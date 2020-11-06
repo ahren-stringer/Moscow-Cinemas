@@ -1,0 +1,20 @@
+.counter,
+.counter a{
+    color:white;
+    padding-right: 10px;
+    text-decoration: none;
+}
+.liked{
+    float: right;
+}
+.searching__form{
+    display: flex;
+}
+.search{
+    background: #fff;
+    width: 150px;
+    margin-left: 10px;
+}
+/* .search input{
+    height: 27px;
+} */
