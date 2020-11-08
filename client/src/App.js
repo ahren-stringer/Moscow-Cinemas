@@ -7,11 +7,17 @@ import Navbar from './Components/Navbar/NavbarContainer';
 import Info from './Components/Info/InfoContainer';
 import 'materialize-css'
 import Search from './Components/Search/Search';
+import { connect } from 'react-redux';
+import { setSearched } from './redux/headerReduser';
 
-function App() {
+function App(props) {
+  const onCloseList=()=>{
+    props.setSearched([])
+  }
   return (
-    <BrowserRouter>
-    <div className="App">
+    <div className="App" 
+    onClick={onCloseList}
+    >
       <div className='Header'>
         <Header/>
       </div>
@@ -22,9 +28,12 @@ function App() {
         <Route path='/liked/:id?' render={()=><Liked/>}/>
       </div>
     </div>
-    </BrowserRouter>
   );
 }
 
-export default App;
+let mapStateToProps=(state)=>{
+  return {isClosed: state.header.isClosed}
+}
+
+export default connect(mapStateToProps,{setSearched})(App);
 

@@ -4,12 +4,11 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
-import { setSearched } from '../../redux/headerReduser';
+import { setSearched, toggleList } from '../../redux/headerReduser';
 
 class Header extends React.Component {
   state = {
     counter: this.props.counter,
-    // searched: this.props.searched
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.counter !== this.props.counter) {
@@ -17,11 +16,6 @@ class Header extends React.Component {
         counter: this.props.counter
       })
     }
-    // if (prevProps.searched !== this.props.searched) {
-    //   this.setState({
-    //     searched: this.props.searched
-    //   })
-    // }
   };
   render() {
     console.log('render')
@@ -44,8 +38,9 @@ let mapStateToPros = (state) => {
     newSearchText: state.navData.newSearchText,
     navData: state.navData.navData,
     names: state.navData.names,
-    searched: state.header.searched
+    searched: state.header.searched,
+    isClosed: state.header.isClosed
   }
 }
 
-export default connect(mapStateToPros, { SearchChange,setSearched })(Header);
+export default connect(mapStateToPros, { SearchChange,setSearched,toggleList})(Header);

@@ -10,8 +10,8 @@ let init = {
     newSearchText: '',
     liked: { ...localStorage },
     totalCount: 1,
-    numberOfPage: 0,
-    onOnePage: 5,
+    numberOfPage: 1,
+    onOnePage: 6,
 };
 
 const navReduser = (state = init, action) => {

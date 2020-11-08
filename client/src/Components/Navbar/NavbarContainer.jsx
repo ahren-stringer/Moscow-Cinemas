@@ -9,32 +9,23 @@ import Search from '../Search/Search';
 
 class NavbarContainer extends React.Component {
     componentDidMount() {
-        axios.get(`https://apidata.mos.ru/v1/datasets/495/count?api_key=c70b711784b712cbe482f9701909fd97`)
+        axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=0&$top=${this.props.onOnePage}&api_key=c70b711784b712cbe482f9701909fd97`)
             .then(response => {
-                this.props.SetTotalCount(response.data)
+                this.props.setNavData(response.data)
+                this.props.setNames(response.data.map(item => {
+                    let name = item.Cells.CommonName.split(' ');
+                    return name[1].slice(1, name[1].length - 1)
+                }))
             })
-            .then(
-                axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=${this.props.onOnePage * this.props.numberOfPage}&$top=${this.props.onOnePage}&api_key=c70b711784b712cbe482f9701909fd97`)
-                    .then(response => {
-                        this.props.setNavData(response.data)
-                        this.props.setNames(response.data.map(item=>{
-                            let name=item.Cells.CommonName.split(' ');
-                            return name[1].slice(1,name[1].length-1)
-                        }))
-                    })
-            )
     }
-    onPageChange=(numberOfPage)=>{
-        axios.get(`https://apidata.mos.ru/v1/datasets/495/count?api_key=c70b711784b712cbe482f9701909fd97`)
+    onPageChange = (numberOfPage) => {
+        axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=0&$top=${numberOfPage}&api_key=c70b711784b712cbe482f9701909fd97`)
             .then(response => {
-                this.props.SetTotalCount(response.data)
+                debugger
+                this.props.setNavData(response.data)
+                console.log(response.data)
             })
-            .then(
-                axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=${this.props.onOnePage * numberOfPage}&$top=${this.props.onOnePage}&api_key=c70b711784b712cbe482f9701909fd97`)
-                    .then(response => {
-                        this.props.setNavData(response.data)
-                    })
-            )
+
     };
     render() {
         if (!this.props.navData) return <div>!!!!!!!!!!!!</div>
