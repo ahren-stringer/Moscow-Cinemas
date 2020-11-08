@@ -1,3 +1,7 @@
+.header{
+    background-color: blue;
+}
+
 .counter,
 .counter a{
     color:white;
@@ -14,6 +18,16 @@
     background: #fff;
     width: 150px;
     margin-left: 10px;
+    position: relative;
+}
+.search ul{
+    position: absolute;
+    /* z-index: 1000; */
+    background: white;
+    width: 100%;
+}
+.search ul li{
+    border-bottom: 1px solid #777;
 }
 /* .search input{
     height: 27px;

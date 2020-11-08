@@ -4,6 +4,8 @@ import * as axios from 'axios';
 import { setNavData, setNames, SetTotalCount, SetPageCount } from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import Search from '../Search/Search';
 
 class NavbarContainer extends React.Component {
     componentDidMount() {
@@ -36,6 +38,7 @@ class NavbarContainer extends React.Component {
     };
     render() {
         if (!this.props.navData) return <div>!!!!!!!!!!!!</div>
+        //if (this.props.searchRedirect) return <Redirect to='/search'/>
         return <Navbar {...this.props} onPageChange={this.onPageChange} />
     }
 }
@@ -48,6 +51,7 @@ let mapStateToProps = (state) => {
         totalCount: state.navData.totalCount,
         numberOfPage: state.navData.numberOfPage,
         onOnePage: state.navData.onOnePage,
+        searchRedirect: state.header.searchRedirect
     }
 }
 

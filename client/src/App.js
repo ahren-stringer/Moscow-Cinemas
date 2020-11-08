@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from '../src/Components/Header/Header';
 import { BrowserRouter, Route } from 'react-router-dom';
-import All from './Components/All/All';
 import Liked from './Components/Liked/Liked';
 import Navbar from './Components/Navbar/NavbarContainer';
 import Info from './Components/Info/InfoContainer';
 import 'materialize-css'
+import Search from './Components/Search/Search';
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
       <Route exact path="/" children={<Navbar/>} />
       <Route path='/cinema/:id' render={()=><Info/>}/>
       <div className='content'>
+      <Route path='/search/:riched' render={()=><Search/>}/>
         <Route path='/liked/:id?' render={()=><Liked/>}/>
       </div>
     </div>

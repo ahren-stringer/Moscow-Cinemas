@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const Coments = (props) => {
     let arr = [1, 2, 3, 4, 5];
-    let [size, setSize] = useState(0);
     let [coments, setComents] = useState([
         // {name: 'alex', email:"1@mail.ru", size:3,}
     ]);

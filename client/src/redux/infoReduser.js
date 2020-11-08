@@ -7,7 +7,7 @@ let init = {
     infoData: null,
     features: null,
     newComentText: '',
-    coment: ''
+    coment: '',
 };
 
 const infoReduser = (state = init, action) => {

@@ -38,14 +38,13 @@ function Navbar(props) {
   let onPageChange=(numberOfPage)=>{
       props.onPageChange(numberOfPage)
   };
-debugger
   return (
     <div>
       <div className={s.nav}>
       {
         props.navData.map((item, index, array) => {
           return <div className={s.cinema}>
-            <NavLink to={`/cinema/${index}`}>
+            <NavLink to={`/cinema/${item.Cells.CommonName}`}>
             <img src={logo}></img>
               <div className={s.name}>
                 {item.Cells.CommonName}

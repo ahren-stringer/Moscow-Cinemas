@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
+import { setSearched } from '../../redux/headerReduser';
 
 class Header extends React.Component {
   state = {
-    counter: this.props.counter
+    counter: this.props.counter,
+    // searched: this.props.searched
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.counter !== this.props.counter) {
@@ -15,10 +17,15 @@ class Header extends React.Component {
         counter: this.props.counter
       })
     }
+    // if (prevProps.searched !== this.props.searched) {
+    //   this.setState({
+    //     searched: this.props.searched
+    //   })
+    // }
   };
   render() {
     console.log('render')
-    return (<div>
+    return (<div className='header'>
       <div className='counter'>
         <div className="liked">
           <NavLink to='/liked'>Liked</NavLink>{this.props.counter}
@@ -36,8 +43,9 @@ let mapStateToPros = (state) => {
     counter: state.header.count,
     newSearchText: state.navData.newSearchText,
     navData: state.navData.navData,
-    names: state.navData.names
+    names: state.navData.names,
+    searched: state.header.searched
   }
 }
 
-export default connect(mapStateToPros, { SearchChange })(Header);
+export default connect(mapStateToPros, { SearchChange,setSearched })(Header);
