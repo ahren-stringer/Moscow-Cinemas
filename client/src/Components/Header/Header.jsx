@@ -20,11 +20,20 @@ class Header extends React.Component {
   render() {
     console.log('render')
     return (<div className='header'>
+      <div>
+        <div>
+          <img src='https://w7.pngwing.com/pngs/999/1016/png-transparent-film-cinema-logo-cinema-x-chin.png'
+            className='img__logo' />
+        </div>
+        <span className='logo__title'>
+          MosCinema
+        </span>
+      </div>
       <div className='counter'>
         <div className="liked">
           <NavLink to='/liked'>Liked</NavLink>{this.props.counter}
         </div>
-        <NavLink to='/all'>All</NavLink>
+        <NavLink to='/'>All</NavLink>
       </div>
       <SearchingForm {...this.props} />
     </div>
@@ -43,4 +52,4 @@ let mapStateToPros = (state) => {
   }
 }
 
-export default connect(mapStateToPros, { SearchChange,setSearched,toggleList})(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList })(Header);

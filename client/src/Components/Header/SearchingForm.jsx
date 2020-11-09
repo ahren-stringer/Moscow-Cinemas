@@ -31,12 +31,15 @@ const SearchingForm = (props) => {
     }
     return (<div className="searching__form">
         <div className="search">
-            <input type="text" value={props.newSearchText} onChange={onSearchChange} ref={searchInput} />
-            <ul>
+            <input type="text" value={props.newSearchText}
+             onChange={onSearchChange}
+             ref={searchInput} 
+             style={{margin:0,height:"2em"}}/>
+            <ul className="collection">
 
                 {(props.isClosed && searched.length == 0) ? null :
                     searched.map((item) => {
-                        return <li><NavLink to={`/cinema/${item.Cells.CommonName}`}
+                        return <li className="collection-item"><NavLink to={`/cinema/${item.Cells.CommonName}`}
                             onClick={CloseList}>{item.Cells.CommonName}</NavLink></li>
                     })
                 }

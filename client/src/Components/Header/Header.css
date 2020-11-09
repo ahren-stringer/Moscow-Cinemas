@@ -1,7 +1,18 @@
 .header{
-    background-color: blue;
+    background-color: #2980b9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
+.img__logo{
+    width: 100px;
+}
+.logo__title{
+    color: white;
+font-size: 19px;
+font-weight: 600;
+padding-left: 5px;
+}
 .counter,
 .counter a{
     color:white;
@@ -16,15 +27,22 @@
 }
 .search{
     background: #fff;
-    width: 150px;
+    width: 250px;
     margin-left: 10px;
     position: relative;
+    border-radius: 5px;
+}
+.search input{
+    margin: 0;
+    height: 2em;
 }
 .search ul{
     position: absolute;
     /* z-index: 1000; */
     background: white;
     width: 100%;
+    margin:0;
+    border: none;
 }
 .search ul li{
     border-bottom: 1px solid #777;

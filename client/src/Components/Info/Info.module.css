@@ -1,0 +1,11 @@
+.coment{
+    display:flex
+}
+.coment__ava{
+    height: 90px;
+    width: 90px;
+}
+.coment__form{
+    width: 400px;
+    margin: 0 auto;
+}

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMailBulk, faStar } from '@fortawesome/free-solid-svg-icons'
 import s from './Info.module.css'
+import user from '../../img/user.png'
 import axios from 'axios';
 
 const Coments = (props) => {
     let arr = [1, 2, 3, 4, 5];
     let [coments, setComents] = useState([
-        // {name: 'alex', email:"1@mail.ru", size:3,}
+        { name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
     ]);
     let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '' });
 
@@ -25,10 +26,10 @@ const Coments = (props) => {
         fetchData()
     }, [])
 
-    const sendComent = async() => {
+    const sendComent = async () => {
         await axios.post('http://localhost:8001/cinema/coments', { ...form })
         const req = await axios.get('http://localhost:8001/cinema/coments');
-            setComents(req.data)
+        setComents(req.data)
     }
 
     let onColorChange = (item) => {
@@ -45,17 +46,22 @@ const Coments = (props) => {
     return (
         <div>
             <div className='comentsList'>
-                {coments.map((item) => {
-                    return <div>
-                        <div>{item.name} </div>
-                        <div>{item.email} </div>
-                        <div>{item.size} </div>
-                        <div>{item.coment} </div>
-                        <div>{item.date} </div>
-                    </div>
-                })}
+                <ul >
+                    {coments.map((item) => {
+                        return <li className={s.coment}>
+                            <img src={user} className={s.coment__ava} />
+                            <div className={s.coment__container}>
+                                <span>{item.name}</span>
+                                <span>{item.email}</span>
+                                <div>Оценка: {item.size} </div>
+                                <div>{item.coment} </div>
+                                <div>{item.date} </div>
+                            </div>
+                        </li>
+                    })}
+                </ul>
             </div>
-            <div className="comentForm">
+            <div className={s.coment__form}>
                 <div className="row">
                     <div className="row">
                         <div className="input-field col s6">
@@ -69,8 +75,7 @@ const Coments = (props) => {
                     </div>
                     <div className="row">
 
-                        <div>
-                            {arr.map((item, index, array) => {
+                        <div>Оценка:   {arr.map((item, index, array) => {
                                 return (
                                     <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
                                 )

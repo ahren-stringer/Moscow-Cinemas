@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css'
 import logo from '../../img/images.png'
+import Introdaction from './Introdaction';
 //localStorage.clear()
 
 function Navbar(props) {
@@ -39,13 +40,19 @@ function Navbar(props) {
     props.SetPageCount(props.numberOfPage + 1)
     props.onPageChange(props.numberOfPage*props.onOnePage)
   };
+
+  let set= new Set(props.navData);
+  let navData=[];
+  for (let value of set) {
+    navData.push(value)
+  };
   return (
     <div>
+      <Introdaction/>
       <div className={s.nav}>
         {
-          props.navData.map((item, index, array) => {
+          navData.map((item, index, array) => {
             if (array.indexOf(item) === index) {
-              //debugger
               return <div className={s.cinema}>
                 <NavLink to={`/cinema/${item.Cells.CommonName}`}>
                   <img src={logo}></img>
@@ -66,15 +73,9 @@ function Navbar(props) {
           })
         }
       </div>
-      <div onClick={onPageChange}>
-        <h3>Загрузить еще</h3>
+      <div onClick={onPageChange} className={s.pagination}>
+        <h4>Загрузить еще</h4>
       </div>
-      {/* <div className={s.pagination}>
-        {
-            arr.map((item, index) => <span
-                onClick={() => {onPageChange(index) }}>{item}</span>)
-        }
-    </div> */}
     </div>
   );
 }
