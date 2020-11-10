@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css'
 import logo from '../../img/images.png'
 import Introdaction from './Introdaction';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 //localStorage.clear()
 
 function Navbar(props) {
@@ -65,7 +67,7 @@ function Navbar(props) {
                     , index)
                 }}>
                   Добавить в избранное {
-                    !!localStorage.getItem(item.Cells.CommonName) && <span>+</span>
+                    !!localStorage.getItem(item.Cells.CommonName) && <FontAwesomeIcon icon={faHeart} style={{color: 'red'}} />
                   }
                 </div>
               </div>

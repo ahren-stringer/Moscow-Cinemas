@@ -4,8 +4,8 @@ import s from './Info.module.css'
 const Description=(props)=>{
  
     return (
-      <div>
-        <div>
+      <div className={s.description}>
+        <div className={s.description__cinema}>
           {props.infoData[0].Cells.CommonName}
         </div>
         <div>
@@ -28,7 +28,7 @@ const Description=(props)=>{
           Количество залов: {props.infoData[0].Cells.NumberOfHalls}
         </div>
         <div>
-          Сайт: {props.infoData[0].Cells.WebSite}
+        Сайт: <a href={'http://www.'+props.infoData[0].Cells.WebSite}>{props.infoData[0].Cells.WebSite}</a> 
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMailBulk, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import s from './Info.module.css'
 import user from '../../img/user.png'
 import axios from 'axios';
@@ -8,7 +8,9 @@ import axios from 'axios';
 const Coments = (props) => {
     let arr = [1, 2, 3, 4, 5];
     let [coments, setComents] = useState([
-        { name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
+        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
+        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
+        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
     ]);
     let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '' });
 
@@ -45,7 +47,8 @@ const Coments = (props) => {
     }
     return (
         <div>
-            <div className='comentsList'>
+            <h4>Коментарии</h4>
+            <div >
                 <ul >
                     {coments.map((item) => {
                         return <li className={s.coment}>
@@ -53,7 +56,11 @@ const Coments = (props) => {
                             <div className={s.coment__container}>
                                 <span>{item.name}</span>
                                 <span>{item.email}</span>
-                                <div>Оценка: {item.size} </div>
+                                <div>Оценка: {
+                                    arr.map((star, index, array) => {
+                                       if (index<item.size) return <FontAwesomeIcon icon={faStar} style={{color: 'red'}} />
+                                    })
+                                    } </div>
                                 <div>{item.coment} </div>
                                 <div>{item.date} </div>
                             </div>
@@ -62,6 +69,7 @@ const Coments = (props) => {
                 </ul>
             </div>
             <div className={s.coment__form}>
+            <h4>Оставить отзыв</h4>
                 <div className="row">
                     <div className="row">
                         <div className="input-field col s6">
@@ -74,14 +82,6 @@ const Coments = (props) => {
                         </div>
                     </div>
                     <div className="row">
-
-                        <div>Оценка:   {arr.map((item, index, array) => {
-                                return (
-                                    <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
-                                )
-                            })
-                            }
-                        </div>
                         <div className="row">
                             <div className="input-field col s12">
                                 <textarea id="textarea1" className="materialize-textarea" name='coment' onChange={onInputChange}></textarea>
@@ -89,6 +89,13 @@ const Coments = (props) => {
                             </div>
                         </div>
                     </div>
+                    <div>Оценка:   {arr.map((item, index, array) => {
+                                return (
+                                    <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
+                                )
+                            })
+                            }
+                        </div>
                     <button className='btn' onClick={sendComent}>отправить</button>
                 </div>
             </div>

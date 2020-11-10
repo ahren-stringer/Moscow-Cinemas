@@ -1,11 +1,22 @@
+.description{
+    font-size: 16px;
+    margin: 30px;
+}
+.description__cinema{
+    font-size: 39px;
+}
+.coment__form{
+    width: 430px;
+    margin: 30px;
+}
 .coment{
-    display:flex
+    display:flex;
+    align-items: center;
 }
 .coment__ava{
     height: 90px;
     width: 90px;
 }
-.coment__form{
-    width: 400px;
-    margin: 0 auto;
+.coment__container{
+    padding-left: 20px;
 }

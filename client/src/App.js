@@ -9,6 +9,7 @@ import 'materialize-css'
 import Search from './Components/Search/Search';
 import { connect } from 'react-redux';
 import { setSearched } from './redux/headerReduser';
+import Footer from './Components/Footer/Footer';
 
 function App(props) {
   const onCloseList=()=>{
@@ -27,6 +28,7 @@ function App(props) {
       <Route path='/search/:riched' render={()=><Search/>}/>
         <Route path='/liked/:id?' render={()=><Liked/>}/>
       </div>
+      <Footer/>
     </div>
   );
 }

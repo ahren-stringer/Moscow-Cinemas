@@ -20,6 +20,7 @@ class Header extends React.Component {
   render() {
     console.log('render')
     return (<div className='header'>
+      <NavLink to='/'>
       <div>
         <div>
           <img src='https://w7.pngwing.com/pngs/999/1016/png-transparent-film-cinema-logo-cinema-x-chin.png'
@@ -29,13 +30,13 @@ class Header extends React.Component {
           MosCinema
         </span>
       </div>
+      </NavLink>
       <div className='counter'>
         <div className="liked">
-          <NavLink to='/liked'>Liked</NavLink>{this.props.counter}
+          <NavLink to='/liked'>Избранное</NavLink>{this.props.counter}
         </div>
-        <NavLink to='/'>All</NavLink>
+        <SearchingForm {...this.props} />
       </div>
-      <SearchingForm {...this.props} />
     </div>
     );
   }
