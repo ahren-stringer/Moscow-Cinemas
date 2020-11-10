@@ -3,33 +3,37 @@ const SET_NAMES = 'navReuser/SET-NAMES';
 const SET_NEW_TEXT = 'navReuser/SET-NEW-TEXT';
 const TOTAL_COUNT = 'navReuser/TOTAL-COUNT';
 const SET_PAGE = 'navReuser/SET-PAGE';
-const CONCAT_NAV_DATA="navReuser/CONCAT_NAV_DATA"
+const SET_LIKED = 'navReuser/SET-LIKED';
+const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA"
 
 let init = {
-    navData: [],
+    navData: {},
     names: [],
     newSearchText: '',
     liked: { ...localStorage },
     totalCount: 1,
     numberOfPage: 2,
     onOnePage: 6,
-    request:true
+    request: true
 };
 
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            return { ...state, navData: action.navData }
-        case CONCAT_NAV_DATA:
-            let arr=[]
-            for (let i=0;i<action.navData.length;i++){
-                let count=0;
-                for (let j=0;j<state.navData.length;j++){
-                    if(state.navData[j].global_id==action.navData[i].global_id) count=count+1
-                }
-                if (!count) arr.push(action.navData[i])
+            for (let i of action.navData) {
+                state.navData[i.Cells.CommonName] = i
             }
-            return { ...state, navData: [].concat(state.navData, arr) }
+            return { ...state, navData: { ...state.navData } }
+        // case CONCAT_NAV_DATA:
+        //     let arr=[]
+        //     for (let i=0;i<action.navData.length;i++){
+        //         let count=0;
+        //         for (let j=0;j<state.navData.length;j++){
+        //             if(state.navData[j].global_id==action.navData[i].global_id) count=count+1
+        //         }
+        //         if (!count) arr.push(action.navData[i])
+        //     }
+        //     return { ...state, navData: [].concat(state.navData, arr) }
         case SET_NAMES:
             return { ...state, names: action.names }
         case SET_NEW_TEXT:
@@ -38,6 +42,8 @@ const navReduser = (state = init, action) => {
             return { ...state, totalCount: action.totalCount }
         case SET_PAGE:
             return { ...state, numberOfPage: action.numberOfPage }
+        case SET_LIKED:
+            return { ...state, liked: action.liked }
         default:
             return state
     }
@@ -49,6 +55,7 @@ export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
+export const Setliked = (liked) => ({ type: SET_LIKED, liked })
 
 
 export default navReduser

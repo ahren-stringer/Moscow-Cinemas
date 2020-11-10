@@ -13,7 +13,7 @@ import Footer from './Components/Footer/Footer';
 
 function App(props) {
   const onCloseList=()=>{
-    props.setSearched([])
+    props.setSearched({ requestNumber:0,request:[] })
   }
   return (
     <div className="App" 

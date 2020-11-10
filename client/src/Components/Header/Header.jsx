@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
-import { setSearched, toggleList } from '../../redux/headerReduser';
+import { setSearched, toggleList,loadList,setReqNumber } from '../../redux/headerReduser';
 
 class Header extends React.Component {
   state = {
@@ -49,8 +49,10 @@ let mapStateToPros = (state) => {
     navData: state.navData.navData,
     names: state.navData.names,
     searched: state.header.searched,
-    isClosed: state.header.isClosed
+    isClosed: state.header.isClosed,
+    isListLoading: state.header.isListLoading,
+    requestNumber: state.header.requestNumber
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList })(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList,loadList,setReqNumber })(Header);

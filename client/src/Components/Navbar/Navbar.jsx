@@ -10,11 +10,11 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 //localStorage.clear()
 
 function Navbar(props) {
-  let [follow, followFlag] = useState(props.liked)
+  let [ls, setLs]=useState(props.liked)
 
-  useEffect(() => {
-    followFlag(props.liked)
-  }, [props.liked])
+  useEffect(()=>{
+    setLs(props.liked)
+  },[props.liked])
 
   const Liked = (name, index) => {
     let counter = +localStorage.getItem('count');
@@ -22,12 +22,12 @@ function Navbar(props) {
       localStorage.removeItem(name)
       counter = counter - 1
       localStorage.setItem('count', counter)
-      followFlag(false)
+      props.Setliked({...localStorage})
     } else {
       localStorage.setItem(name, index)
       counter = counter + 1
       localStorage.setItem('count', counter)
-      followFlag(false)
+      props.Setliked({...localStorage})
     }
     props.setCounter(counter)
     console.log(localStorage)
@@ -43,11 +43,7 @@ function Navbar(props) {
     props.onPageChange(props.numberOfPage*props.onOnePage)
   };
 
-  let set= new Set(props.navData);
-  let navData=[];
-  for (let value of set) {
-    navData.push(value)
-  };
+  let navData=Object.values(props.navData)
   return (
     <div>
       <Introdaction/>
@@ -67,7 +63,7 @@ function Navbar(props) {
                     , index)
                 }}>
                   Добавить в избранное {
-                    !!localStorage.getItem(item.Cells.CommonName) && <FontAwesomeIcon icon={faHeart} style={{color: 'red'}} />
+                    !!ls[item.Cells.CommonName] && <FontAwesomeIcon icon={faHeart} style={{color: 'red'}} />
                   }
                 </div>
               </div>
