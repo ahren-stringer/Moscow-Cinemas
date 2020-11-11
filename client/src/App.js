@@ -12,12 +12,12 @@ import { setSearched } from './redux/headerReduser';
 import Footer from './Components/Footer/Footer';
 
 function App(props) {
-  const onCloseList=()=>{
-    props.setSearched({ requestNumber:0,request:[] })
-  }
+  // const onCloseList=()=>{
+  //   props.setSearched({ requestNumber:0,request:[] })
+  // }
   return (
     <div className="App" 
-    onClick={onCloseList}
+    //onClick={onCloseList}
     >
       <div className='Header'>
         <Header/>

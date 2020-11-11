@@ -10,7 +10,6 @@ const SearchingForm = (props) => {
     let searchInput = React.createRef();
 
     useEffect(() => {
-        debugger
         if(searched.requestNumber<props.searched.requestNumber) setSearched(props.searched)
         console.log('searched:', searched)
     }, [props.searched])
@@ -31,7 +30,7 @@ const SearchingForm = (props) => {
         console.log(req.data)
     }
     const CloseList = () => {
-        props.setSearched([])
+        props.setSearched({ requestNumber:0,request:[] })
     }
     return (<div className="searching__form">
         <div className="search">
@@ -42,7 +41,7 @@ const SearchingForm = (props) => {
             {props.isListLoading ? <PreloaderList />
                 : <ul className="collection">
                     {(props.isClosed && searched.length == 0) ? null :
-                        Object.values(searched.request).map((item) => {
+                        Object.values(searched.request).map((item,index) => {
                             return <li className="collection-item"><NavLink to={`/cinema/${item.Cells.CommonName}`}
                                 onClick={CloseList}>{item.Cells.CommonName}</NavLink></li>
                         })

@@ -7,14 +7,26 @@ import logo from '../../img/images.png'
 import Introdaction from './Introdaction';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
 //localStorage.clear()
 
 function Navbar(props) {
-  let [ls, setLs]=useState(props.liked)
+  let [ls, setLs] = useState(props.liked);
+  let [photos, setPhotos] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
+    async function fetchData() {
+      const req = await axios.get('http://localhost:8001/cinema/photos');
+      setPhotos(req.data)
+      console.log(req.data)
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
     setLs(props.liked)
-  },[props.liked])
+    setPhotos(photos)
+  }, [photos])
 
   const Liked = (name, index) => {
     let counter = +localStorage.getItem('count');
@@ -22,12 +34,12 @@ function Navbar(props) {
       localStorage.removeItem(name)
       counter = counter - 1
       localStorage.setItem('count', counter)
-      props.Setliked({...localStorage})
+      props.Setliked({ ...localStorage })
     } else {
       localStorage.setItem(name, index)
       counter = counter + 1
       localStorage.setItem('count', counter)
-      props.Setliked({...localStorage})
+      props.Setliked({ ...localStorage })
     }
     props.setCounter(counter)
     console.log(localStorage)
@@ -40,20 +52,26 @@ function Navbar(props) {
   }
   let onPageChange = (e) => {
     props.SetPageCount(props.numberOfPage + 1)
-    props.onPageChange(props.numberOfPage*props.onOnePage)
+    props.onPageChange(props.numberOfPage * props.onOnePage)
   };
 
-  let navData=Object.values(props.navData)
+  let navData = Object.values(props.navData)
   return (
     <div>
-      <Introdaction/>
+      <Introdaction />
       <div className={s.nav}>
         {
           navData.map((item, index, array) => {
+            let ava = logo;
+            if (photos) {
+              for (let i of photos) {
+                if (i.cinema == item.Cells.CommonName) ava = i.photoLarge
+              }
+            }
             if (array.indexOf(item) === index) {
               return <div className={s.cinema}>
                 <NavLink to={`/cinema/${item.Cells.CommonName}`}>
-                  <img src={logo}></img>
+                  <img src={ava}></img>
                   <div className={s.name}>
                     {item.Cells.CommonName}
                   </div>
@@ -63,7 +81,7 @@ function Navbar(props) {
                     , index)
                 }}>
                   Добавить в избранное {
-                    !!ls[item.Cells.CommonName] && <FontAwesomeIcon icon={faHeart} style={{color: 'red'}} />
+                    !!ls[item.Cells.CommonName] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                   }
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import expess from 'express'
 import mongoose from 'mongoose'
 import Coment from "./models/Coment.js"
+import Photos from "./models/Photos.js"
 import Cors from "cors"
 
 
@@ -25,6 +26,8 @@ mongoose.connect(connection_url,{
 
 app.get('/',(req,res)=>res.status(200).send('GET'))
 
+//Коменты
+
 app.post('/cinema/coments',(req,res)=>{
     const dbComent=req.body
 
@@ -39,6 +42,30 @@ app.post('/cinema/coments',(req,res)=>{
 
 app.get('/cinema/coments',(req,res)=>{
     Coment.find((err,data)=>{
+        if (err){
+            res.status(500).send(err)
+        }else{
+            res.status(200).send(data)
+        }
+    })
+})
+
+//Фотки
+
+app.post('/cinema/photos',(req,res)=>{
+    const dbPhotos=req.body
+
+    Photos.create(dbPhotos,(err,data)=>{
+        if (err){
+            res.status(500).send(err)
+        }else{
+            res.status(201).send(data)
+        }
+    })
+})
+
+app.get('/cinema/photos',(req,res)=>{
+    Photos.find((err,data)=>{
         if (err){
             res.status(500).send(err)
         }else{

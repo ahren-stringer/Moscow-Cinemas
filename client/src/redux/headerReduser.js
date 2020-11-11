@@ -21,6 +21,7 @@ const headerReduser = (state = init, action) => {
         case SET_COUNTER:
             return { ...state, count: action.count }
         case SET_SEARCHED:
+            debugger
             let obj_1 = {};
             for (let i of action.searched.request) {
                 obj_1[i.Cells.CommonName] = i
@@ -28,7 +29,7 @@ const headerReduser = (state = init, action) => {
             return { ...state, searched: { requestNumber: action.searched.requestNumber, request: obj_1 } }
         case SET_SEARCHED_PAGE:
             let obj_2 = {};
-            for (let i of action.searched) {
+            for (let i of action.searchedPage) {
                 obj_2[i.Cells.CommonName] = i
             }
             return { ...state, searchedPage: { ...obj_2 } }

@@ -13,6 +13,7 @@ function Search(props) {
         async function fetchData() {
             let riched = props.match.params.riched;
             const req = await axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${riched}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`);
+            debugger
             props.setSearchedPage(req.data)
             console.log(req.data)
         }

@@ -6,6 +6,7 @@ const comentSchema=mongoose.Schema({
     coment:String,
     size:Number,
     date: {type:Date, default: Date.now},
+    cinema: String,
     //owner:{type: String}
 });
 

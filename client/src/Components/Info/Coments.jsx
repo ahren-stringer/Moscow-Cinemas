@@ -12,7 +12,7 @@ const Coments = (props) => {
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
     ]);
-    let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '' });
+    let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '', cinema:props.infoData[0].Cells.CommonName});
 
     let onInputChange = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -51,7 +51,7 @@ const Coments = (props) => {
             <div >
                 <ul >
                     {coments.map((item) => {
-                        return <li className={s.coment}>
+                        if (item.cinema==props.infoData[0].Cells.CommonName) return <li className={s.coment}>
                             <img src={user} className={s.coment__ava} />
                             <div className={s.coment__container}>
                                 <span>{item.name}</span>
