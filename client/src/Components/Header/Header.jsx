@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
-import { setSearched, toggleList,loadList,setReqNumber } from '../../redux/headerReduser';
+import { setSearched, toggleList, loadList, setReqNumber } from '../../redux/headerReduser';
 
 class Header extends React.Component {
   state = {
@@ -17,25 +17,33 @@ class Header extends React.Component {
       })
     }
   };
+//   logoutReq=(e)=>{
+//     e.preventDefault()
+//     auth.logout()
+// }
   render() {
     console.log('render')
     return (<div className='header'>
       <NavLink to='/'>
-      <div>
         <div>
-          <img src='https://w7.pngwing.com/pngs/999/1016/png-transparent-film-cinema-logo-cinema-x-chin.png'
-            className='img__logo' />
-        </div>
-        <span className='logo__title'>
-          MosCinema
+          <div>
+            <img src='https://w7.pngwing.com/pngs/999/1016/png-transparent-film-cinema-logo-cinema-x-chin.png'
+              className='img__logo' />
+          </div>
+          <span className='logo__title'>
+            MosCinema
         </span>
-      </div>
+        </div>
       </NavLink>
       <div className='counter'>
         <div className="liked">
           <NavLink to='/liked'>Избранное</NavLink>{this.props.counter}
         </div>
         <SearchingForm {...this.props} />
+        <NavLink to='/auth'>Войти</NavLink>
+        <a href='/' 
+        // onClick={this.logoutReq}
+        >Выход</a>
       </div>
     </div>
     );
@@ -55,4 +63,4 @@ let mapStateToPros = (state) => {
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList,loadList,setReqNumber })(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber })(Header);

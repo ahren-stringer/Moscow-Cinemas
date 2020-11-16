@@ -7,7 +7,7 @@ const comentSchema=mongoose.Schema({
     size:Number,
     date: {type:Date, default: Date.now},
     cinema: String,
-    //owner:{type: String}
+    owner: [{type: mongoose.Types.ObjectId, ref: 'User'}]
 });
 
 export default mongoose.model('coment',comentSchema)
