@@ -1,15 +1,15 @@
 import React from 'react';
 import NavbarContainer from './Navbar/NavbarContainer'
-import InfoContainer from './Info/InfoContainer'
-import s from './../All/All.module.css'
+import InfoContainer from '../Info/InfoContainer'
+import s from './Liked.css'
 
 
 function Liked() {
-  return <div className={s.All}>
-  <div className={s.Navbar}>
+  return <div className='All'>
+  <div className='Navbar'>
       <NavbarContainer />
   </div>
-  <div className={s.Info}>
+  <div className='Info'>
       <InfoContainer/>
   </div>
 </div>

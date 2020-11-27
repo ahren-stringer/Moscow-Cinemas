@@ -3,7 +3,7 @@ import 'materialize-css'
 import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
 
-function Auth(props) {
+function Register(props) {
 
     //let auth=useContext(AuthContext)
     //let { load, request,error,clearError} = useHttp();
@@ -35,7 +35,7 @@ function Auth(props) {
 
     return <div class="container">
         <div style={{marginLeft: "10px"}}>
-            <h4>Войти:</h4>
+            <h4>Регистрация</h4>
         </div>
         <div className="row">
             <form className="col s6">
@@ -57,13 +57,11 @@ function Auth(props) {
                         <label for="email">Email</label>
                     </div>
                 </div>
-                <button className='btn' style={{marginLeft: "10px",marginRight: "10px"}}
-                onClick={loginReq}>Войти</button>
                 <button className='btn' onClick={registerReq}>Зарегистрироваться</button>
             </form>
         </div>
     </div>
 }
 
-export default Auth;
+export default Register;
 

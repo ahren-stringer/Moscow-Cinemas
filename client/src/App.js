@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { setSearched } from './redux/headerReduser';
 import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
+import Register from './Components/Auth/Register';
 
 function App(props) {
   // const onCloseList=()=>{
@@ -29,6 +30,7 @@ function App(props) {
         <Route path='/search/:riched' render={() => <Search />} />
         <Route path='/liked/:id?' render={() => <Liked />} />
         <Route path='/auth' render={() => <Auth />}/>
+        <Route path='/register' render={() => <Register />}/>
       </div>
       <Footer />
     </div>

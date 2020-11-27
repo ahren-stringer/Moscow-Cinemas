@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import * as axios from 'axios';
 import {setNavData,Setliked} from '../../../redux/navReduser';
 import { connect } from 'react-redux';
+import { setCounter } from '../../../redux/headerReduser';
 
 class NavbarContainer extends React.Component{
     componentDidMount(){
@@ -20,4 +21,4 @@ let mapStateToProps=(state)=>{
     }
 }
 
-export default connect(mapStateToProps,{setNavData,Setliked})(NavbarContainer);
+export default connect(mapStateToProps,{setNavData,Setliked,setCounter})(NavbarContainer);

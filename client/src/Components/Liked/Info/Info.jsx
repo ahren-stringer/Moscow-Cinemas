@@ -9,17 +9,21 @@ let Info = (props) => {
   let [infoData, setInfoData] = useState(props.infoData);
   let [infoFlag, setInfoFlag] = useState(false);
 
-  useEffect(() => {
-    setInfoFlag(true)
-    let id=props.match.params.id;
-    axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=${id}&$top=1&api_key=c70b711784b712cbe482f9701909fd97`)  
-    .then(response => {
-        setInfoData(response.data)
-        setInfoFlag(false)
-      })
+  useEffect(async () => {
+    let id = props.match.params.id;
+    let req = '';
+    debugger
+    if (id) {
+      setInfoFlag(true)
+      req = await axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${id}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+      setInfoData(req.data)
+      setInfoFlag(false)
+    }else{
+      props.setInfoData(null)
+    }
   }, [props.match.params.id])
 
-  if (infoFlag) return <Preloader/>
+  if (infoFlag) return <Preloader />
 
   return (
     <div>

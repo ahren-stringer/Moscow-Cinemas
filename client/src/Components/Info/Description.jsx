@@ -54,7 +54,9 @@ const Description=(props)=>{
           {photos ? photos.map(item=>{
             return <img src={item}></img>
           }) 
-          :<Preloader/>}
+          :<div>
+            <h3>Фотокарточки</h3>
+            </div>}
         </div>
       </div>
     );
