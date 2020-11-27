@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
+import '../Liked.css'
 
 function Navbar(props) {
   let [ls, setLs] = useState(props.liked);
@@ -33,19 +34,10 @@ function Navbar(props) {
   debugger
   return (
     <div>
-      {
-        //    <ul className="collection">
-        //    <li className="collection-item avatar">
-        //      <i className="material-icons circle red">play_arrow</i>
-        //      <span className="title">Title</span>
-        //      <p>First Line </p>
-        //      <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
-        //    </li>
-        //  </ul>
-        Object.entries(ls)
+        <ul className="collection">
+       { Object.entries(ls)
           .filter(item => item[0].slice(0, 4) === "Кино")
           .map((item) =>
-            <ul className="collection">
               <li className="collection-item avatar">
               <FontAwesomeIcon icon={faFilm} className="material-icons circle red"/>
               <span className="title">
@@ -60,9 +52,8 @@ function Navbar(props) {
             </p>
               {redirect ? <Redirect to={'/liked' + (!favorteArr[0] ? '' : '/' + favorteArr[0][0])} /> : null}
               </li>
-            </ul>
-          )
-      }
+          )}  
+      </ul>
     </div>
   );
 }

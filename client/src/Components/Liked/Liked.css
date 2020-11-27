@@ -1,3 +1,10 @@
 .All{
     display: flex;
+    justify-content: space-around;
+}
+.collection{
+    margin-left: 15px;
+}
+.Info{
+    width: 780px;
 }
