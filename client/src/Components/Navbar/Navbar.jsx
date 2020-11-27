@@ -24,9 +24,12 @@ function Navbar(props) {
   }, [])
 
   useEffect(() => {
-    setLs(props.liked)
     setPhotos(photos)
   }, [photos])
+
+  useEffect(() => {
+    setLs(props.liked)
+  }, [props.liked])
 
   const Liked = (name, index) => {
     let counter = +localStorage.getItem('count');

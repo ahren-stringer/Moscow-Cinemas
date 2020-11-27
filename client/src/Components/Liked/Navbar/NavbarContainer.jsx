@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import * as axios from 'axios';
-import {setNavData} from '../../../redux/navReduser';
+import {setNavData,Setliked} from '../../../redux/navReduser';
 import { connect } from 'react-redux';
 
 class NavbarContainer extends React.Component{
@@ -15,8 +15,9 @@ class NavbarContainer extends React.Component{
 
 let mapStateToProps=(state)=>{
     return{
+        liked: state.navData.liked,
         navData: state.navData.navData
     }
 }
 
-export default connect(mapStateToProps,{setNavData})(NavbarContainer);
+export default connect(mapStateToProps,{setNavData,Setliked})(NavbarContainer);

@@ -14,7 +14,9 @@ const {check, validationResult} = pkg;
 //API Config
 const app=expess();
 const port=process.env.PORT||8001;
-const connection_url='mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority'
+const connection_url='mongodb+srv://poul:another_db@cluster0.jqmoe.mongodb.net/another?retryWrites=true&w=majority'
+//'mongodb+srv://poul:sh_db@cluster0.hsumz.mongodb.net/shelkovo?retryWrites=true&w=majority'
+//'mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority'
 
 //Middlewares
 app.use(expess.json())
