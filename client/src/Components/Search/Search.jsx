@@ -18,7 +18,7 @@ function Search(props) {
             console.log(req.data)
         }
         fetchData()
-    }, [])
+    }, [props.match.params.riched])
 
     useEffect(() => {
         setSearched(props.searchedPage)

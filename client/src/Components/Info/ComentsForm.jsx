@@ -5,38 +5,32 @@ import s from './Info.module.css'
 import user from '../../img/user.png'
 import axios from 'axios';
 
-const Coments = (props) => {
+const ComentsForm = (props) => {
     let arr = [1, 2, 3, 4, 5];
     let [coments, setComents] = useState([
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
     ]);
-    let [form, setForm] = useState({size: 0, coment: '', cinema:props.infoData[0].Cells.CommonName});
+    let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '', cinema:props.infoData[0].Cells.CommonName});
 
     let onInputChange = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    useEffect(() => {
-        async function fetchData() {
-            debugger
-            const req = await axios.get('http://localhost:8001/cinema/coments',{headers:{
-                "Authorization": ('Bearer '+ props.token)
-            }});
-            setComents(req.data)
-            console.log(req.data)
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         debugger
+    //         const req = await axios.get('http://localhost:8001/cinema/coments');
+    //         setComents(req.data)
+    //         console.log(req.data)
+    //     }
+    //     fetchData()
+    // }, [])
 
     const sendComent = async () => {
-        await axios.post('http://localhost:8001/coment', { ...form },{headers:{
-            "Authorization": ('Bearer '+ props.token)
-        }})
-        const req = await axios.get('http://localhost:8001/cinema/coments',{headers:{
-            "Authorization": ('Bearer '+ props.token)
-        }});
+        await axios.post('http://localhost:8001/cinema/coments', { ...form })
+        const req = await axios.get('http://localhost:8001/cinema/coments');
         setComents(req.data)
     }
 
@@ -53,34 +47,19 @@ const Coments = (props) => {
     }
     return (
         <div>
-            <h4>Коментарии</h4>
-            <div >
-                <ul >
-                    {coments.map((item) => {
-                        if (item.cinema==props.infoData[0].Cells.CommonName) return <li className={s.coment}>
-                            <img src={user} className={s.coment__ava} />
-                            <div className={s.coment__container}>
-                                <span>{item.name}</span>
-                                <span>{item.email}</span>
-                                <div>Оценка: {
-                                    arr.map((star, index, array) => {
-                                       if (index<item.size) return <FontAwesomeIcon icon={faStar} style={{color: 'red'}} />
-                                    })
-                                    } </div>
-                                <div>{item.coment} </div>
-                                <div>{item.date} </div>
-                            </div>
-                        </li>
-                    })}
-                </ul>
-            </div>
             <div className={s.coment__form}>
             <h4>Оставить отзыв</h4>
-                {!props.token?
-                <div>
-                    Чтобы оставить коментарий, вам нужно авторизироваться
-                </div>
-                :<div className="row">
+                <div className="row">
+                    <div className="row">
+                        <div className="input-field col s6">
+                            <input id="name" name='name' type="text" className="validate" onChange={onInputChange} />
+                            <label for="name">Name</label>
+                        </div>
+                        <div className="input-field col s6">
+                            <input id="email" type="email" className="validate" name='email' onChange={onInputChange} />
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="row">
                             <div className="input-field col s12">
@@ -97,11 +76,11 @@ const Coments = (props) => {
                             }
                         </div>
                     <button className='btn' onClick={sendComent}>отправить</button>
-                </div>}
+                </div>
             </div>
         </div>
     );
 
 }
 
-export default Coments
+export default ComentsForm

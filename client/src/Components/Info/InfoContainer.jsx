@@ -46,7 +46,8 @@ let mapStateToProps = (state) => {
         infoData: state.infoData.infoData,
         features: state.infoData.features,
         newComentText: state.infoData.newComentText,
-        coment: state.infoData.coment
+        coment: state.infoData.coment,
+        token: state.auth.token,
     }
 }
 

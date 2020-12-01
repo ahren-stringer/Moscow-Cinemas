@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Header from '../src/Components/Header/Header';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -12,8 +12,36 @@ import { setSearched } from './redux/headerReduser';
 import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
+import {setToken, setUserId, setLogin, setLoaded} from './redux/authReduser'
 
 function App(props) {
+  // const [token, setToken] = useState(null);
+  // const [userId, setUserId] = useState(null);
+  // const [loaded, setLoaded] = useState(false);
+
+  const login = useCallback((jwtToken, id) => {
+    debugger
+    props.setToken(jwtToken)
+    props.setUserId(id)
+    localStorage.setItem('userData', JSON.stringify({ userId: id, token: jwtToken }))
+  }, []);
+
+ props.setLogin(login)
+
+  // const logout = useCallback(() => {
+  //   props.setToken(null)
+  //   props.setUserId(null)
+  //   localStorage.removeItem('userData')
+  // }, []);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('userData'))
+    if (data && data.token) {
+      login(data.token, data.userId)
+    }
+    props.setLoaded(true)
+  }, [login]);
+
   // const onCloseList=()=>{
   //   props.setSearched({ requestNumber:0,request:[] })
   // }
@@ -29,8 +57,8 @@ function App(props) {
       <div className='content'>
         <Route path='/search/:riched' render={() => <Search />} />
         <Route path='/liked/:id?' render={() => <Liked />} />
-        <Route path='/auth' render={() => <Auth />}/>
-        <Route path='/register' render={() => <Register />}/>
+        <Route path='/auth' render={() => <Auth />} />
+        <Route path='/register' render={() => <Register />} />
       </div>
       <Footer />
     </div>
@@ -38,8 +66,14 @@ function App(props) {
 }
 
 let mapStateToProps = (state) => {
-  return { isClosed: state.header.isClosed }
+  return {
+    isClosed: state.header.isClosed,
+    loaded: state.auth.loaded,
+    token: state.auth.token,
+    userId: state.auth.userId,
+    loaded: state.auth.loaded,
+  }
 }
 
-export default connect(mapStateToProps, { setSearched })(App);
+export default connect(mapStateToProps, { setSearched, setToken, setUserId,setLogin,setLoaded})(App);
 

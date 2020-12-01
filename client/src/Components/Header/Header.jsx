@@ -5,11 +5,12 @@ import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
 import { setSearched, toggleList, loadList, setReqNumber } from '../../redux/headerReduser';
+import { logout } from '../../redux/authReduser';
 
 class Header extends React.Component {
   state = {
     counter: this.props.counter,
-    favorteArr: Object.entries(this.props.liked).filter(item => item[0].slice(0, 4) === "Кино")
+    favorteArr: Object.entries(this.props.liked).filter(item => item[0].slice(0, 4) === "Кино"),
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.counter !== this.props.counter) {
@@ -29,7 +30,6 @@ class Header extends React.Component {
   // }
   //favorteArr = Object.entries(this.props.liked).filter(item => item[0].slice(0, 4) === "Кино");
   render() {
-    debugger
     console.log('favoriteArr',this.state.favorteArr[0]);
     console.log('render')
     return (<div className='header'>
@@ -49,10 +49,10 @@ class Header extends React.Component {
           <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/'+this.state.favorteArr[0][0]))}>Избранное</NavLink>{this.props.counter}
         </div>
         <SearchingForm {...this.props} />
-        <NavLink to='/auth'>Войти</NavLink>
-        <a href='/'
-        // onClick={this.logoutReq}
-        >Выход</a>
+        {!this.props.token?<NavLink to='/auth'>Войти</NavLink>:
+        <span href='/'
+        onClick={this.props.logout}
+        >Выход</span>}
       </div>
     </div>
     );
@@ -69,8 +69,9 @@ let mapStateToPros = (state) => {
     isClosed: state.header.isClosed,
     isListLoading: state.header.isListLoading,
     liked: state.navData.liked,
-    requestNumber: state.header.requestNumber
+    requestNumber: state.header.requestNumber,
+    token: state.auth.token,
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber })(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber,logout })(Header);

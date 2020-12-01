@@ -9,7 +9,7 @@ const Info = (props) => {
     <div>
       <Description infoData={props.infoData} />
       <InfoMap infoData={props.infoData} />
-      <Coments id={props.match.params.id} infoData={props.infoData}/>
+      <Coments id={props.match.params.id} infoData={props.infoData} token={props.token}/>
     </div>
   );
 
