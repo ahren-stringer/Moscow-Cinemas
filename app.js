@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import pkg from 'express-validator';
 const { check, validationResult } = pkg;
-import auth from './middleware/auth.middleware.js'
+//import auth from './middleware/auth.middleware.js'
 
 //API Config
 const app = expess();
@@ -33,13 +33,19 @@ app.get('/', (req, res) => res.status(200).send('GET'))
 
 //Коменты
 
-app.post('/coment', auth, async (req, res) => {
+app.post('/coment', async (req, res) => {
 
     try {
-        const { cinema, coment, size } = req.body
-        console.log(req.user)
-        const newComent = new Coment({ cinema, coment, size,owner: req.user.userId })
+        const { cinema, coment, size, token } = req.body
 
+        if(!token) return res.status(400).json({message: 'Вы не авторизованны'})
+        const decoded = jwt.verify(token,'TopSecret')
+        //req.user=decoded
+        console.log(decoded)
+        const user = await User.findOne({ _id: decoded.userId })
+        console.log(user)
+        const newComent = new Coment({ cinema, coment, size, name: user.name, email: user.email, owner: decoded.userId })
+        console.log(newComent)
         await newComent.save()
         res.status(201).json({ newComent })
     } catch (e) {
@@ -55,9 +61,10 @@ app.post('/coment', auth, async (req, res) => {
     // })
 })
 
-app.get('/cinema/coments', auth, async (req, res) => {
+app.get('/cinema/coments', async (req, res) => {
     try {
-        const coments = await Coment.find({ owner: req.user.userId })
+        
+        const coments = await Coment.find()
         res.json(coments)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
@@ -72,7 +79,7 @@ app.get('/cinema/coments', auth, async (req, res) => {
     // })
 })
 
-app.get('/cinema/coments/:id', auth, async (req, res) => {
+app.get('/cinema/coments/:id', async (req, res) => {
     try {
         const coments = await Coment.findById(req.params.id)
         res.json(coments)

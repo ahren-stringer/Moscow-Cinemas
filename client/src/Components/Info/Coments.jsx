@@ -12,7 +12,10 @@ const Coments = (props) => {
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
         {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
     ]);
-    let [form, setForm] = useState({size: 0, coment: '', cinema:props.infoData[0].Cells.CommonName});
+    let [form, setForm] = useState({size: 0,
+        coment: '',
+        cinema:props.infoData[0].Cells.CommonName,
+        token: props.token});
 
     let onInputChange = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
