@@ -11,7 +11,6 @@ let init = {
 };
 
 const infoReduser = (state = init, action) => {
-    debugger
     switch (action.type) {
         case SET_INFO_DATA:
             return { ...state, infoData: action.infoData }

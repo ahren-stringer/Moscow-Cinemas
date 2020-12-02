@@ -21,7 +21,6 @@ const headerReduser = (state = init, action) => {
         case SET_COUNTER:
             return { ...state, count: action.count }
         case SET_SEARCHED:
-            debugger
             let obj_1 = {};
             for (let i of action.searched.request) {
                 obj_1[i.Cells.CommonName] = i

@@ -14,21 +14,58 @@ const SearchingForm = (props) => {
         console.log('searched:', searched)
     }, [props.searched])
     let onSearchChange = async () => {
+        let searchAll=[];
+        let count=0;
+        let reqFlag = true;
         props.setReqNumber(+props.requestNumber + 1)
         let search = searchInput.current.value;
         console.log(search)
         props.SearchChange(search)
         props.toggleList(true)
         props.loadList(true)
-        const req = await axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`);
-        if (search == '') {
-            props.setSearched({ requestNumber: props.requestNumber, request: [] })
-        } else {
-            props.setSearched({ requestNumber: props.requestNumber, request: req.data })
+        // const req = await 
+
+        function zaebalsya() {
+            function request(req) {
+                debugger
+                props.loadList(false)
+                console.log(req.data)
+                if (search == '') {
+                    return []
+                    //props.setSearched({ requestNumber: props.requestNumber, request: [] })
+                } else {
+                    return req.data
+                    //props.setSearched({ requestNumber: props.requestNumber, request: req.data })
+                }
+            }
+            axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+                .then(req => {
+                    searchAll = searchAll.concat(request(req))
+                    console.log('Кинотеатры:', searchAll)
+                    count++
+                    debugger
+                })
+            axios.get(`https://apidata.mos.ru/v1/datasets/531/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+                .then(req => {
+                    searchAll = searchAll.concat(request(req))
+                    console.log('Театры:', searchAll)
+                    count++
+                    debugger
+                })
+        }
+        await zaebalsya()
+        function ochen(){
+        props.setSearched({ requestNumber: props.requestNumber, request: searchAll })
+    }
+        if(count%2==0 ||count!=0){
+            ochen()
         }
         debugger
-        props.loadList(false)
-        console.log(req.data)
+        console.log('взлом жопы')
+        // .then((res)=> {
+        //     debugger
+        //     props.setSearched({ requestNumber: props.requestNumber, request: res })
+        // })
     }
     const CloseList = () => {
         debugger

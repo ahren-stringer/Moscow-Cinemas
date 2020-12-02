@@ -4,7 +4,8 @@ const SET_NEW_TEXT = 'navReuser/SET-NEW-TEXT';
 const TOTAL_COUNT = 'navReuser/TOTAL-COUNT';
 const SET_PAGE = 'navReuser/SET-PAGE';
 const SET_LIKED = 'navReuser/SET-LIKED';
-const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA"
+const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
+const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
 
 let init = {
     navData: {},
@@ -14,7 +15,8 @@ let init = {
     totalCount: 1,
     numberOfPage: 2,
     onOnePage: 6,
-    request: true
+    request: true,
+    typeTitle:'',
 };
 
 const navReduser = (state = init, action) => {
@@ -44,6 +46,8 @@ const navReduser = (state = init, action) => {
             return { ...state, numberOfPage: action.numberOfPage }
         case SET_LIKED:
             return { ...state, liked: action.liked }
+        case SET_TYPE_TITLE:
+                return { ...state, typeTitle: action.typeTitle }
         default:
             return state
     }
@@ -56,6 +60,7 @@ export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 export const Setliked = (liked) => ({ type: SET_LIKED, liked })
+export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
 
 
 export default navReduser

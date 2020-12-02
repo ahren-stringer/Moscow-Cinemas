@@ -13,6 +13,7 @@ import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
 import {setToken, setUserId, setLogin, setLoaded} from './redux/authReduser'
+import MainPage from './Components/MainPage/MainPage';
 
 function App(props) {
   // const [token, setToken] = useState(null);
@@ -27,12 +28,6 @@ function App(props) {
   }, []);
 
  props.setLogin(login)
-
-  // const logout = useCallback(() => {
-  //   props.setToken(null)
-  //   props.setUserId(null)
-  //   localStorage.removeItem('userData')
-  // }, []);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('userData'))
@@ -52,7 +47,8 @@ function App(props) {
       <div className='Header'>
         <Header />
       </div>
-      <Route exact path="/" children={<Navbar />} />
+      <Route exact path="/" children={<MainPage />} />
+      <Route exact path="/:type" children={<Navbar />} />
       <Route path='/cinema/:id' render={() => <Info />} />
       <div className='content'>
         <Route path='/search/:riched' render={() => <Search />} />

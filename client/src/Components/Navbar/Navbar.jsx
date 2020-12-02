@@ -61,7 +61,7 @@ function Navbar(props) {
   let navData = Object.values(props.navData)
   return (
     <div>
-      <Introdaction />
+      <Introdaction typeTitle={props.typeTitle}/>
       <div className={s.nav}>
         {
           navData.map((item, index, array) => {
