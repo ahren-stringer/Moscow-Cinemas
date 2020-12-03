@@ -6,66 +6,54 @@ import './Header.css'
 import PreloaderList from '../Preloader/PreloaderList';
 
 const SearchingForm = (props) => {
+    let [searchedAll, setSearchedAll] = useState([]);
+    let [searchedSingle, setSearchedSingle] = useState([]);
+    let [requestNumber, setRequestNumber] = useState(0);
+    let [counter, setCounter] = useState(0);
     let [searched, setSearched] = useState(props.searched);
     let searchInput = React.createRef();
 
     useEffect(() => {
-        if (searched.requestNumber < props.searched.requestNumber || props.searched.requestNumber == 0) setSearched(props.searched)
+        debugger
+        //if (searched.requestNumber < props.searched.requestNumber)
+        setSearched(props.searched)
         console.log('searched:', searched)
     }, [props.searched])
+
     let onSearchChange = async () => {
-        let searchAll=[];
-        let count=0;
-        let reqFlag = true;
+        debugger
         props.setReqNumber(+props.requestNumber + 1)
         let search = searchInput.current.value;
         console.log(search)
         props.SearchChange(search)
         props.toggleList(true)
         props.loadList(true)
-        // const req = await 
-
-        function zaebalsya() {
-            function request(req) {
-                debugger
-                props.loadList(false)
-                console.log(req.data)
-                if (search == '') {
-                    return []
-                    //props.setSearched({ requestNumber: props.requestNumber, request: [] })
-                } else {
-                    return req.data
-                    //props.setSearched({ requestNumber: props.requestNumber, request: req.data })
-                }
+        
+        function request(req){
+            //props.setReqNumber(+props.requestNumber + 1)
+            setCounter(counter+1)
+            console.log('номер', counter)
+            if (search == '') {
+                props.setSearched({ requestNumber: props.requestNumber, request: [] })
+            } else {
+                props.setSearched({ requestNumber: props.requestNumber, request: req.data })
             }
-            axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
-                .then(req => {
-                    searchAll = searchAll.concat(request(req))
-                    console.log('Кинотеатры:', searchAll)
-                    count++
-                    debugger
-                })
+            debugger
+            props.loadList(false)
+            console.log(req.data)
+        }
+
+
+        axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+            .then(req => {
+                request(req)
+            })
+        setTimeout(() => {
             axios.get(`https://apidata.mos.ru/v1/datasets/531/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
                 .then(req => {
-                    searchAll = searchAll.concat(request(req))
-                    console.log('Театры:', searchAll)
-                    count++
-                    debugger
+                    request(req)
                 })
-        }
-        await zaebalsya()
-        function ochen(){
-        props.setSearched({ requestNumber: props.requestNumber, request: searchAll })
-    }
-        if(count%2==0 ||count!=0){
-            ochen()
-        }
-        debugger
-        console.log('взлом жопы')
-        // .then((res)=> {
-        //     debugger
-        //     props.setSearched({ requestNumber: props.requestNumber, request: res })
-        // })
+        }, 1);
     }
     const CloseList = () => {
         debugger
@@ -77,7 +65,7 @@ const SearchingForm = (props) => {
                 onChange={onSearchChange}
                 ref={searchInput}
                 style={{ margin: 0, height: "2em" }} />
-            {props.isListLoading ? <PreloaderList />
+            {props.isListLoading ? <div>!!!!!!!!!!</div>
                 : <ul className="collection">
                     {(props.isClosed && searched.length == 0) ? null :
                         Object.values(searched.request).map((item, index) => {

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
-import { setSearched, toggleList, loadList, setReqNumber } from '../../redux/headerReduser';
+import { setSearched, toggleList, loadList, setReqNumber,setSearchedArr } from '../../redux/headerReduser';
 import { logout } from '../../redux/authReduser';
 
 class Header extends React.Component {
@@ -30,8 +30,6 @@ class Header extends React.Component {
   // }
   //favorteArr = Object.entries(this.props.liked).filter(item => item[0].slice(0, 4) === "Кино");
   render() {
-    console.log('favoriteArr',this.state.favorteArr[0]);
-    console.log('render')
     return (<div className='header'>
       <NavLink to='/' activeClassName='active'>
         <div>
@@ -74,4 +72,4 @@ let mapStateToPros = (state) => {
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber,logout })(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber,logout,setSearchedArr })(Header);

@@ -4,12 +4,16 @@ const SET_SEARCHED_PAGE = 'infoReuser/SET-SEARCHED-PAGE';
 const SET_REDIRECT = 'infoReuser/SET-REDIRECT';
 const CLOSE_LIST = 'infoReuser/CLOSE_LIST';
 const LOAD_LIST = 'infoReuser/LOAD_LIST';
-const SET_REQ_NUMBER='infoReuser/SET_REQ_NUMBER'
+const SET_REQ_NUMBER = 'infoReuser/SET_REQ_NUMBER';
+const SET_SEARCHED_ARR = 'infoReuser/SET_SEARCHED_ARR'
 
 let init = {
     count: localStorage.getItem("count"),
-    requestNumber: 0,
+    requestNumber: 1,
+
     searched: { requestNumber: 0, request: [] },
+    searchedArr: [],
+
     searchedPage: {},
     searchRedirect: true,
     isClosed: true,
@@ -22,10 +26,26 @@ const headerReduser = (state = init, action) => {
             return { ...state, count: action.count }
         case SET_SEARCHED:
             let obj_1 = {};
-            for (let i of action.searched.request) {
-                obj_1[i.Cells.CommonName] = i
+            state.searchedArr.push(action.searched.request)
+            if (state.searchedArr.length>2){
+                state.searchedArr.splice(0,2)
             }
+            debugger
+            for (let i=0;i<state.searchedArr.length;i++) {
+                for(let j=0;j<state.searchedArr[i].length;j++){
+                    obj_1[state.searchedArr[i][j].Cells.CommonName] = state.searchedArr[i][j]
+                }
+            }
+            debugger
+            if (state.searchedArr.length==2) {
             return { ...state, searched: { requestNumber: action.searched.requestNumber, request: obj_1 } }
+            }else{
+                return { ...state, searched: { requestNumber: action.searched.requestNumber, request: {} } }
+            }
+        // case SET_SEARCHED_ARR:
+        //     state.searchedArr.push(action.searchedArr)
+        //     debugger
+        //     return { ...state, searchedArr: state.searchedArr }
         case SET_SEARCHED_PAGE:
             let obj_2 = {};
             for (let i of action.searchedPage) {
@@ -52,5 +72,6 @@ export const setSearchRedirect = (searchRedirect) => ({ type: SET_REDIRECT, sear
 export const toggleList = (isClosed) => ({ type: CLOSE_LIST, isClosed })
 export const loadList = (isListLoading) => ({ type: LOAD_LIST, isListLoading })
 export const setReqNumber = (requestNumber) => ({ type: SET_REQ_NUMBER, requestNumber })
+export const setSearchedArr = (searchedArr) => ({ type: SET_SEARCHED_ARR, searchedArr })
 
 export default headerReduser
