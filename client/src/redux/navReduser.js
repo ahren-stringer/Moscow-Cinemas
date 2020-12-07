@@ -8,7 +8,7 @@ const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
 const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
 
 let init = {
-    navData: {},
+    navData: [],
     names: [],
     newSearchText: '',
     liked: { ...localStorage },
@@ -22,7 +22,8 @@ let init = {
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            return { ...state, navData: { ...action.navData } }
+            
+            return { ...state, navData: action.prevNanData.concat(action.navData)}
         // case CONCAT_NAV_DATA:
         //     let arr=[]
         //     for (let i=0;i<action.navData.length;i++){
@@ -50,7 +51,7 @@ const navReduser = (state = init, action) => {
     }
 }
 
-export const setNavData = (navData) => ({ type: SET_NAV_DATA, navData });
+export const setNavData = (navData,prevNanData) => ({ type: SET_NAV_DATA, navData, prevNanData });
 export const concatNavData = (navData) => ({ type: CONCAT_NAV_DATA, navData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })

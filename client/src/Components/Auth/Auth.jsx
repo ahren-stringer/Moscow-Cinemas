@@ -24,12 +24,11 @@ function Auth(props) {
 
     let loginReq = async () => {
         try {
-            const req= await axios.post('http://localhost:8001/cinema/login', { ...form })
+            const req = await axios.post('http://localhost:8001/cinema/login', { ...form })
             console.log(req)
             props.login(req.data.token, req.data.userId)
         } catch (e) { }
     }
-
 
     return <div class="container">
         <div style={{ marginLeft: "10px" }}>
@@ -57,12 +56,6 @@ function Auth(props) {
             </NavLink>
         </div>
         <div>
-            <div>
-                <h5>Авторизация через:</h5>
-            </div>
-            <div>
-                <img src={vkAuth} style={{ width: "40px" }}></img>
-            </div>
         </div>
     </div>
 }

@@ -1,21 +1,36 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Preloader from '../Preloader/Preloader';
 
 
 function MainPage(props) {
 
+    let [categores, setCategores] = useState(null)
+
+    useEffect(
+        () => {
+            async function fetchData() {
+                const req = await axios.get('http://localhost:8001/place_category');
+                setCategores(req.data)
+                console.log(req.data)
+            }
+            fetchData()
+        }
+        , [])
+
     return (
         <div>
-            <div classNmae='place__type'>
-                <NavLink to='/cinemas' className='place__type__link'>
-                    Кинотеатры
-                </NavLink>
-            </div>
-            <div classNmae='place__type'>
-                <NavLink to='/theatres' className='place__type__link'>
-                    Театры
-                </NavLink>
-            </div>
+            {
+                categores
+                    ? categores.map(item =>
+                        <div classNmae='place__type'>
+                            <NavLink to={'/' + item.categoryUrl} className='place__type__link'>
+                                {item.category}
+                            </NavLink>
+                        </div>)
+                    : <Preloader />
+            }
         </div>
     );
 }

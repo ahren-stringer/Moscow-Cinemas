@@ -217,6 +217,7 @@ app.post('/place_category/places', async (req, res) => {
     try {
         const { name,
             address,
+            district,
             phones,
             email,
             workHours,
@@ -232,6 +233,7 @@ app.post('/place_category/places', async (req, res) => {
         const newPlace = new Place({
             name,
             address,
+            district,
             phones,
             email,
             workHours,
@@ -240,6 +242,7 @@ app.post('/place_category/places', async (req, res) => {
             webSite,
             photos,
             placeCategory,
+            categoryUrl,
             owner: category
         })
 
@@ -263,6 +266,16 @@ app.get('/place_category/places/search/:search', async (req, res) => {
 app.get('/place_category/places/category/:placeCategory', async (req, res) => {
     try {
         const places = await Place.find({ categoryUrl: req.params.placeCategory }).exec()
+        res.json(places)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+// определенное количество
+app.get('/place_category/places/some/:placeCategory/:limit/:skip', async (req, res) => {
+    try {
+        const places = await Place.find({categoryUrl:req.params.placeCategory}).limit(+req.params.limit).skip(+req.params.skip)
+        console.log(req.params.name,req.params.limit,req.params.skip)
         res.json(places)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })

@@ -55,16 +55,16 @@ function Navbar(props) {
   }
   let onPageChange = (e) => {
     props.SetPageCount(props.numberOfPage + 1)
-    props.onPageChange(props.numberOfPage * props.onOnePage)
+    props.onPageChange(props.numberOfPage * props.onOnePage, props.type, props.navData)
   };
 
-  let navData = Object.values(props.navData)
+  // let navData = Object.values(props.navData)
   return (
     <div>
       <Introdaction typeTitle={props.typeTitle}/>
       <div className={s.nav}>
         {
-          navData.map((item, index, array) => {
+          props.navData.map((item, index, array) => {
             if (array.indexOf(item) === index) {
               return <div className={s.cinema}>
                 <NavLink to={`/cinemas/${item.name}`}>

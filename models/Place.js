@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 const placeSchema=mongoose.Schema({
     name: String,
     address:String,
+    district: String,
     phones:Array,
     email:String,
     workHours: Object,
