@@ -14,7 +14,7 @@ const Coments = (props) => {
     ]);
     let [form, setForm] = useState({size: 0,
         coment: '',
-        cinema:props.infoData[0].Cells.CommonName,
+        cinema:props.infoData[0].name,
         token: props.token});
 
     let onInputChange = (event) => {
@@ -60,7 +60,7 @@ const Coments = (props) => {
             <div >
                 <ul >
                     {coments.map((item) => {
-                        if (item.cinema==props.infoData[0].Cells.CommonName) return <li className={s.coment}>
+                        if (item.cinema==props.infoData[0].name) return <li className={s.coment}>
                             <img src={user} className={s.coment__ava} />
                             <div className={s.coment__container}>
                                 <span>{item.name}</span>

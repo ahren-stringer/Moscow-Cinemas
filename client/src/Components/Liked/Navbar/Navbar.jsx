@@ -30,13 +30,13 @@ function Navbar(props) {
     props.setCounter(counter)
     console.log(localStorage)
   }
-  let favorteArr = Object.entries(localStorage).filter(item => item[0].slice(0, 4) === "Кино")
+  let favorteArr = Object.entries(localStorage).filter(item => item[0] !== "count")
   debugger
   return (
     <div>
         <ul className="collection">
        { Object.entries(ls)
-          .filter(item => item[0].slice(0, 4) === "Кино")
+          .filter(item => item[0] !== "count")
           .map((item) =>
               <li className="collection-item avatar">
               <FontAwesomeIcon icon={faFilm} className="material-icons circle red"/>

@@ -25,33 +25,10 @@ const headerReduser = (state = init, action) => {
         case SET_COUNTER:
             return { ...state, count: action.count }
         case SET_SEARCHED:
-            let obj_1 = {};
-            state.searchedArr.push(action.searched.request)
-            if (state.searchedArr.length>2){
-                state.searchedArr.splice(0,2)
-            }
-            debugger
-            for (let i=0;i<state.searchedArr.length;i++) {
-                for(let j=0;j<state.searchedArr[i].length;j++){
-                    obj_1[state.searchedArr[i][j].Cells.CommonName] = state.searchedArr[i][j]
-                }
-            }
-            debugger
-            if (state.searchedArr.length==2) {
-            return { ...state, searched: { requestNumber: action.searched.requestNumber, request: obj_1 } }
-            }else{
-                return { ...state, searched: { requestNumber: action.searched.requestNumber, request: {} } }
-            }
-        // case SET_SEARCHED_ARR:
-        //     state.searchedArr.push(action.searchedArr)
-        //     debugger
-        //     return { ...state, searchedArr: state.searchedArr }
+            
+            return { ...state, searched: { requestNumber: action.searched.requestNumber, request: action.searched.request } }
         case SET_SEARCHED_PAGE:
-            let obj_2 = {};
-            for (let i of action.searchedPage) {
-                obj_2[i.Cells.CommonName] = i
-            }
-            return { ...state, searchedPage: { ...obj_2 } }
+            return { ...state, searchedPage: action.searchedPage }
         case SET_REDIRECT:
             return { ...state, searchRedirect: action.searchRedirect }
         case CLOSE_LIST:

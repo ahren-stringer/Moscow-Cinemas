@@ -20,6 +20,7 @@ class InfoContainer extends React.Component {
         }
     }
     render() {
+        debugger
         if (!this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
         return <Info {...this.props} />
     }

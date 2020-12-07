@@ -13,15 +13,20 @@ class NavbarContainer extends React.Component {
         let type=this.props.match.params.type;
         let typeTitle='';
         if (type=='cinemas'){
-            axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?$skip=0&$top=${this.props.onOnePage}&api_key=c70b711784b712cbe482f9701909fd97`)
+            axios.get(`http://localhost:8001/place_category/places/category/cinemas`)
             .then(response => {
+                debugger
                 this.props.setNavData(response.data)
+                this.props.SetTypeTitle(response.data[0].placeCategory)
             })
-            axios.get(`https://apidata.mos.ru/v1/datasets/495?$skip=0&$top=${this.props.onOnePage}&api_key=c70b711784b712cbe482f9701909fd97`)
+        }
+        if (type=='theatres'){
+            axios.get(`http://localhost:8001/place_category/places/category/theatres`)
             .then(response => {
-                this.props.SetTypeTitle(response.data.Caption)
+                debugger
+                this.props.setNavData(response.data)
+                this.props.SetTypeTitle(response.data[0].placeCategory)
             })
-            console.log(this.props)
         }
     }
     onPageChange = (numberOfPage) => {

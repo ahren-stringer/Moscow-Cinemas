@@ -37,19 +37,19 @@ function App(props) {
     props.setLoaded(true)
   }, [login]);
 
-  // const onCloseList=()=>{
-  //   props.setSearched({ requestNumber:0,request:[] })
-  // }
+  const onCloseList=()=>{
+    props.setSearched({ requestNumber:0,request:[] })
+  }
   return (
     <div className="App"
-    //onClick={onCloseList}
+    onClick={onCloseList}
     >
       <div className='Header'>
         <Header />
       </div>
       <Route exact path="/" children={<MainPage />} />
       <Route exact path="/:type" children={<Navbar />} />
-      <Route path='/cinema/:id' render={() => <Info />} />
+      <Route path='/cinemas/:id' render={() => <Info />} />
       <div className='content'>
         <Route path='/search/:riched' render={() => <Search />} />
         <Route path='/liked/:id?' render={() => <Liked />} />

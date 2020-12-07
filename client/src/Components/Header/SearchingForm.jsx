@@ -44,16 +44,10 @@ const SearchingForm = (props) => {
         }
 
 
-        axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+        axios.get(`http://localhost:8001/place_category/places/search/${search}`)
             .then(req => {
                 request(req)
             })
-        setTimeout(() => {
-            axios.get(`https://apidata.mos.ru/v1/datasets/531/rows?&$filter=substringof(%27${search}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
-                .then(req => {
-                    request(req)
-                })
-        }, 1);
     }
     const CloseList = () => {
         debugger
@@ -68,10 +62,10 @@ const SearchingForm = (props) => {
             {props.isListLoading ? <div>!!!!!!!!!!</div>
                 : <ul className="collection">
                     {(props.isClosed && searched.length == 0) ? null :
-                        Object.values(searched.request).map((item, index) => {
+                        searched.request.map((item, index) => {
                             return <li className="collection-item">
-                                <NavLink to={`/cinema/${item.Cells.CommonName}`}
-                                    onClick={CloseList}>{item.Cells.CommonName}
+                                <NavLink to={`/cinemas/${item.name}`}
+                                    onClick={CloseList}>{item.name}
                                 </NavLink>
                             </li>
                         })

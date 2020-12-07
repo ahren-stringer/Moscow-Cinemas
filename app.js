@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import Coment from "./models/Coment.js"
 import Photos from "./models/Photos.js"
 import User from './models/User.js'
+import PlaceCategory from './models/PlaceCategory.js'
+import Place from './models/Place.js'
 import Cors from "cors"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -38,8 +40,8 @@ app.post('/coment', async (req, res) => {
     try {
         const { cinema, coment, size, token } = req.body
 
-        if(!token) return res.status(400).json({message: 'Вы не авторизованны'})
-        const decoded = jwt.verify(token,'TopSecret')
+        if (!token) return res.status(400).json({ message: 'Вы не авторизованны' })
+        const decoded = jwt.verify(token, 'TopSecret')
         //req.user=decoded
         console.log(decoded)
         const user = await User.findOne({ _id: decoded.userId })
@@ -51,32 +53,16 @@ app.post('/coment', async (req, res) => {
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
-
-    // Coment.create(dbComent,(err,data)=>{
-    //     if (err){
-    //         res.status(500).send(err)
-    //     }else{
-    //         res.status(201).send(data)
-    //     }
-    // })
 })
 
 app.get('/cinema/coments', async (req, res) => {
     try {
-        
+
         const coments = await Coment.find()
         res.json(coments)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
-
-    // Coment.find((err,data)=>{
-    //     if (err){
-    //         res.status(500).send(err)
-    //     }else{
-    //         res.status(200).send(data)
-    //     }
-    // })
 })
 
 app.get('/cinema/coments/:id', async (req, res) => {
@@ -189,6 +175,109 @@ app.post(
             res.status(500).json({ message: 'Ошибка авторизации' })
         }
     })
+
+//Наборы данных
+
+//Категории
+
+app.post(
+    '/place_category',
+    async (req, res) => {
+        try {
+            const { category, categoryUrl } = req.body
+            const condidate = await PlaceCategory.findOne({ category })
+            if (condidate) {
+                return res.status(400).json({ message: 'Такая категория уже есть' })
+            }
+            const newCategory = new PlaceCategory({ category, categoryUrl });
+
+            await newCategory.save()
+
+            res.status(201).json({ message: 'Категория зарегистрирована' })
+        } catch (e) {
+            res.status(500).json({ message: 'Ошибка записи' })
+        }
+    })
+
+app.get(
+    '/place_category',
+    async (req, res) => {
+        try {
+            const category = await PlaceCategory.find()
+            res.json(category)
+        } catch (e) {
+            res.status(500).json({ message: 'Что-то пошло не так' })
+        }
+    })
+
+//Места
+
+app.post('/place_category/places', async (req, res) => {
+
+    try {
+        const { name,
+            address,
+            phones,
+            email,
+            workHours,
+            numberOfHalls,
+            coordinates,
+            webSite,
+            photos,
+            placeCategory,
+            categoryUrl } = req.body
+
+        const category = await PlaceCategory.findOne({ categoryUrl })
+
+        const newPlace = new Place({
+            name,
+            address,
+            phones,
+            email,
+            workHours,
+            numberOfHalls,
+            coordinates,
+            webSite,
+            photos,
+            placeCategory,
+            owner: category
+        })
+
+        await newPlace.save()
+        //await category.places.push(newPlace)
+        res.status(201).json({ newPlace })
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+
+app.get('/place_category/places/search/:search', async (req, res) => {
+    try {
+        const places = await Place.find()
+        res.json(places.filter(item=> item.name.toLowerCase().includes(req.params.search)))
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+// по категориям
+app.get('/place_category/places/category/:placeCategory', async (req, res) => {
+    try {
+        const places = await Place.find({ categoryUrl: req.params.placeCategory }).exec()
+        res.json(places)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+// по местам
+app.get('/place_category/places/:name', async (req, res) => {
+    try {
+        const places = await Place.find({name:req.params.name}).exec()
+        console.log(places)
+        res.json(places)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
 
 //Listener
 

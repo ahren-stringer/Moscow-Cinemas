@@ -11,6 +11,11 @@ function MainPage(props) {
                     Кинотеатры
                 </NavLink>
             </div>
+            <div classNmae='place__type'>
+                <NavLink to='/theatres' className='place__type__link'>
+                    Театры
+                </NavLink>
+            </div>
         </div>
     );
 }

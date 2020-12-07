@@ -22,10 +22,7 @@ let init = {
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            for (let i of action.navData) {
-                state.navData[i.Cells.CommonName] = i
-            }
-            return { ...state, navData: { ...state.navData } }
+            return { ...state, navData: { ...action.navData } }
         // case CONCAT_NAV_DATA:
         //     let arr=[]
         //     for (let i=0;i<action.navData.length;i++){

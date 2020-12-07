@@ -1,62 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import s from './Info.module.css'
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import Preloader from '../Preloader/Preloader';
 
 const Description=(props)=>{
-  let [photos, setPhotos] = useState(null);
+  let [ls, setLs] = useState(props.liked);
 
   useEffect(() => {
-    async function fetchData() {
-      const req = await axios.get('http://localhost:8001/cinema/photos');
-      req.data.map((item)=>{
-        if (item.cinema==props.infoData[0].Cells.CommonName ) setPhotos(item.photosSlider)
-      })
-      //setPhotos(req.data)
-      console.log(req.data)
-    }
-    fetchData()
-  }, [])
+    setLs(props.liked)
+  }, [props.liked])
 
-  // useEffect(() => {
-  //   debugger
-  //   setPhotos(photos)
-  // }, [photos])
- 
+  const Liked = (name, index) => {
+    let counter = +localStorage.getItem('count');
+    if (localStorage.getItem(name)) {
+      localStorage.removeItem(name)
+      counter = counter - 1
+      localStorage.setItem('count', counter)
+      props.Setliked({ ...localStorage })
+    } else {
+      localStorage.setItem(name, index)
+      counter = counter + 1
+      localStorage.setItem('count', counter)
+      props.Setliked({ ...localStorage })
+    }
+    props.setCounter(counter)
+    console.log(localStorage)
+  }
+  
     return (
       <div className={s.description}>
         <div className={s.description__cinema}>
-          {props.infoData[0].Cells.CommonName}
+          {props.infoData[0].name}
         </div>
         <div>
-          Адрес: {props.infoData[0].Cells.ObjectAddress[0].Address}
+          Адрес: {props.infoData[0].address}
         </div>
         <div>
-          Телефоны: {props.infoData[0].Cells.PublicPhone.map(item => <div>{item.PublicPhone[0]}</div>)}
+          Телефоны: {props.infoData[0].phones.map(item => <div>{item}</div>)}
         </div>
         <div>
-          E-mail: {props.infoData[0].Cells.Email[0].Email[0]}
+          E-mail: {props.infoData[0].email}
         </div>
         <div>
 
-          Часы работ: {props.infoData[0].Cells.WorkingHours.map(item => <div>
+          Часы работ: {props.infoData[0].workHours.map(item => <div>
           <span>{item.DayWeek}</span>: <span>{item.WorkHours}</span>
         </div>)}
 
         </div>
         <div>
-          Количество залов: {props.infoData[0].Cells.NumberOfHalls}
+          Количество залов: {props.infoData[0].numberOfHalls}
         </div>
         <div>
-        Сайт: <a href={'http://www.'+props.infoData[0].Cells.WebSite}>{props.infoData[0].Cells.WebSite}</a> 
+        Сайт: <a href={'http://www.'+props.infoData[0].webSite}>{props.infoData[0].webSite}</a> 
         </div>
         <div>
-          {photos ? photos.map(item=>{
+          {props.infoData[0].photos.photosSlider ? props.infoData[0].photos.photosSlider.map(item=>{
             return <img src={item}></img>
           }) 
           :<div>
             <h3>Фотокарточки</h3>
             </div>}
+            <div 
+            //className={s.liked} 
+            onClick={() => {Liked(props.infoData[0].name, props.infoData[0].name)}}>
+                  Добавить в избранное {
+                    !!ls[props.infoData[0].name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                  }
+                </div>
         </div>
       </div>
     );

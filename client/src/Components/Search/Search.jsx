@@ -12,7 +12,7 @@ function Search(props) {
     useEffect(() => {
         async function fetchData() {
             let riched = props.match.params.riched;
-            const req = await axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${riched}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`);
+            const req = await axios.get(`http://localhost:8001/place_category/places/search/${riched}`);
             debugger
             props.setSearchedPage(req.data)
             console.log(req.data)
@@ -29,7 +29,7 @@ function Search(props) {
         <div>
             <h4>Возможно вы искали:</h4>
             {
-                Object.values(searched).map((item) => <div><NavLink to={`/cinema/${item.Cells.CommonName}`}>{item.Cells.CommonName}</NavLink></div>)
+                Object.values(searched).map((item) => <div><NavLink to={`/cinemas/${item.name}`}>{item.name}</NavLink></div>)
             }
         </div>
     );

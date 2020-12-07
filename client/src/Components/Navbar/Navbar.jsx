@@ -65,26 +65,19 @@ function Navbar(props) {
       <div className={s.nav}>
         {
           navData.map((item, index, array) => {
-            let ava = logo;
-            if (photos) {
-              for (let i of photos) {
-                if (i.cinema == item.Cells.CommonName) ava = i.photoLarge
-              }
-            }
             if (array.indexOf(item) === index) {
               return <div className={s.cinema}>
-                <NavLink to={`/cinema/${item.Cells.CommonName}`}>
-                  <img src={ava}></img>
+                <NavLink to={`/cinemas/${item.name}`}>
+                  <img src={item.photos.photoLarge}></img>
                   <div className={s.name}>
-                    {item.Cells.CommonName}
+                    {item.name}
                   </div>
                 </NavLink>
                 <div className={s.liked} onClick={() => {
-                  Liked(item.Cells.CommonName
-                    , index)
+                  Liked(item.name, index)
                 }}>
                   Добавить в избранное {
-                    !!ls[item.Cells.CommonName] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                    !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                   }
                 </div>
               </div>

@@ -11,12 +11,12 @@ const InfoMap = (props) => {
                     <Map
                         state={{
                             zoom: 15,
-                            center: [props.infoData[0].Cells.geoData.coordinates[0][1], props.infoData[0].Cells.geoData.coordinates[0][0]],
+                            center: [props.infoData[0].coordinates[1], props.infoData[0].coordinates[0]],
                         }}
                         width="100%"
                     >
                         <ZoomControl />
-                        <Placemark geometry={[props.infoData[0].Cells.geoData.coordinates[0][1], props.infoData[0].Cells.geoData.coordinates[0][0]]} />
+                        <Placemark geometry={[props.infoData[0].coordinates[1], props.infoData[0].coordinates[0]]} />
                     </Map>
                 </div>
             </YMaps>

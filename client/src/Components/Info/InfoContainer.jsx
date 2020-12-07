@@ -2,6 +2,8 @@ import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
 import { setInfoData, setFeatures, ComentChange, setComent } from '../../redux/infoReduser';
+import { Setliked } from '../../redux/navReduser';
+import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -13,11 +15,14 @@ class InfoContainer extends React.Component {
     }
     componentDidMount() {
         let id = this.props.match.params.id;
-        axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${id}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+        if (id){
+            axios.get(`http://localhost:8001/place_category/places/${id}`)
             .then(response => {
+                debugger
                 console.log(response.data)
                 this.props.setInfoData(response.data)
             })
+        }
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id != this.props.match.params.id) {
@@ -25,7 +30,7 @@ class InfoContainer extends React.Component {
             this.setState({
                 infoFlag: true
             })
-            axios.get(`https://apidata.mos.ru/v1/datasets/495/rows?&$filter=substringof(%27${id}%27,Cells/CommonName)&api_key=c70b711784b712cbe482f9701909fd97`)
+            axios.get(`http://localhost:8001/place_category/places/${id}`)
                 .then(response => {
                     console.log(response.data)
                     this.props.setInfoData(response.data)
@@ -36,6 +41,8 @@ class InfoContainer extends React.Component {
         }
     }
     render() {
+        debugger
+        if (this.props.match.url=='/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
         if (!this.props.infoData||this.state.infoFlag) return <Preloader />
         return <Info {...this.props} id={this.props.match.params.id} />
     }
@@ -48,10 +55,11 @@ let mapStateToProps = (state) => {
         newComentText: state.infoData.newComentText,
         coment: state.infoData.coment,
         token: state.auth.token,
+        liked: state.navData.liked,
     }
 }
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComent })
+    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComent,setCounter, Setliked })
 )(InfoContainer)
