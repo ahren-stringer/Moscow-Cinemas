@@ -12,9 +12,9 @@
     margin: 0 32px 30px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
-img{
+/* img{
     width: 266px;
-}
+} */
 .liked,
 .name{
     margin: 5px;

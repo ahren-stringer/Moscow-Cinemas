@@ -7,26 +7,12 @@ import axios from 'axios';
 
 const ComentsForm = (props) => {
     let arr = [1, 2, 3, 4, 5];
-    let [coments, setComents] = useState([
-        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
-        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' },
-        {date:String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....' }
-    ]);
+    let [coments, setComents] = useState([]);
     let [form, setForm] = useState({ email: '', name: '', size: 0, coment: '', cinema:props.infoData[0].Cells.CommonName});
 
     let onInputChange = (event) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         debugger
-    //         const req = await axios.get('http://localhost:8001/cinema/coments');
-    //         setComents(req.data)
-    //         console.log(req.data)
-    //     }
-    //     fetchData()
-    // }, [])
 
     const sendComent = async () => {
         await axios.post('http://localhost:8001/cinema/coments', { ...form })

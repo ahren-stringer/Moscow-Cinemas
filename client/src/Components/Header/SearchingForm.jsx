@@ -14,7 +14,6 @@ const SearchingForm = (props) => {
     let searchInput = React.createRef();
 
     useEffect(() => {
-        debugger
         //if (searched.requestNumber < props.searched.requestNumber)
         setSearched(props.searched)
         console.log('searched:', searched)

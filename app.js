@@ -11,6 +11,7 @@ import jwt from 'jsonwebtoken'
 import pkg from 'express-validator';
 const { check, validationResult } = pkg;
 //import auth from './middleware/auth.middleware.js'
+import nodemailer from 'nodemailer'
 
 //API Config
 const app = expess();
@@ -100,6 +101,26 @@ app.get('/cinema/photos', (req, res) => {
 
 // Авторизация
 
+const transporter = nodemailer.createTransport({
+    host: 'smtp.mail.ru',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'mos_culture@mail.ru',
+        pass: 'youwi11neverpass'
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+
+const mailer= message =>{
+    transporter.sendMail(message,(err,info)=>{
+        if (err) return console.log('Error ',err)
+        console.log('Email sent:', info)
+    })
+}
+
 app.post(
     '/cinema/register',
     [
@@ -109,7 +130,6 @@ app.post(
     ],
     async (req, res) => {
         try {
-            debugger
             console.log('body', req.body)
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
@@ -131,6 +151,21 @@ app.post(
             await user.save()
 
             res.status(201).json({ message: 'Пользователь зарегистрирован' })
+            // Отправка на почту
+
+            const message = {
+                from: 'MosCulture <mos_culture@mail.ru>',
+                to: req.body.email, 
+                subject: 'Вы зарегистрированны на сайте MosCulture',
+                text: `Вы зарегистрированны на сайте MosCulture
+                
+                Данные вашей учетной записи:
+                Логин: ${req.body.email}
+                Пароль: ${req.body.password}`
+              };
+
+            mailer(message)
+
         } catch (e) {
             res.status(500).json({ message: 'Ошибка регистрации' })
         }
@@ -290,6 +325,19 @@ app.get('/place_category/places/:name', async (req, res) => {
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
+})
+
+// Обратная 
+
+app.post('/email',(req,res)=>{
+    if (!req.body.email || !req.body.message) return res.sendStatus(400)
+    const message = {
+        from: `MosCulture <mos_culture@mail.ru>`,
+        to: 'pavel12g@mail.ru', // Почта сайта
+        subject: req.body.name,
+        html: req.body.message
+      };
+      mailer(message)
 })
 
 //Listener

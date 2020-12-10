@@ -1,14 +1,47 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 
 
 const Footer = (props) => {
+
+    let [form, setForm] = useState({
+        name: '',
+        message: '',
+        email: ''
+    });
+
+    let onInputChange = (event) => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+    }
+
+    const sendEmail = async () => {
+        await axios.post('http://localhost:8001/email', { ...form })
+    }
+
     return (
         <footer className="page-footer">
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">
-                        <h5 className="white-text">Footer Content</h5>
-                        <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                        <div className="row">
+                            <div className="row">
+                                <div className="row">
+                                        <div className="input-field col s12">
+                                            <input id="first_name" type="text" className="validate" name='name' onChange={onInputChange} />
+                                            <label for="first_name">First Name</label>
+                                        </div>
+                                    <div className="input-field col s12">
+                                        <input id="email" type="email" className="validate" name='email' onChange={onInputChange} />
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div className="input-field col s12">
+                                        <textarea id="textarea1" className="materialize-textarea" name='message' onChange={onInputChange}></textarea>
+                                        <label for="textarea1">Textarea</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button className='btn' onClick={sendEmail}>отправить</button>
+                        </div>
                     </div>
                     <div className="col l4 offset-l2 s12">
                         <h5 className="white-text">Links</h5>

@@ -12,7 +12,7 @@ import { setSearched } from './redux/headerReduser';
 import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
-import {setToken, setUserId, setLogin, setLoaded} from './redux/authReduser'
+import { setToken, setUserId, setLogin, setLoaded } from './redux/authReduser'
 import MainPage from './Components/MainPage/MainPage';
 
 function App(props) {
@@ -27,7 +27,7 @@ function App(props) {
     localStorage.setItem('userData', JSON.stringify({ userId: id, token: jwtToken }))
   }, []);
 
- props.setLogin(login)
+  props.setLogin(login)
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('userData'))
@@ -37,26 +37,24 @@ function App(props) {
     props.setLoaded(true)
   }, [login]);
 
-  const onCloseList=()=>{
-    props.setSearched({ requestNumber:0,request:[] })
+  const onCloseList = () => {
+    props.setSearched({ requestNumber: 0, request: [] })
   }
   return (
     <div className="App"
-    onClick={onCloseList}
+      onClick={onCloseList}
     >
-      <div className='Header'>
-        <Header />
-      </div>
-      <Route exact path="/" children={<MainPage />} />
-      <Route exact path="/:type" children={<Navbar />} />
-      <Route path='/cinemas/:id' render={() => <Info />} />
-      <div className='content'>
+        <div className='Header'>
+          <Header />
+        </div>
+        <Route exact path="/" render={() => <MainPage />} />
+        <Route exact path="/category/:type" render={() => <Navbar />} />
+        <Route path='/cinemas/:id' render={() => <Info />} />
         <Route path='/search/:riched' render={() => <Search />} />
         <Route path='/liked/:id?' render={() => <Liked />} />
         <Route path='/auth' render={() => <Auth />} />
         <Route path='/register' render={() => <Register />} />
-      </div>
-      <Footer />
+        <Footer />
     </div>
   );
 }
@@ -71,5 +69,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setSearched, setToken, setUserId,setLogin,setLoaded})(App);
+export default connect(mapStateToProps, { setSearched, setToken, setUserId, setLogin, setLoaded })(App);
 
