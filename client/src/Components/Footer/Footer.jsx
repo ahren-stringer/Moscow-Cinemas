@@ -19,7 +19,7 @@ const Footer = (props) => {
     }
 
     return (
-        <footer className="page-footer">
+        <footer className="page-footer" style={{'background-color': "#2980b9"}}>
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">

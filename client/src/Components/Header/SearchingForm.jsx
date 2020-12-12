@@ -4,6 +4,8 @@ import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './Header.css'
 import PreloaderList from '../Preloader/PreloaderList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const SearchingForm = (props) => {
     let [searchedAll, setSearchedAll] = useState([]);
@@ -27,10 +29,10 @@ const SearchingForm = (props) => {
         props.SearchChange(search)
         props.toggleList(true)
         props.loadList(true)
-        
-        function request(req){
+
+        function request(req) {
             //props.setReqNumber(+props.requestNumber + 1)
-            setCounter(counter+1)
+            setCounter(counter + 1)
             console.log('номер', counter)
             if (search == '') {
                 props.setSearched({ requestNumber: props.requestNumber, request: [] })
@@ -54,10 +56,24 @@ const SearchingForm = (props) => {
     }
     return (<div className="searching__form">
         <div className="search">
-            <input type="text" value={props.newSearchText}
+            <input className='search__input' type="text" value={props.newSearchText}
                 onChange={onSearchChange}
                 ref={searchInput}
-                style={{ margin: 0, height: "2em" }} />
+                style={{
+                    margin: 0,
+                    background: '#E0EFCA',
+                    width: '100%',
+                    height: '42px',
+                    paddingLeft: '10px',
+                    border: '2px solid #7BA7AB',
+                    borderRadius: '5px',
+                    outline: 'none',
+                    background: '#F9F0DA',
+                    color: '#9E9C9C',
+                }}
+                name="s"
+                placeholder="Искать здесь..."
+            />
             {props.isListLoading ? <div>!!!!!!!!!!</div>
                 : <ul className="collection">
                     {(props.isClosed && searched.length == 0) ? null :
@@ -73,7 +89,7 @@ const SearchingForm = (props) => {
             }
         </div>
         <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
-            Найти
+            <FontAwesomeIcon icon={faSearch} style={{fontSize:'100px'}} />
         </NavLink>
     </div>)
 }

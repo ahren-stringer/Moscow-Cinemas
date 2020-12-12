@@ -51,3 +51,7 @@ padding-left: 5px;
 a.active{
     color: red;
 }
+.search__input{
+    margin: 0; 
+    height: 2em;
+}

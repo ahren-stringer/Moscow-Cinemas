@@ -7,28 +7,52 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css'
 
-
 function MainPage(props) {
+
     var settings = {
         dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        arrows: false,
+        autoplay:true,
+        autoplaySpeed: 5000
     };
 
-    let [categores, setCategores] = useState(null)
-
-    useEffect(
-        () => {
-            async function fetchData() {
-                const req = await axios.get('http://localhost:8001/place_category');
-                setCategores(req.data)
-                console.log(req.data)
-            }
-            fetchData()
+    let [categores, setCategores] = useState([
+        {
+            category: "Кинотеатры",
+            categoryUrl: "cinemas",
+            img: "https://www.mobrep.ru/b/c/28427.jpg"
+        },
+        {
+            category: "Театры",
+            categoryUrl: "theatres",
+            img: "https://blog.edinoepole.ru/wp-content/uploads/2016/08/km091.jpg"
+        },
+        {
+            category: "Галереи",
+            categoryUrl: "galleries",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU0kPJr1Y_Uo5Dx4zhW-OrIq91A1hz9Xjy4A&usqp=CAU"
+        },
+        {
+            category: "Музеи",
+            categoryUrl: "museums",
+            img: 'https://www.nlb.by/upload/iblock/c4c/296a2067.jpg'
         }
-        , [])
+    ])
+
+    // useEffect(
+    //     () => {
+    //         async function fetchData() {
+    //             const req = await axios.get('http://localhost:8001/place_category');
+    //             setCategores(req.data)
+    //             console.log(req.data)
+    //         }
+    //         fetchData()
+    //     }
+    //     , [])
 
     return (
         <div>
@@ -55,18 +79,35 @@ function MainPage(props) {
                         </div>
                     </Slider>
                 </div>
-                <div>
+                
+                <div className='place__type-wrapper'>
                     {
                         categores
                             ? categores.map(item =>
                                 <div className='place__type'>
                                     <NavLink to={'/category/' + item.categoryUrl} className='place__type__link'>
-                                        {item.category}
+
+                                        <div style={{
+                                            'backgroundImage': 'url(' + item.img + ')',
+                                            'maxWidth': ' 1720px',
+                                            'minHeight': '310px',
+                                            'width': '100%',
+                                            'backgroundSize': 'cover',
+                                            'backgroundPosition': 'center center',
+                                            'position': 'relative',
+                                            'borderRadius': '4px'
+                                        }}
+                                            classNmae='plase__type-card'>
+                                            <span className='plase__type-title'>
+                                                {item.category}
+                                            </span>
+                                        </div>
+
                                     </NavLink>
-                                    <img src={item.img} alt=""/>
                                 </div>)
                             : <Preloader />
                     }
+                
                 </div>
             </div>
         </div>

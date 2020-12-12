@@ -6,6 +6,7 @@ import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
 import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr } from '../../redux/headerReduser';
 import { logout } from '../../redux/authReduser';
+import logo from '../../img/logo.png'
 
 class Header extends React.Component {
   state = {
@@ -37,12 +38,12 @@ class Header extends React.Component {
             <NavLink to='/' activeClassName='active'>
               <div>
                 <div>
-                  <img src='https://w7.pngwing.com/pngs/999/1016/png-transparent-film-cinema-logo-cinema-x-chin.png'
+                  <img src={logo}
                     className='img__logo' />
                 </div>
                 <span className='logo__title'>
-                  MosCinema
-        </span>
+                  MosCulture
+                </span>
               </div>
             </NavLink>
             <div className='counter'>

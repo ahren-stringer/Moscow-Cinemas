@@ -11,17 +11,22 @@ import axios from 'axios';
 //localStorage.clear()
 
 function Navbar(props) {
-  let [ls, setLs] = useState(props.liked);
+  let [ls, setLs] = useState(
+    [
+      
+    ]
+    //props.liked
+    );
   let [photos, setPhotos] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      const req = await axios.get('http://localhost:8001/cinema/photos');
-      setPhotos(req.data)
-      console.log(req.data)
-    }
-    fetchData()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const req = await axios.get('http://localhost:8001/cinema/photos');
+  //     setPhotos(req.data)
+  //     console.log(req.data)
+  //   }
+  //   fetchData()
+  // }, [])
 
   useEffect(() => {
     setPhotos(photos)
@@ -58,7 +63,6 @@ function Navbar(props) {
     props.onPageChange(props.numberOfPage * props.onOnePage, props.type, props.navData)
   };
 
-  // let navData = Object.values(props.navData)
   return (
     <div>
       <Introdaction typeTitle={props.typeTitle}/>

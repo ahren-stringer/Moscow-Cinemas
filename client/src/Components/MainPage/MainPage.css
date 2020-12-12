@@ -1,5 +1,25 @@
+.title{
+    margin: 0 auto;
+    text-align: center;
+}
+.place__type-wrapper{
+    margin: 50px auto;
+}
 .place__type{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    margin-bottom: 40px;
+}
+.plase__type-card{
+    max-width: 1720px;
+    min-height: 310px;
+    width: 700px;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.plase__type-title{
+    position: absolute;
+    color: white;
+    font-size: 28px;
+    bottom: 26px;
+    left: 22px;
 }
