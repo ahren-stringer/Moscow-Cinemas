@@ -1,5 +1,12 @@
 .App{
   background-color: #ecf0f1;
+  position: relative;
+}
+.Header{
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  margin-top: 15px;
 }
 .container{
   max-width: 1200px;

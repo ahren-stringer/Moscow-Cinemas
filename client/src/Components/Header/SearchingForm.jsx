@@ -70,11 +70,17 @@ const SearchingForm = (props) => {
                     outline: 'none',
                     background: '#F9F0DA',
                     color: '#9E9C9C',
+                    boxSizing: 'inherit'
                 }}
                 name="s"
                 placeholder="Искать здесь..."
             />
-            {props.isListLoading ? <div>!!!!!!!!!!</div>
+            <button className='search__btn'>
+            <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
+                <FontAwesomeIcon icon={faSearch} />
+            </NavLink>
+        </button>
+            {/* {props.isListLoading ? <div>!!!!!!!!!!</div>
                 : <ul className="collection">
                     {(props.isClosed && searched.length == 0) ? null :
                         searched.request.map((item, index) => {
@@ -86,11 +92,8 @@ const SearchingForm = (props) => {
                         })
                     }
                 </ul>
-            }
+            } */}
         </div>
-        <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
-            <FontAwesomeIcon icon={faSearch} style={{fontSize:'100px'}} />
-        </NavLink>
     </div>)
 }
 

@@ -16,8 +16,8 @@ function MainPage(props) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        autoplay:true,
-        autoplaySpeed: 5000
+        // autoplay:true,
+        // autoplaySpeed: 5000
     };
 
     let [categores, setCategores] = useState([
@@ -34,7 +34,7 @@ function MainPage(props) {
         {
             category: "Галереи",
             categoryUrl: "galleries",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU0kPJr1Y_Uo5Dx4zhW-OrIq91A1hz9Xjy4A&usqp=CAU"
+            img: "https://upload.wikimedia.org/wikipedia/commons/0/06/The_State_Tretyakov_Gallery.jpg"
         },
         {
             category: "Музеи",
@@ -56,30 +56,50 @@ function MainPage(props) {
 
     return (
         <div>
-            <div className='container'>
-                <div className='title'>
-                    <Slider {...settings}>
-                        <div>
-                            <h3>Добро пожаловать на MosCulture</h3>
+            <div className='title'>
+                <Slider {...settings}>
+                    <div className='title__slide-1'>
+                        {/* <h3>Добро пожаловать на MosCulture</h3>
                             <div>
                                 Сайт о местах культурного наследия России и Мира
-                            </div>
-                        </div>
-                        <div>
+                            </div> */}
+                    </div>
+                    <div style={{position:'static'}}>
+                    <div className='title__slide-2' style={{position: 'relative'}}>
+                        <div className='title__slide-container-2' 
+                        style={{position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            marginRight: '-50%',
+                            transform: 'translate(-50%, -50%)'}}
+                            >
                             <h3>Будьте в курсе событий</h3>
                             <div>
                                 К вашему вниманию представлена актуализированная информация о культырных местах москвы
                             </div>
                         </div>
-                        <div>
+                    </div>
+                    </div>
+                    
+                    <div style={{position:'static'}}>
+                    <div className='title__slide-3' style={{position: 'relative'}}>
+                        <div className='title__slide-container-3' 
+                        style={{position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            marginRight: '-50%',
+                            transform: 'translate(-50%, -50%)'}}
+                            >
                             <h3>Делитесь отзывами</h3>
                             <div>
                                 Здесь вы можете смотреть и оставлять отзывы
                             </div>
                         </div>
-                    </Slider>
-                </div>
-                
+                    </div>
+                    </div>
+                </Slider>
+            </div>
+            <div className='container'>
                 <div className='place__type-wrapper'>
                     {
                         categores
@@ -107,7 +127,7 @@ function MainPage(props) {
                                 </div>)
                             : <Preloader />
                     }
-                
+
                 </div>
             </div>
         </div>

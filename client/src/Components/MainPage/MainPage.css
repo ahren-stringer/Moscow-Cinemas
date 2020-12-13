@@ -2,6 +2,34 @@
     margin: 0 auto;
     text-align: center;
 }
+.title__slide-1,
+.title__slide-2,
+.title__slide-3{
+    max-width: 1720px;
+    min-height: 450px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    position: relative,
+}
+.title__slide-1{
+    background-image: url(https://ic.pics.livejournal.com/cultura_v_msc/78442067/33559/33559_original.jpg); 
+}
+.title__slide-2{
+    background-image: url(https://b1.m24.ru/c/1114597.jpg); 
+}
+.title__slide-3{
+    background-image: url(https://irkutsk.megafon.ru/download/~federal/~federal/images/mobid.jpg); 
+}
+/* .title__slide-container-2,
+.title__slide-container-3{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+} */
 .place__type-wrapper{
     margin: 50px auto;
 }

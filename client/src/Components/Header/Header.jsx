@@ -7,6 +7,8 @@ import { SearchChange } from '../../redux/navReduser';
 import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr } from '../../redux/headerReduser';
 import { logout } from '../../redux/authReduser';
 import logo from '../../img/logo.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 class Header extends React.Component {
   state = {
@@ -37,25 +39,28 @@ class Header extends React.Component {
           <div className='header__wrapper'>
             <NavLink to='/' activeClassName='active'>
               <div>
-                <div>
+                {/* <div>
                   <img src={logo}
                     className='img__logo' />
-                </div>
+                </div> */}
                 <span className='logo__title'>
                   MosCulture
                 </span>
               </div>
             </NavLink>
-            <div className='counter'>
-              <div className="liked">
-                <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>Избранное</NavLink>{this.props.counter}
-              </div>
+            {/* <div className='counter'> */}
               <SearchingForm {...this.props} />
-              {!this.props.token ? <NavLink to='/auth'>Войти</NavLink> :
-                <span href='/'
+              <div className="liked">
+                <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
+                  <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                </NavLink>
+                {this.props.counter}
+              </div>
+              {!this.props.token ? <NavLink to='/auth' className='auth__btn'>Войти</NavLink> :
+                <span className='auth__btn' href='/'
                   onClick={this.props.logout}
-                >Выход</span>}
-            </div>
+                >Выход</span>} 
+             {/* </div> */}
           </div>
         </div>
       </div>
