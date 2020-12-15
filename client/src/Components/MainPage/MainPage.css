@@ -6,7 +6,7 @@
 .title__slide-2,
 .title__slide-3{
     max-width: 1720px;
-    min-height: 450px;
+    min-height: 100vh;
     width: 100%;
     background-size: cover;
     background-position: center center;
@@ -14,7 +14,7 @@
     position: relative,
 }
 .title__slide-1{
-    background-image: url(https://ic.pics.livejournal.com/cultura_v_msc/78442067/33559/33559_original.jpg); 
+    background-image: url(https://versiya.info/uploads/posts/2020-01/1580486225_90495-temple-saint_petersburg-hotel-town_square-tourist_attraction-2048x1152.jpg); 
 }
 .title__slide-2{
     background-image: url(https://b1.m24.ru/c/1114597.jpg); 

@@ -1,4 +1,5 @@
 @import '~materialize-css/dist/css/materialize.min.css';
+@import "~react-image-gallery/styles/css/image-gallery.css";
 
 body {
   margin: 0;

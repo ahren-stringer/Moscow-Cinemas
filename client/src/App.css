@@ -3,10 +3,8 @@
   position: relative;
 }
 .Header{
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  margin-top: 15px;
+  padding: 15px 0;
+  background-color: #2980b9
 }
 .container{
   max-width: 1200px;

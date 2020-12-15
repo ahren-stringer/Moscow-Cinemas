@@ -13,10 +13,10 @@ import axios from 'axios';
 function Navbar(props) {
   let [ls, setLs] = useState(
     [
-      
+
     ]
     //props.liked
-    );
+  );
   let [photos, setPhotos] = useState(null);
 
   // useEffect(() => {
@@ -65,14 +65,21 @@ function Navbar(props) {
 
   return (
     <div>
-      <Introdaction typeTitle={props.typeTitle}/>
+      <Introdaction typeTitle={props.typeTitle} />
       <div className={s.nav}>
         {
           props.navData.map((item, index, array) => {
-            if (array.indexOf(item) === index) {
+            
               return <div className={s.cinema}>
                 <NavLink to={`/cinemas/${item.name}`}>
-                  <img src={item.photos.photoLarge}></img>
+                  <div style={{
+                    'backgroundImage': 'url(' + item.photos.photoLarge + ')',
+                    'minHeight': '185px',
+                    'width': '100%',
+                    'backgroundSize': 'cover',
+                    'backgroundPosition': 'center center',
+                  }}>
+                  </div>
                   <div className={s.name}>
                     {item.name}
                   </div>
@@ -85,7 +92,7 @@ function Navbar(props) {
                   }
                 </div>
               </div>
-            }
+            
           })
         }
       </div>

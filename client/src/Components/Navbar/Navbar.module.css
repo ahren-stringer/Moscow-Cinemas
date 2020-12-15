@@ -5,23 +5,41 @@
     display: flex;
     flex-wrap: wrap;
     margin: 50px auto 0px;
-    width: 1000px;
+    justify-content: space-between;
 }
 .cinema{
     border-radius: 3px;
-    margin: 0 32px 30px;
+    margin: 0 0 30px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-/* img{
     width: 266px;
+}
+/* .place__img{
+    width: 100%;
 } */
-.liked,
+.liked{
+    margin: 5px;
+}
 .name{
     margin: 5px;
+    font-size: 17px;
+    color:#000;
 }
 a{
     text-decoration: none;
 }
 .pagination{
     text-align: center;
+    width: 300px;
+    margin: 14px auto 20px;
+    background-color: rgb(41, 128, 185);
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination h4{
+    margin: 0;
 }

@@ -22,8 +22,13 @@ let init = {
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            
-            return { ...state, navData: action.prevNanData.concat(action.navData)}
+            let arr=[action.navData[0]];
+            for (let i=0;i<8;i++){
+                arr.push(action.navData[1])
+            }
+            debugger
+            return { ...state, navData: arr}
+            // return { ...state, navData: action.prevNanData.concat(action.navData)}
         // case CONCAT_NAV_DATA:
         //     let arr=[]
         //     for (let i=0;i<action.navData.length;i++){

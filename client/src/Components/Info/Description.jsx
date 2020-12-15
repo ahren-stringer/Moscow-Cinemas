@@ -4,9 +4,12 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import Preloader from '../Preloader/Preloader';
+import ImageGallery from 'react-image-gallery';
 
 const Description=(props)=>{
   let [ls, setLs] = useState(props.liked);
+
+  const images = [];
 
   useEffect(() => {
     setLs(props.liked)
@@ -56,13 +59,21 @@ const Description=(props)=>{
         <div>
         Сайт: <a href={'http://www.'+props.infoData[0].webSite}>{props.infoData[0].webSite}</a> 
         </div>
-        <div>
+        <div className={s.photos__galery}>
           {props.infoData[0].photos.photosSlider ? props.infoData[0].photos.photosSlider.map(item=>{
-            return <img src={item}></img>
+            images.push(
+              {
+                original: item,
+                thumbnail: item,
+              },
+            )
+            // return <img src={item}></img>
           }) 
           :<div>
             <h3>Фотокарточки</h3>
             </div>}
+            
+            <ImageGallery items={images} />;
             <div 
             //className={s.liked} 
             onClick={() => {Liked(props.infoData[0].name, props.infoData[0].name)}}>

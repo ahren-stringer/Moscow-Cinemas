@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Header from '../src/Components/Header/Header';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 import Liked from './Components/Liked/Liked';
 import Navbar from './Components/Navbar/NavbarContainer';
 import Info from './Components/Info/InfoContainer';
@@ -19,9 +19,8 @@ function App(props) {
   // const [token, setToken] = useState(null);
   // const [userId, setUserId] = useState(null);
   // const [loaded, setLoaded] = useState(false);
-
+  debugger
   const login = useCallback((jwtToken, id) => {
-    debugger
     props.setToken(jwtToken)
     props.setUserId(id)
     localStorage.setItem('userData', JSON.stringify({ userId: id, token: jwtToken }))
@@ -44,17 +43,28 @@ function App(props) {
     <div className="App"
       onClick={onCloseList}
     >
-        <div className='Header'>
-          <Header />
-        </div>
-        <Route exact path="/" render={() => <MainPage />} />
-        <Route exact path="/category/:type" render={() => <Navbar />} />
-        <Route path='/cinemas/:id' render={() => <Info />} />
-        <Route path='/search/:riched' render={() => <Search />} />
-        <Route path='/liked/:id?' render={() => <Liked />} />
-        <Route path='/auth' render={() => <Auth />} />
-        <Route path='/register' render={() => <Register />} />
-        <Footer />
+      <div className='Header'
+        style={props.location.pathname == '/' ? {
+          position: 'absolute',
+          width: '100%',
+          zIndex: '1',
+          background: 'none'
+        }
+          : {}
+        }
+      >
+        <Header />
+      </div>
+      <Route exact path="/" render={() => <MainPage />} />
+      <div className='container'>
+      <Route exact path="/category/:type" render={() => <Navbar />} />
+      <Route path='/cinemas/:id' render={() => <Info />} />
+      <Route path='/search/:riched' render={() => <Search />} />
+      <Route path='/liked/:id?' render={() => <Liked />} />
+      <Route path='/auth' render={() => <Auth />} />
+      <Route path='/register' render={() => <Register />} />
+      </div>
+      <Footer />
     </div>
   );
 }
@@ -69,5 +79,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setSearched, setToken, setUserId, setLogin, setLoaded })(App);
+export default connect(mapStateToProps, { setSearched, setToken, setUserId, setLogin, setLoaded })(withRouter(App));
 

@@ -4,18 +4,47 @@
 .description__cinema{
     font-size: 39px;
 }
+.title{
+    margin-left: 17px;
+}
+.coment__wrapper{
+    background-color: #298097;
+    padding: 30px 30px 30px 15px;;
+    border-radius: 19px;
+}
 .coment__form{
     width: 430px;
-    margin: 30px;
+    margin: 40px 0;
 }
 .coment{
-    display:flex;
-    align-items: center;
+    display: flex;
+    border-radius: 8px;
+    margin-bottom: 9px;
+    background-color: #ecf0f1;
 }
 .coment__ava{
     height: 90px;
     width: 90px;
+    margin: 10px 20px 10px 7px;
 }
-.coment__container{
-    padding-left: 20px;
+.coment__name{
+    font-size: 20px;
+    font-weight: 500;
+    color: #298097;
+}
+.coment__coment{
+    margin: 3px 0 12px;
+}
+.coment__date{
+    margin-bottom: 10px;
+}
+.photos__galery img{
+    width: 250px;
+}
+.coment__otcenka{
+    margin-bottom: 12px;
+}
+.coment__size{
+    color: #9e9e9e;
+    padding: 0 .75rem;
 }
