@@ -36,7 +36,7 @@ function Navbar(props) {
     setLs(props.liked)
   }, [props.liked])
 
-  const Liked = (name, index) => {
+  const Liked = (name, categoryUrl) => {
     let counter = +localStorage.getItem('count');
     if (localStorage.getItem(name)) {
       localStorage.removeItem(name)
@@ -44,7 +44,7 @@ function Navbar(props) {
       localStorage.setItem('count', counter)
       props.Setliked({ ...localStorage })
     } else {
-      localStorage.setItem(name, index)
+      localStorage.setItem(name, categoryUrl)
       counter = counter + 1
       localStorage.setItem('count', counter)
       props.Setliked({ ...localStorage })
@@ -66,7 +66,9 @@ function Navbar(props) {
   return (
     <div>
       <Introdaction typeTitle={props.typeTitle} />
+      <div className={s.nav__wrapper}>
       <div className={s.nav}>
+        
         {
           props.navData.map((item, index, array) => {
             
@@ -85,16 +87,16 @@ function Navbar(props) {
                   </div>
                 </NavLink>
                 <div className={s.liked} onClick={() => {
-                  Liked(item.name, index)
+                  Liked(item.name, item.categoryUrl)
                 }}>
                   Добавить в избранное {
                     !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                   }
                 </div>
-              </div>
-            
+              </div>          
           })
         }
+        </div>
       </div>
       <div onClick={onPageChange} className={s.pagination}>
         <h4>Загрузить еще</h4>

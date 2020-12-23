@@ -3,28 +3,83 @@ import 'materialize-css'
 import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import vkAuth from '../../img/vkAuth.png'
 import { connect } from 'react-redux';
 import { login, setLoaded } from '../../redux/authReduser'
+import { Field, reduxForm } from 'redux-form'
+import { required, aol, email, minLength6 } from '../../validators'
+
+const input = ({ input, label, type, meta: { touched, error, warning } }) => {
+    debugger
+    return (<div className="row">
+        <div className="input-field col s12">
+            <input {...input} id={type} type={type} className="validate" />
+            <label for={type}>{label}</label>
+            {touched &&
+                ((error && <span>{error}</span>) ||
+                    (warning && <span>{warning}</span>))}
+        </div>
+    </div>)
+}
+
+function AuthForm(props) {
+    const { handleSubmit, pristine, reset, submitting } = props
+
+    return <form onSubmit={props.handleSubmit}>
+        <Field
+            name="email"
+            type="email"
+            component={input}
+            label="Email"
+            validate={[required,email]}
+            warn={aol}
+        />
+        <Field
+            name="password"
+            type="password"
+            component={input}
+            label="Password"
+            validate={[required]}
+            warn={aol}
+        />
+        <button className='btn' style={{ marginLeft: "10px", marginRight: "10px" }} type="submit" disabled={submitting}>
+            Войти
+    </button>
+        <NavLink to='/register'>
+            <button className='btn'>
+                Зарегистрироваться
+        </button>
+        </NavLink>
+    </form>
+}
+
+AuthForm = reduxForm({ form: 'auth' })(AuthForm)
 
 function Auth(props) {
 
-    //let auth=useContext(AuthContext)
-
     let message = useMessage();
-    let [form, setForm] = useState({ email: '', password: '' });
+    // let [form, setForm] = useState({ email: '', password: '' });
 
-    let onInputChange = (event) => {
-        setForm({ ...form, [event.target.name]: event.target.value })
-    }
+    // let onInputChange = (event) => {
+    //     setForm({ ...form, [event.target.name]: event.target.value })
+    // }
     // useEffect(()=>{
     //     message(error)
     //     clearError()
     // },[error,message,clearError])
 
-    let loginReq = async () => {
+    // let loginReq = async () => {
+    //     try {
+    //         const req = await axios.post('http://localhost:8001/cinema/login', { ...form })
+    //         console.log(req)
+    //         props.login(req.data.token, req.data.userId)
+    //     } catch (e) { }
+    // }
+    let submit = async (formData) => {
+        // print the form values to the console
+        console.log(formData)
+        //props.loginThunk(formData.email, formData.password, formData.rememberMe)
         try {
-            const req = await axios.post('http://localhost:8001/cinema/login', { ...form })
+            const req = await axios.post('http://localhost:8001/cinema/login', { ...formData })
             console.log(req)
             props.login(req.data.token, req.data.userId)
         } catch (e) { }
@@ -34,29 +89,7 @@ function Auth(props) {
         <div style={{ marginLeft: "10px" }}>
             <h4>Войти:</h4>
         </div>
-        <div className="row">
-            <div className="row">
-                <div className="input-field col s12">
-                    <input id="email" type="email" className="validate" name='email' onChange={onInputChange} />
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div className="row">
-                <div className="input-field col s12">
-                    <input id="password" type="password" className="validate" name='password' onChange={onInputChange} />
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <button className='btn' style={{ marginLeft: "10px", marginRight: "10px" }}
-                onClick={loginReq}>Войти</button>
-            <NavLink to='/register'>
-                <button className='btn'
-                // onClick={registerReq}
-                >Зарегистрироваться</button>
-            </NavLink>
-        </div>
-        <div>
-        </div>
+        <AuthForm onSubmit={submit} />
     </div>
 }
 

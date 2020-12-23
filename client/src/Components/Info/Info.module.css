@@ -1,8 +1,30 @@
 .description{
     font-size: 16px;
 }
-.description__cinema{
+.description__wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.description__place{
     font-size: 39px;
+    color: white;
+}
+.photos__galery{
+    width: 450px;
+}
+.description__liked{
+    text-align: center;
+    width: 300px;
+    margin: 14px 0 20px;
+    background-color: rgb(41, 128, 185);
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
 }
 .title{
     margin-left: 17px;
@@ -11,6 +33,7 @@
     background-color: #298097;
     padding: 30px 30px 30px 15px;;
     border-radius: 19px;
+    margin-bottom: 40px;
 }
 .coment__form{
     width: 430px;

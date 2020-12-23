@@ -16,10 +16,7 @@ import { setToken, setUserId, setLogin, setLoaded } from './redux/authReduser'
 import MainPage from './Components/MainPage/MainPage';
 
 function App(props) {
-  // const [token, setToken] = useState(null);
-  // const [userId, setUserId] = useState(null);
-  // const [loaded, setLoaded] = useState(false);
-  debugger
+  
   const login = useCallback((jwtToken, id) => {
     props.setToken(jwtToken)
     props.setUserId(id)
@@ -56,7 +53,7 @@ function App(props) {
         <Header />
       </div>
       <Route exact path="/" render={() => <MainPage />} />
-      <div className='container'>
+      <div className='__container'>
       <Route exact path="/category/:type" render={() => <Navbar />} />
       <Route path='/cinemas/:id' render={() => <Info />} />
       <Route path='/search/:riched' render={() => <Search />} />

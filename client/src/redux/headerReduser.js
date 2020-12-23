@@ -10,10 +10,8 @@ const SET_SEARCHED_ARR = 'infoReuser/SET_SEARCHED_ARR'
 let init = {
     count: localStorage.getItem("count"),
     requestNumber: 1,
-
     searched: { requestNumber: 0, request: [] },
     searchedArr: [],
-
     searchedPage: {},
     searchRedirect: true,
     isClosed: true,

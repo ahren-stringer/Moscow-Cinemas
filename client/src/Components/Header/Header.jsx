@@ -35,7 +35,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className='header'>
-        <div className='container'>
+        <div className='__container'>
           <div className='header__wrapper'>
             <NavLink to='/' activeClassName='active'>
               <div>

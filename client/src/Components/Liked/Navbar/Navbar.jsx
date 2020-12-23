@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilm } from '@fortawesome/free-solid-svg-icons'
+import { faAmericanSignLanguageInterpreting, faFilm, faPalette, faArchway } from '@fortawesome/free-solid-svg-icons'
 import '../Liked.css'
 
 function Navbar(props) {
@@ -39,8 +39,14 @@ function Navbar(props) {
           .filter(item => item[0] !== "count")
           .map((item) =>
               <li className="collection-item avatar">
-              <FontAwesomeIcon icon={faFilm} className="material-icons circle red"/>
-              <span className="title">
+              {
+              item[1]==='cinemas'?<FontAwesomeIcon icon={faFilm} className="material-icons circle red"/>:
+              item[1]==='theatres'?<FontAwesomeIcon icon={faAmericanSignLanguageInterpreting} className="material-icons circle blue"/>:
+              item[1]==='galleries'?<FontAwesomeIcon icon={faPalette} className="material-icons circle yellow"/>:
+              item[1]==='museums'?<FontAwesomeIcon icon={faArchway} className="material-icons circle green"/>:
+              null
+              }
+              <span>
                 <NavLink to={`/liked/${item[0]}`}>
                   <div>
                     {item[0]}

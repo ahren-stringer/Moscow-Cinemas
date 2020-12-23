@@ -12,17 +12,38 @@ const SearchingForm = (props) => {
     let [searchedSingle, setSearchedSingle] = useState([]);
     let [requestNumber, setRequestNumber] = useState(0);
     let [counter, setCounter] = useState(0);
-    let [searched, setSearched] = useState(props.searched);
+    let [searched, setSearched] = useState(
+        {
+            request: [
+                {
+                    name: "Государственный музей имени Пушкина",
+                    address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
+                    photos: {
+                        photoLarge: "https://www.mobrep.ru/b/c/28427.jpg",
+                        photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
+                            "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
+                            "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
+                    },
+                }
+            ]
+        },
+        //props.searched
+    );
+
+
+    for (let i = 0; i < 8; i++) {
+        searched.request.push(searched.request[0])
+    }
+
     let searchInput = React.createRef();
 
-    useEffect(() => {
-        //if (searched.requestNumber < props.searched.requestNumber)
-        setSearched(props.searched)
-        console.log('searched:', searched)
-    }, [props.searched])
+    // useEffect(() => {
+    //     //if (searched.requestNumber < props.searched.requestNumber)
+    //     setSearched(props.searched)
+    //     console.log('searched:', searched)
+    // }, [props.searched])
 
     let onSearchChange = async () => {
-        debugger
         props.setReqNumber(+props.requestNumber + 1)
         let search = searchInput.current.value;
         console.log(search)
@@ -39,19 +60,18 @@ const SearchingForm = (props) => {
             } else {
                 props.setSearched({ requestNumber: props.requestNumber, request: req.data })
             }
-            debugger
-            props.loadList(false)
+            // props.loadList(false)
             console.log(req.data)
         }
-
 
         axios.get(`http://localhost:8001/place_category/places/search/${search}`)
             .then(req => {
                 request(req)
             })
+
+        props.loadList(false)
     }
     const CloseList = () => {
-        debugger
         props.setSearched({ requestNumber: 0, request: [] })
     }
     return (<div className="searching__form">
@@ -76,23 +96,25 @@ const SearchingForm = (props) => {
                 placeholder="Искать здесь..."
             />
             <button className='search__btn'>
-            <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
-                <FontAwesomeIcon icon={faSearch} />
-            </NavLink>
-        </button>
+                <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
+                    <FontAwesomeIcon icon={faSearch} />
+                </NavLink>
+            </button>
             {/* {props.isListLoading ? <div>!!!!!!!!!!</div>
-                : <ul className="collection">
-                    {(props.isClosed && searched.length == 0) ? null :
-                        searched.request.map((item, index) => {
-                            return <li className="collection-item">
-                                <NavLink to={`/cinemas/${item.name}`}
-                                    onClick={CloseList}>{item.name}
-                                </NavLink>
-                            </li>
-                        })
-                    }
-                </ul>
-            } */}
+                :  */}
+            {/* <ul className="collection">
+                {
+                    // (props.isClosed && searched.length == 0) ? null :
+                    searched.request.map((item) => {
+                        return <li className="collection-item">
+                            <NavLink to={`/cinemas/${item.name}`}
+                                onClick={CloseList}>{item.name}
+                            </NavLink>
+                        </li>
+                    })
+                }
+            </ul> */}
+            {/* } */}
         </div>
     </div>)
 }

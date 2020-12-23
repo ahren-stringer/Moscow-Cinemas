@@ -20,39 +20,18 @@ function MainPage(props) {
         // autoplaySpeed: 5000
     };
 
-    let [categores, setCategores] = useState([
-        {
-            category: "Кинотеатры",
-            categoryUrl: "cinemas",
-            img: "https://www.mobrep.ru/b/c/28427.jpg"
-        },
-        {
-            category: "Театры",
-            categoryUrl: "theatres",
-            img: "https://blog.edinoepole.ru/wp-content/uploads/2016/08/km091.jpg"
-        },
-        {
-            category: "Галереи",
-            categoryUrl: "galleries",
-            img: "https://upload.wikimedia.org/wikipedia/commons/0/06/The_State_Tretyakov_Gallery.jpg"
-        },
-        {
-            category: "Музеи",
-            categoryUrl: "museums",
-            img: 'https://www.nlb.by/upload/iblock/c4c/296a2067.jpg'
-        }
-    ])
+    let [categores, setCategores] = useState([])
 
-    // useEffect(
-    //     () => {
-    //         async function fetchData() {
-    //             const req = await axios.get('http://localhost:8001/place_category');
-    //             setCategores(req.data)
-    //             console.log(req.data)
-    //         }
-    //         fetchData()
-    //     }
-    //     , [])
+    useEffect(
+        () => {
+            async function fetchData() {
+                const req = await axios.get('http://localhost:8001/place_category');
+                setCategores(req.data)
+                console.log(req.data)
+            }
+            fetchData()
+        }
+        , [])
 
     return (
         <div>
@@ -115,7 +94,7 @@ function MainPage(props) {
                     </div>
                 </Slider>
             </div>
-            <div className='container'>
+            <div className='__container'>
                 <div className='place__type-wrapper'>
                     {
                         categores

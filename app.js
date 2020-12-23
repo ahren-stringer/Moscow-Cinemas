@@ -39,7 +39,7 @@ app.get('/', (req, res) => res.status(200).send('GET'))
 app.post('/coment', async (req, res) => {
 
     try {
-        const { cinema, coment, size, token } = req.body
+        const { coment, size, token, place } = req.body
 
         if (!token) return res.status(400).json({ message: 'Вы не авторизованны' })
         const decoded = jwt.verify(token, 'TopSecret')
@@ -47,7 +47,7 @@ app.post('/coment', async (req, res) => {
         console.log(decoded)
         const user = await User.findOne({ _id: decoded.userId })
         console.log(user)
-        const newComent = new Coment({ cinema, coment, size, name: user.name, email: user.email, owner: decoded.userId })
+        const newComent = new Coment({ coment, size, place, name: user.name, email: user.email, owner: decoded.userId })
         console.log(newComent)
         await newComent.save()
         res.status(201).json({ newComent })

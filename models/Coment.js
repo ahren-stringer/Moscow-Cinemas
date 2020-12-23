@@ -4,9 +4,9 @@ const comentSchema=mongoose.Schema({
     name: String,
     email:String,
     coment:String,
+    place: String,
     size:Number,
     date: {type:Date, default: Date.now},
-    cinema: String,
     owner: [{type: mongoose.Types.ObjectId, ref: 'User'}]
 });
 
