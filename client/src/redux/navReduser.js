@@ -29,8 +29,8 @@ const navReduser = (state = init, action) => {
             //     arr.push(action.navData[1])
             // }
             // debugger
-            return { ...state, navData: action.navData }
-        // return { ...state, navData: action.prevNanData.concat(action.navData)}
+            // return { ...state, navData: action.navData }
+        return { ...state, navData: action.prevNanData.concat(action.navData)}
         // case CONCAT_NAV_DATA:
         //     let arr=[]
         //     for (let i=0;i<action.navData.length;i++){

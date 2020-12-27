@@ -43,7 +43,7 @@ function Navbar(props) {
     props.SetPageCount(props.numberOfPage + 1)
     props.onPageChange(props.numberOfPage * props.onOnePage, props.type, props.navData)
   };
-
+debugger
   return (
     <div>
       <Introdaction typeTitle={props.typeTitle} />

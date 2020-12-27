@@ -5,9 +5,9 @@ import axios from 'axios';
 
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email, minLength6 } from '../../validators'
+import { withRouter } from 'react-router-dom';
 
 const input = ({ input, label, type, meta: { touched, error, warning } }) => {
-    debugger
     return (<div className="row">
         <div className="input-field col s12">
             <input {...input} id={type} type={type} className="validate" />
@@ -55,20 +55,6 @@ RegisterForm = reduxForm({ form: 'register' })(RegisterForm)
 
 function Register(props) {
 
-    //let message=useMessage();
-    // let [form, setForm] = useState({name:'', email: '', password: '' });
-
-    // let onInputChange = (event) => {
-    //     setForm({ ...form, [event.target.name]: event.target.value })
-    // }
-
-    // let registerReq = async () => {
-    //     try {
-    //         const data = await axios.post('http://localhost:8001/cinema/register', { ...form })
-    //         console.log('Зарегистрировался ',data)
-    //     } catch (e) { }
-    // }
-
     let submit = async (formData) => {
         // print the form values to the console
         console.log(formData)
@@ -76,6 +62,7 @@ function Register(props) {
         try {
             const data = await axios.post('http://localhost:8001/cinema/register', { ...formData })
             console.log('Зарегистрировался ',data)
+            props.history.goBack()
         } catch (e) { }
     }
 
@@ -85,28 +72,9 @@ function Register(props) {
         </div>
         <div className="row">
             <RegisterForm onSubmit={submit}/>
-                {/* <div className="row">
-                    <div className="input-field col s12">
-                        <input id="first_name" type="text" className="validate" name='name' onChange={onInputChange}/>
-                        <label for="first_name">First Name</label>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="input-field col s12">
-                        <input id="password" type="password" className="validate" name='password' onChange={onInputChange}/>
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="input-field col s12">
-                        <input id="email" type="email" className="validate" name='email' onChange={onInputChange}/>
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <button className='btn' onClick={registerReq}>Зарегистрироваться</button> */}
         </div>
     </div>
 }
 
-export default Register;
+export default withRouter(Register);
 
