@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import 'materialize-css'
 import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, setLoaded } from '../../redux/authReduser'
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email, minLength6 } from '../../validators'
 
 const input = ({ input, label, type, meta: { touched, error, warning } }) => {
-    debugger
+
     return (<div className="row">
         <div className="input-field col s12">
             <input {...input} id={type} type={type} className="validate" />
@@ -22,58 +22,45 @@ const input = ({ input, label, type, meta: { touched, error, warning } }) => {
 }
 
 function AuthForm(props) {
+    
     const { handleSubmit, pristine, reset, submitting } = props
 
     return <form onSubmit={props.handleSubmit}>
-        <Field
-            name="email"
-            type="email"
-            component={input}
-            label="Email"
-            validate={[required,email]}
-            warn={aol}
-        />
-        <Field
-            name="password"
-            type="password"
-            component={input}
-            label="Password"
-            validate={[required]}
-            warn={aol}
-        />
-        <button className='btn' style={{ marginLeft: "10px", marginRight: "10px" }} type="submit" disabled={submitting}>
-            Войти
-    </button>
-        <NavLink to='/register'>
-            <button className='btn'>
-                Зарегистрироваться
-        </button>
-        </NavLink>
+        <div className="row">
+            <Field
+                name="email"
+                type="email"
+                component={input}
+                label="Email"
+                validate={[required, email]}
+                warn={aol}
+            />
+            <Field
+                name="password"
+                type="password"
+                component={input}
+                label="Password"
+                validate={[required]}
+                warn={aol}
+            />
+            <button className='btn' style={{ marginLeft: "10px", marginRight: "10px" }} type="submit" disabled={submitting}>
+                Войти
+            </button>
+            <NavLink to='/register'>
+                <button className='btn'>
+                    Зарегистрироваться
+                </button>
+            </NavLink>
+        </div>
     </form>
 }
 
 AuthForm = reduxForm({ form: 'auth' })(AuthForm)
 
 function Auth(props) {
-
+    debugger
     let message = useMessage();
-    // let [form, setForm] = useState({ email: '', password: '' });
 
-    // let onInputChange = (event) => {
-    //     setForm({ ...form, [event.target.name]: event.target.value })
-    // }
-    // useEffect(()=>{
-    //     message(error)
-    //     clearError()
-    // },[error,message,clearError])
-
-    // let loginReq = async () => {
-    //     try {
-    //         const req = await axios.post('http://localhost:8001/cinema/login', { ...form })
-    //         console.log(req)
-    //         props.login(req.data.token, req.data.userId)
-    //     } catch (e) { }
-    // }
     let submit = async (formData) => {
         // print the form values to the console
         console.log(formData)
@@ -82,6 +69,7 @@ function Auth(props) {
             const req = await axios.post('http://localhost:8001/cinema/login', { ...formData })
             console.log(req)
             props.login(req.data.token, req.data.userId)
+            props.history.goBack()
         } catch (e) { }
     }
 
@@ -99,5 +87,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(Auth);
+export default connect(mapStateToProps, {})(withRouter(Auth));
 

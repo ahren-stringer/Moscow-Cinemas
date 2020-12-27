@@ -30,13 +30,13 @@ function Navbar(props) {
     props.setCounter(counter)
     console.log(localStorage)
   }
-  let favorteArr = Object.entries(localStorage).filter(item => item[0] !== "count")
+  let favorteArr = Object.entries(localStorage).filter(item => item[0] !== "count" && item[0] !== "userData")
   debugger
   return (
     <div>
         <ul className="collection">
        { Object.entries(ls)
-          .filter(item => item[0] !== "count")
+          .filter(item => item[0] !== "count" && item[0] !== "userData")
           .map((item) =>
               <li className="collection-item avatar">
               {

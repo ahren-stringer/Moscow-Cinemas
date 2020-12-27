@@ -35,41 +35,39 @@ const Description = (props) => {
   return (
     <div className={s.description}>
 
-          <div className={s.description__place} style={{
-            'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')',
-            'minHeight': '200px',
-            'width': '100%',
-            'backgroundSize': 'cover',
-            'backgroundPosition': 'center center',
-            'position': 'relative',
-            'borderRadius': '4px',
-            'margin': '20px 0 10px'
-          }}>
-            {props.infoData[0].name}
-          </div>
-          <div className={s.description__wrapper}>
+      <div className={s.description__place} style={{
+        'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')',
+        'minHeight': '200px',
+        'width': '100%',
+        'backgroundSize': 'cover',
+        'backgroundPosition': 'center center',
+        'position': 'relative',
+        'borderRadius': '4px',
+        'margin': '20px 0 10px'
+      }}>
+        {props.infoData[0].name}
+      </div>
+      <div className={s.description__wrapper}>
         <div className={s.description__info}>
-          <div>
-            Адрес: {props.infoData[0].address}
+          <div className={s.description__item}>
+            <span className={s.description__item_title}>Адрес:</span> {props.infoData[0].address}
           </div>
-          <div>
-            Телефоны: {props.infoData[0].phones.map(item => <div>{item}</div>)}
+          <div className={s.description__item}>
+            <span className={s.description__item_title}>Телефоны:</span> {props.infoData[0].phones.map(item => <div>{item}</div>)}
           </div>
-          <div>
-            E-mail: {props.infoData[0].email}
+          <div className={s.description__item}>
+            <span className={s.description__item_title}>E-mail:</span> {props.infoData[0].email}
           </div>
-          <div>
-
-            Часы работ: {props.infoData[0].workHours.map(item => <div>
-            <span>{item.DayWeek}</span>: <span>{item.WorkHours}</span>
-          </div>)}
-
+          <div className={s.description__item}>
+            <span className={s.description__item_title}>Часы работ:</span> {props.infoData[0].workHours.map(item => <div>
+              <span>{item.DayWeek}</span>: <span>{item.WorkHours}</span>
+            </div>)}
           </div>
-          <div>
-            Количество залов: {props.infoData[0].numberOfHalls}
+          <div className={s.description__item}>
+          <span className={s.description__item_title}>Количество залов:</span> {props.infoData[0].numberOfHalls}
           </div>
-          <div>
-            Сайт: <a href={'http://www.' + props.infoData[0].webSite}>{props.infoData[0].webSite}</a>
+          <div className={s.description__item}>
+          <span className={s.description__item_title}>Сайт:</span> <a href={'http://www.' + props.infoData[0].webSite}>{props.infoData[0].webSite}</a>
           </div>
         </div>
 
@@ -88,15 +86,15 @@ const Description = (props) => {
               <h3>Фотокарточки</h3>
             </div>}
 
-          <ImageGallery items={images} showNav={false} showFullscreenButton={false} showPlayButton={false}/>
+          <ImageGallery items={images} showNav={false} showFullscreenButton={false} showPlayButton={false} />
         </div>
       </div>
 
 
       <div
-        className={s.description__liked} 
+        className={s.description__liked}
         onClick={() => { Liked(props.infoData[0].name, props.infoData[0].name) }}>
-        <span style={{marginRight: '10px'}}>Добавить в избранное</span>
+        <span style={{ marginRight: '10px' }}>Добавить в избранное</span>
         {
           !!ls[props.infoData[0].name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
         }

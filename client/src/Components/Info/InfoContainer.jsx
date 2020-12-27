@@ -83,7 +83,7 @@ class InfoContainer extends React.Component {
             })
     };
     render() {
-        if (this.props.match.url == '/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
+        //if (this.props.match.url == '/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
         if (!this.props.infoData || this.state.infoFlag) return <Preloader />
         return <Info {...this.props} id={this.props.match.params.id}
         onPageChange={this.onPageChange}

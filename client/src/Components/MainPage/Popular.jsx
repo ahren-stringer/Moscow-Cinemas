@@ -9,6 +9,8 @@ import './MainPage.css'
 import s from '../Navbar/Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { SetPopular } from '../../redux/navReduser';
+import { connect } from 'react-redux';
 
 function Popular(props) {
 
@@ -20,6 +22,7 @@ function Popular(props) {
     };
 
     let [ls, setLs] = useState(props.liked);
+    let [popular, setPopular] = useState(props.popular)
 
     useEffect(() => {
         setLs(props.liked)
@@ -41,9 +44,24 @@ function Popular(props) {
         props.setCounter(counter)
         console.log(localStorage)
     }
+    useEffect(
+        () => {
+            async function fetchData() {
+                const req = await axios.get('http://localhost:8001/popular');
+                props.SetPopular(req.data)
+                console.log(req.data)
+            }
+            fetchData()
+        }
+        , [])
+    useEffect(() => {
+        setPopular(props.popular)
+    }, [props.popular])
 
     return (
         <div>
+            {popular? 
+            <div>
             <div>
                 <h3>Популярные места</h3>
             </div>
@@ -68,9 +86,9 @@ function Popular(props) {
                                         </div>
                                     </NavLink>
                                     <div className='place__liked'
-                                    onClick={() => {
-                                        Liked(item.name, item.categoryUrl)
-                                    }}>
+                                        onClick={() => {
+                                            Liked(item.name, item.categoryUrl)
+                                        }}>
                                         Добавить в избранное {
                                             !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                                         }
@@ -81,8 +99,18 @@ function Popular(props) {
                     }
                 </Slider>
             </div>
+            </div>
+        : <Preloader/>    
+        }
         </div>
     );
 }
 
-export default Popular;
+let mapStateToProps = (state) => {
+    return {
+        popular:state.navData.popular,
+        liked: state.navData.liked,
+    }
+}
+
+export default connect(mapStateToProps, {SetPopular})(Popular)

@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css'
 import Popular from './Popular';
-import { SetPopular } from '../../redux/navReduser';
 import { connect } from 'react-redux';
 
 function MainPage(props) {
@@ -19,8 +18,8 @@ function MainPage(props) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        // autoplay:true,
-        // autoplaySpeed: 5000
+        autoplay:true,
+        autoplaySpeed: 5000
     };
 
     let [categores, setCategores] = useState([]);
@@ -37,20 +36,20 @@ function MainPage(props) {
         }
         , [])
 
-    useEffect(
-        () => {
-            async function fetchData() {
-                const req = await axios.get('http://localhost:8001/popular');
-                props.SetPopular(req.data)
-                console.log(req.data)
-            }
-            fetchData()
-        }
-        , [])
-    useEffect(()=>{
-        debugger
-        setPopular(props.popular)
-    },[props.popular])
+    // useEffect(
+    //     () => {
+    //         async function fetchData() {
+    //             const req = await axios.get('http://localhost:8001/popular');
+    //             props.SetPopular(req.data)
+    //             console.log(req.data)
+    //         }
+    //         fetchData()
+    //     }
+    //     , [])
+    // useEffect(()=>{
+    //     debugger
+    //     setPopular(props.popular)
+    // },[props.popular])
 
     return (
         <div>
@@ -143,17 +142,12 @@ function MainPage(props) {
                     }
 
                 </div>
-                {popular? <Popular popular={popular} liked={props.liked}/>:<Preloader/>}
+                {/* {popular?  */}
+                <Popular/>
+                {/* :<Preloader/>} */}
             </div>
         </div>
     );
 }
 
-let mapStateToProps = (state) => {
-    return {
-        popular:state.navData.popular,
-        liked: state.navData.liked,
-    }
-}
-
-export default connect(mapStateToProps, {SetPopular})(MainPage)
+export default MainPage

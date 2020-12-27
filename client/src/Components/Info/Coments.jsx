@@ -96,11 +96,11 @@ const Coments = (props) => {
         <div>
             <div className={s.coment__form}>
                 <h4 className={s.title}>Оставить отзыв</h4>
-                {/* {!props.token? */}
-                {/* <div>
+                {!props.token?
+                <div>
                     Чтобы оставить коментарий, вам нужно авторизироваться
                 </div>
-                : */}
+                : 
                 <div className="row">
                     <div className="row">
 
@@ -122,7 +122,7 @@ const Coments = (props) => {
                         disabled={disabled}
                         style={{ margin: '0 .75rem' }}>отправить</button>
                 </div>
-                {/* } */}
+                }
             </div>
             <h4 className={s.title}>Коментарии</h4>
             <div className={s.coment__wrapper}>

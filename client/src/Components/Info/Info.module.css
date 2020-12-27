@@ -4,10 +4,17 @@
 .description__wrapper{
     display: flex;
     justify-content: space-between;
+    margin-top: 35px;
 }
 .description__place{
     font-size: 39px;
     color: white;
+}
+.description__item{
+    margin-bottom: 2px;
+}
+.description__item_title{
+    font-weight: 700;
 }
 .photos__galery{
     width: 450px;
