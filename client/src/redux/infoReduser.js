@@ -9,7 +9,7 @@ let init = {
     infoData: null,
     features: null,
     newComentText: '',
-    coment: '',
+    coments: null,
     totalCount: 1,
     numberOfPage: 1,
     onOnePage: 5,
@@ -20,7 +20,7 @@ const infoReduser = (state = init, action) => {
         case SET_INFO_DATA:
             return { ...state, infoData: action.infoData }
         case SET_COMENT:
-            return { ...state, coment: action.coment }
+            return { ...state, coments: action.coments }
         case SET_FEATURES:
             return { ...state, features: action.features }
         case SET_NEW_TEXT:
@@ -39,7 +39,7 @@ const infoReduser = (state = init, action) => {
 export const setInfoData = (infoData) => ({ type: SET_INFO_DATA, infoData });
 export const setFeatures = (features) => ({ type: SET_FEATURES, features });
 export const ComentChange = (text) => ({ type: SET_NEW_TEXT, text })
-export const setComent = (coment) => ({ type: SET_COMENT, coment })
+export const setComents = (coments) => ({ type: SET_COMENT, coments })
 export const SetTotalCount=(totalCount)=> ({type: TOTAL_COUNT, totalCount})
 export const SetPageCount=(numberOfPage)=> ({type: SET_PAGE, numberOfPage})
 

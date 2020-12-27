@@ -6,6 +6,7 @@ const SET_PAGE = 'navReuser/SET-PAGE';
 const SET_LIKED = 'navReuser/SET-LIKED';
 const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
 const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
+const SET_POPULAR = "navReuser/SET_POPULAR"
 
 let init = {
     navData: [],
@@ -16,7 +17,8 @@ let init = {
     numberOfPage: 2,
     onOnePage: 6,
     request: true,
-    typeTitle:'',
+    typeTitle: '',
+    popular: null
 };
 
 const navReduser = (state = init, action) => {
@@ -27,8 +29,8 @@ const navReduser = (state = init, action) => {
             //     arr.push(action.navData[1])
             // }
             // debugger
-            return { ...state, navData: action.navData}
-            // return { ...state, navData: action.prevNanData.concat(action.navData)}
+            return { ...state, navData: action.navData }
+        // return { ...state, navData: action.prevNanData.concat(action.navData)}
         // case CONCAT_NAV_DATA:
         //     let arr=[]
         //     for (let i=0;i<action.navData.length;i++){
@@ -50,13 +52,15 @@ const navReduser = (state = init, action) => {
         case SET_LIKED:
             return { ...state, liked: action.liked }
         case SET_TYPE_TITLE:
-                return { ...state, typeTitle: action.typeTitle }
+            return { ...state, typeTitle: action.typeTitle }
+        case SET_POPULAR:
+            return { ...state, popular: action.popular }
         default:
             return state
     }
 }
 
-export const setNavData = (navData,prevNanData) => ({ type: SET_NAV_DATA, navData, prevNanData });
+export const setNavData = (navData, prevNanData) => ({ type: SET_NAV_DATA, navData, prevNanData });
 export const concatNavData = (navData) => ({ type: CONCAT_NAV_DATA, navData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
@@ -64,6 +68,6 @@ export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 export const Setliked = (liked) => ({ type: SET_LIKED, liked })
 export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
-
+export const SetPopular = (popular) => ({ type: SET_POPULAR, popular })
 
 export default navReduser

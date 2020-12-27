@@ -6,6 +6,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css'
+import Popular from './Popular';
+import { SetPopular } from '../../redux/navReduser';
+import { connect } from 'react-redux';
 
 function MainPage(props) {
 
@@ -20,7 +23,8 @@ function MainPage(props) {
         // autoplaySpeed: 5000
     };
 
-    let [categores, setCategores] = useState([])
+    let [categores, setCategores] = useState([]);
+    let [popular, setPopular] = useState(props.popular)
 
     useEffect(
         () => {
@@ -33,13 +37,28 @@ function MainPage(props) {
         }
         , [])
 
+    useEffect(
+        () => {
+            async function fetchData() {
+                const req = await axios.get('http://localhost:8001/popular');
+                props.SetPopular(req.data)
+                console.log(req.data)
+            }
+            fetchData()
+        }
+        , [])
+    useEffect(()=>{
+        debugger
+        setPopular(props.popular)
+    },[props.popular])
+
     return (
         <div>
             <div className='title'>
                 <Slider {...settings}>
                     <div style={{ position: 'static' }}>
                         <div className='title__slide-1' style={{ position: 'relative' }}>
-                        <div className='title__slide-container-2'
+                            <div className='title__slide-container-2'
                                 style={{
                                     position: 'absolute',
                                     top: '50%',
@@ -48,9 +67,9 @@ function MainPage(props) {
                                     transform: 'translate(-50%, -50%)'
                                 }}
                             >
-                            <h3>Добро пожаловать на MosCulture</h3>
-                            <div>
-                                Сайт о местах культурного наследия России и Мира
+                                <h3>Добро пожаловать на MosCulture</h3>
+                                <div>
+                                    Сайт о местах культурного наследия России и Мира
                             </div>
                             </div>
                         </div>
@@ -124,9 +143,17 @@ function MainPage(props) {
                     }
 
                 </div>
+                {popular? <Popular popular={popular} liked={props.liked}/>:<Preloader/>}
             </div>
         </div>
     );
 }
 
-export default MainPage;
+let mapStateToProps = (state) => {
+    return {
+        popular:state.navData.popular,
+        liked: state.navData.liked,
+    }
+}
+
+export default connect(mapStateToProps, {SetPopular})(MainPage)

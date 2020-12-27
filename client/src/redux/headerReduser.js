@@ -12,7 +12,7 @@ let init = {
     requestNumber: 1,
     searched: { requestNumber: 0, request: [] },
     searchedArr: [],
-    searchedPage: {},
+    searchedPage: [],
     searchRedirect: true,
     isClosed: true,
     isListLoading: false

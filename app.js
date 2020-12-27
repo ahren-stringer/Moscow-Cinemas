@@ -56,20 +56,28 @@ app.post('/coment', async (req, res) => {
     }
 })
 
-app.get('/cinema/coments', async (req, res) => {
+app.get('/cinema/coments/:place', async (req, res) => {
     try {
+        const coments = await Coment.find({place: req.params.place})
+        res.json([coments[coments.length-1]])
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
 
-        const coments = await Coment.find()
+app.get('/cinema/coments/some/:place/:limit/:skip', async (req, res) => {
+    try {
+        const coments = await Coment.find({place: req.params.place}).limit(+req.params.limit).skip(+req.params.skip)
         res.json(coments)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
 
-app.get('/cinema/coments/:id', async (req, res) => {
+app.get('/cinema/coments_count/:place', async (req, res) => {
     try {
-        const coments = await Coment.findById(req.params.id)
-        res.json(coments)
+        const coments = await Coment.find({place: req.params.place})
+        res.json(coments.length)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
@@ -179,7 +187,6 @@ app.post(
     ],
     async (req, res) => {
         try {
-            console.log('body', req.body)
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return res.status(400).json({
@@ -204,7 +211,6 @@ app.post(
                 'TopSecret',
                 { expiresIn: '24h' }
             )
-            debugger
             res.json({ token, userId: user.id })
         } catch (e) {
             res.status(500).json({ message: 'Ошибка авторизации' })
@@ -288,8 +294,19 @@ app.post('/place_category/places', async (req, res) => {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
+// Поиск
 
 app.get('/place_category/places/search/:search', async (req, res) => {
+    try {
+        const places = await Place.find()
+        
+        res.json(places.filter(item=> item.name.toLowerCase().includes(req.params.search)).slice(0,8))
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+
+app.get('/place_category/places/search_all/:search', async (req, res) => {
     try {
         const places = await Place.find()
         res.json(places.filter(item=> item.name.toLowerCase().includes(req.params.search)))
@@ -297,6 +314,7 @@ app.get('/place_category/places/search/:search', async (req, res) => {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
+
 // по категориям
 app.get('/place_category/places/category/:placeCategory', async (req, res) => {
     try {
@@ -310,7 +328,7 @@ app.get('/place_category/places/category/:placeCategory', async (req, res) => {
 app.get('/place_category/places/some/:placeCategory/:limit/:skip', async (req, res) => {
     try {
         const places = await Place.find({categoryUrl:req.params.placeCategory}).limit(+req.params.limit).skip(+req.params.skip)
-        console.log(req.params.name,req.params.limit,req.params.skip)
+        console.log(req.params.limit,req.params.skip)
         res.json(places)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
@@ -320,14 +338,41 @@ app.get('/place_category/places/some/:placeCategory/:limit/:skip', async (req, r
 app.get('/place_category/places/:name', async (req, res) => {
     try {
         const places = await Place.find({name:req.params.name}).exec()
-        console.log(places)
         res.json(places)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
 
-// Обратная 
+// Популярность
+app.put('/place_category/places/:id', async (req, res) => {
+    try {
+        await Place.findByIdAndUpdate({_id:req.params.id},req.body)
+        let place= await Place.findById(req.params.id)
+        console.log(place)
+        res.send('+1')
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+app.get('/popular', async (req, res) => {
+    try {
+        
+        let places= await Place.find().exec()
+        let arr=[]
+        for (let i=0;i<places.length;i++){
+            if ('popular' in places[i] && places[i].popular){
+                arr.push(places[i])
+            }
+        }
+        arr.sort((a, b) => b.popular - a.popular)
+        res.json(arr)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+// Обратная связь
+
 
 app.post('/email',(req,res)=>{
     if (!req.body.email || !req.body.message) return res.sendStatus(400)

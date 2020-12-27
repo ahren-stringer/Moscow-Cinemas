@@ -11,27 +11,8 @@ import axios from 'axios';
 //localStorage.clear()
 
 function Navbar(props) {
-  let [ls, setLs] = useState(
-    [
-
-    ]
-    //props.liked
-  );
-  let [photos, setPhotos] = useState(null);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const req = await axios.get('http://localhost:8001/cinema/photos');
-  //     setPhotos(req.data)
-  //     console.log(req.data)
-  //   }
-  //   fetchData()
-  // }, [])
-
-  useEffect(() => {
-    setPhotos(photos)
-  }, [photos])
-
+  let [ls, setLs] = useState(props.liked);
+  
   useEffect(() => {
     setLs(props.liked)
   }, [props.liked])

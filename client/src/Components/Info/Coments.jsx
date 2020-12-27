@@ -7,13 +7,10 @@ import axios from 'axios';
 import Pagination from './Pagination';
 
 const Coments = (props) => {
+    let [coments,setComents]=useState(props.coments)
     let [disabled, setDisabled] = useState(true)
     let arr = [1, 2, 3, 4, 5];
-    let [coments, setComents] = useState([
-        { date: String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....', place: 'Государственный музей имени Пушкина' },
-        { date: String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....', place: 'Государственный музей имени Пушкина' },
-        { date: String(new Date()), name: 'alex', email: "1@mail.ru", size: 3, coment: 'Орел и решка, это так, для всех... Общепит.... У Птушкина же, ручная работа. Это, можно сказать, Бентли среди одиночных путешествий.... Это, натуральная кожа и ручная сборка....', place: 'Государственный музей имени Пушкина' }
-    ]);
+
     let [form, setForm] = useState({
         size: 0,
         coment: '',
@@ -22,8 +19,6 @@ const Coments = (props) => {
     });
 
     let onInputChange = (event) => {
-
-
         if (event.target.value != '') {
             setDisabled(false)
         } else {
@@ -33,19 +28,33 @@ const Coments = (props) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    useEffect(() => {
-        async function fetchData() {
-            debugger
-            const req = await axios.get('http://localhost:8001/cinema/coments', {
-                headers: {
-                    "Authorization": ('Bearer ' + props.token)
-                }
-            });
-            setComents(req.data)
-            console.log(req.data)
-        }
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         debugger
+    //         const req = await axios.get(`http://localhost:8001/cinema/coments/some/${props.infoData[0].name}/${props.onOnePage}/0`, {
+    //             headers: {
+    //                 "Authorization": ('Bearer ' + props.token)
+    //             }
+    //         });
+    //         const count = await axios.get(`http://localhost:8001/cinema/coments_count/${props.infoData[0].name}`, {
+    //             headers: {
+    //                 "Authorization": ('Bearer ' + props.token)
+    //             }
+    //         });
+    //         setComents(req.data)
+    //         props.SetTotalCount(count.data)
+    //     }
+    //     fetchData()
+    // }, [])
+
+    // let onPageChange = (page) => {
+    //     debugger
+    //     axios.get(`http://localhost:8001/cinema/coments/some/${props.infoData[0].name}/${props.onOnePage}/${page*props.onOnePage}`)
+    //         .then(req => {
+    //             debugger
+    //             setComents(req.data)
+    //         })
+    // };
 
     const sendComent = async () => {
         await axios.post('http://localhost:8001/coment', { ...form }, {
@@ -53,13 +62,19 @@ const Coments = (props) => {
                 "Authorization": ('Bearer ' + props.token)
             }
         })
-        const req = await axios.get('http://localhost:8001/cinema/coments', {
+        const req = await axios.get(`http://localhost:8001/cinema/coments/${props.infoData[0].name}`, {
             headers: {
                 "Authorization": ('Bearer ' + props.token)
             }
         });
-        setComents(req.data)
+        let arr=[...coments]
+        arr.push(req.data[0])
+        setComents(arr)
     }
+
+    useEffect(()=>{
+        setComents(props.coments)
+    },[props.coments])
 
     let onColorChange = (item) => {
         if (item == 0) {
@@ -76,6 +91,7 @@ const Coments = (props) => {
         }
         setForm({ ...form, size: item })
     }
+
     return (
         <div>
             <div className={s.coment__form}>
@@ -128,11 +144,14 @@ const Coments = (props) => {
                         </li>
                     })}
                 </ul>
-                <Pagination SetTotalCount={props.SetTotalCount}
+                {
+                props.totalCount<props.onOnePage? null : <Pagination SetTotalCount={props.SetTotalCount}
                     SetPageCount={props.SetPageCount}
                     totalCount={props.totalCount}
                     numberOfPage={props.numberOfPage}
-                    onOnePage={props.onOnePage} />
+                    onOnePage={props.onOnePage}
+                    onPageChange={props.onPageChange}
+                    infoData={props.infoData}/>}
             </div>
         </div>
     );

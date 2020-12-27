@@ -51,3 +51,23 @@
     bottom: 26px;
     left: 22px;
 }
+.slider__wrapper{
+    margin-bottom: 50px;
+}
+.place{
+    border-radius: 3px;
+    margin: 0 0 30px;
+    width: 266px;
+}
+.place__wrapper{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 0 10px;
+}
+.place__name{
+    margin: 5px;
+    font-size: 17px;
+    color:#000;
+}
+.place__liked{
+    margin: 5px;
+}

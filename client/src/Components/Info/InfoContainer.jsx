@@ -1,7 +1,7 @@
 import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
-import { setInfoData, setFeatures, ComentChange, setComent,SetTotalCount,SetPageCount } from '../../redux/infoReduser';
+import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount } from '../../redux/infoReduser';
 import { Setliked } from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
@@ -15,11 +15,30 @@ class InfoContainer extends React.Component {
     }
     componentDidMount() {
         let id = this.props.match.params.id;
-        if (id){
+        if (id) {
             axios.get(`http://localhost:8001/place_category/places/${id}`)
-            .then(response => {
-                this.props.setInfoData(response.data)
-            })
+                .then(response => {
+                    this.props.setInfoData(response.data)
+                    let pop = +response.data[0].popular + 1;
+                    axios.put(`http://localhost:8001/place_category/places/${response.data[0]._id}`, { popular: pop })
+                    // Коменты
+                    axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
+                        headers: {
+                            "Authorization": ('Bearer ' + this.props.token)
+                        }
+                    })
+                        .then(req => {
+                            this.props.setComents(req.data)
+                        });
+                    // Количество коментов
+                    axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
+                        headers: {
+                            "Authorization": ('Bearer ' + this.props.token)
+                        }
+                    }).then(count => {
+                        this.props.SetTotalCount(count.data)
+                    });
+                })
         }
     }
     componentDidUpdate(prevProps, prevState) {
@@ -28,20 +47,47 @@ class InfoContainer extends React.Component {
             this.setState({
                 infoFlag: true
             })
+            //место
             axios.get(`http://localhost:8001/place_category/places/${id}`)
                 .then(response => {
                     this.props.setInfoData(response.data)
                     this.setState({
                         infoFlag: false
                     })
+                    // Коменты
+                    // axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
+                    //     headers: {
+                    //         "Authorization": ('Bearer ' + this.props.token)
+                    //     }
+                    // })
+                    //     .then(req => {
+                    //         this.props.setComents(req.data)
+                    //         debugger
+                    //     });
+                    // Количество коментов
+                    // axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
+                    //     headers: {
+                    //         "Authorization": ('Bearer ' + this.props.token)
+                    //     }
+                    // }).then(count => {
+                    //     this.props.SetTotalCount(count.data)
+                    // });
                 })
         }
     }
-    render() {
+    onPageChange = (name,onOnePage,page) => {
         debugger
-        if (this.props.match.url=='/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
-        if (!this.props.infoData||this.state.infoFlag) return <Preloader />
-        return <Info {...this.props} id={this.props.match.params.id} />
+        axios.get(`http://localhost:8001/cinema/coments/some/${name}/${onOnePage}/${page*onOnePage}`)
+            .then(req => {
+                this.props.setComents(req.data)
+            })
+    };
+    render() {
+        if (this.props.match.url == '/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
+        if (!this.props.infoData || this.state.infoFlag) return <Preloader />
+        return <Info {...this.props} id={this.props.match.params.id}
+        onPageChange={this.onPageChange}
+        />
     }
 }
 
@@ -50,16 +96,16 @@ let mapStateToProps = (state) => {
         infoData: state.infoData.infoData,
         features: state.infoData.features,
         newComentText: state.infoData.newComentText,
-        coment: state.infoData.coment,
+        coments: state.infoData.coments,
         token: state.auth.token,
         liked: state.navData.liked,
         totalCount: state.infoData.totalCount,
-        numberOfPage:state.infoData.numberOfPage,
-        onOnePage:state.infoData.onOnePage,
+        numberOfPage: state.infoData.numberOfPage,
+        onOnePage: state.infoData.onOnePage,
     }
 }
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComent,setCounter, Setliked,SetTotalCount,SetPageCount })
+    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, setCounter, Setliked, SetTotalCount, SetPageCount })
 )(InfoContainer)

@@ -58,6 +58,7 @@ padding-left: 5px;
     width: 100%;
     margin:0;
     border: none;
+    z-index: 1;
 }
 .search ul li{
     border-bottom: 1px solid #777;

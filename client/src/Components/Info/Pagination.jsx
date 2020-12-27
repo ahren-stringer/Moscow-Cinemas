@@ -1,30 +1,31 @@
 import React from 'react'
+import s from './Info.module.css'
 
 let Pagination = (props) => {
-    debugger
     let pageCount = Math.ceil(props.totalCount / props.onOnePage);
     let arr = [];
     for (let i = 1; i <= pageCount; i++) {
         arr.push(i)
     }
-    return <div>
-
-        {/* //     <ul class="pagination">
-            //     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        //     <li class="active"><a href="#!">1</a></li>
-        //     <li class="waves-effect"><a href="#!">2</a></li>
-        //     <li class="waves-effect"><a href="#!">3</a></li>
-        //     <li class="waves-effect"><a href="#!">4</a></li>
-        //     <li class="waves-effect"><a href="#!">5</a></li>
-        //     <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-        //   </ul> */}
+    return <div className={s.pagination__wrapper}>
         <ul className="pagination">
-        <li className="disabled"><a href="#!"><i className="material-icons">chevron_left</i></a></li>
+            <li className={props.numberOfPage == arr[0] ? "disabled" : 'waves-effect'}
+                onClick={()=>{
+                    props.SetPageCount(props.numberOfPage - 1)
+                    props.onPageChange(props.infoData[0].name, props.onOnePage, props.numberOfPage - 2)
+                    }}><a><i className="material-icons">chevron_left</i></a></li>
             {
-                arr.map(item => <li className={item === props.numberOfPage ? 'active' : 'waves-effect'}
-                    onClick={(e) => { props.onPageChange(item) }}><a href="#!">{item}</a></li>)
+                arr.map((item, index) => <li className={item === props.numberOfPage ? 'active' : 'waves-effect'}
+                    onClick={(e) => {
+                        props.SetPageCount(item)
+                        props.onPageChange(props.infoData[0].name, props.onOnePage, index)
+                    }}><a>{item}</a></li>)
             }
-            <li className="waves-effect"><a href="#!"><i className="material-icons">chevron_right</i></a></li>
+            <li className={props.numberOfPage == arr[arr.length - 1] ? "disabled" : 'waves-effect'}
+                onClick={()=>{
+                    props.SetPageCount(props.numberOfPage + 1)
+                    props.onPageChange(props.infoData[0].name, props.onOnePage, props.numberOfPage)
+                    }}><a><i className="material-icons">chevron_right</i></a></li>
         </ul>
 
     </div>
