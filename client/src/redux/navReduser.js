@@ -24,23 +24,7 @@ let init = {
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            // let arr=[action.navData[0]];
-            // for (let i=0;i<8;i++){
-            //     arr.push(action.navData[1])
-            // }
-            // debugger
-            // return { ...state, navData: action.navData }
         return { ...state, navData: action.prevNanData.concat(action.navData)}
-        // case CONCAT_NAV_DATA:
-        //     let arr=[]
-        //     for (let i=0;i<action.navData.length;i++){
-        //         let count=0;
-        //         for (let j=0;j<state.navData.length;j++){
-        //             if(state.navData[j].global_id==action.navData[i].global_id) count=count+1
-        //         }
-        //         if (!count) arr.push(action.navData[i])
-        //     }
-        //     return { ...state, navData: [].concat(state.navData, arr) }
         case SET_NAMES:
             return { ...state, names: action.names }
         case SET_NEW_TEXT:

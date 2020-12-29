@@ -1,6 +1,10 @@
 .title{
     margin: 0 auto;
     text-align: center;
+    background-color: #000;
+}
+.title__slide-wrapper{
+    position: relative
 }
 .title__slide-1,
 .title__slide-2,
@@ -11,7 +15,8 @@
     background-size: cover;
     background-position: center center;
     color: white;
-    position: relative,
+    position: relative;
+    opacity: .9;
 }
 .title__slide-1{
     background-image: url(https://versiya.info/uploads/posts/2020-01/1580486225_90495-temple-saint_petersburg-hotel-town_square-tourist_attraction-2048x1152.jpg); 
@@ -22,14 +27,15 @@
 .title__slide-3{
     background-image: url(https://irkutsk.megafon.ru/download/~federal/~federal/images/mobid.jpg); 
 }
-/* .title__slide-container-2,
-.title__slide-container-3{
+.title__slide-container{
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-} */
+    color: white;
+    z-index: 1;
+}
 .place__type-wrapper{
     margin: 50px auto;
 }
@@ -52,7 +58,8 @@
     left: 22px;
 }
 .slider__wrapper{
-    margin-bottom: 50px;
+    width: 93%;
+    margin: 0 auto 50px;
 }
 .place{
     border-radius: 3px;

@@ -6,9 +6,8 @@ import SearchingForm from './SearchingForm';
 import { SearchChange } from '../../redux/navReduser';
 import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr } from '../../redux/headerReduser';
 import { logout } from '../../redux/authReduser';
-import logo from '../../img/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart,faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class Header extends React.Component {
   state = {
@@ -28,15 +27,10 @@ class Header extends React.Component {
       })
     }
   };
-  //   logoutReq=(e)=>{
-  //     e.preventDefault()
-  //     auth.logout()
-  // }
-  //favorteArr = Object.entries(this.props.liked).filter(item => item[0].slice(0, 4) === "Кино");
 
-  openMenu=(e)=>{
+  openMenu = (e) => {
     debugger
-    e.currentTarget.parentNode.style.right='0'
+    e.currentTarget.parentNode.style.right = '0'
   }
   render() {
     return (
@@ -44,46 +38,70 @@ class Header extends React.Component {
         <div className='__container'>
           {/* <div className='header__inner'> */}
           <div className='header__wrapper'>
-            <NavLink to='/' className='logo' activeClassName='active'>
+            {this.state.menuBtn || <NavLink to='/' className='logo' activeClassName='active'>
               <div>
                 <span className='logo__title'>
                   MosCulture
                 </span>
               </div>
-            </NavLink>
+            </NavLink>}
             <div className='menu__wrapper'>
               <a className="menu-btn">
-                {!this.state.menuBtn ? 
-                <span onClick={(e)=>{
-                  e.currentTarget.parentNode.parentNode.style.right='0'
-                  this.setState({
-                    menuBtn:true
-                  })
-                  }}>
-                  <FontAwesomeIcon icon={faBars} />
-                </span>            
-                :<span onClick={(e)=>{
-                  e.currentTarget.parentNode.parentNode.style.right='-283px'
-                  this.setState({
-                    menuBtn:false
-                  })}}>
-                  <FontAwesomeIcon icon={faTimes}/>
-                </span>
+                {
+                  !this.state.menuBtn ?
+                    <span onClick={(e) => {
+                      e.currentTarget.parentNode.parentNode.style.right = '0'
+                      this.setState({
+                        menuBtn: true
+                      })
+                    }}>
+                      <FontAwesomeIcon icon={faBars} />
+                    </span>
+                    : <span onClick={(e) => {
+                      e.currentTarget.parentNode.parentNode.style.right = '-283px'
+                      this.setState({
+                        menuBtn: false
+                      })
+                    }}>
+                      <FontAwesomeIcon icon={faTimes} />
+                    </span>
                 }
               </a>
-              <div className='header__inner'>
-                <SearchingForm {...this.props} />
-                <div className="liked">
+              {
+                this.state.menuBtn && <NavLink to='/' className='logo' activeClassName='active'>
                   <div>
-                    Избранное
+                    <span className='logo__title'>
+                      MosCulture
+                  </span>
                   </div>
-                  <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
-                    <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                  </NavLink>
-                  {this.props.counter}
+                </NavLink>
+              }
+              <div className='header__inner'>
+
+                {/* Поиск */}
+                <SearchingForm {...this.props} />
+
+                {/* Избранное */}
+                <div className="liked inner-item">
+                  <a class="collection-item">
+                    {!this.state.menuBtn || <span class="new badge">
+                      {this.props.counter}
+                    </span>}
+                    {this.state.menuBtn ? <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
+                      Избранное
+                    </NavLink>
+                      : <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
+                        <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                      </NavLink>}
+                    {this.state.menuBtn ||
+                      this.props.counter
+                    }
+                  </a>
                 </div>
-                {!this.props.token ? <NavLink to='/auth' className='auth__btn'>Войти</NavLink> :
-                  <span className='auth__btn' href='/'
+
+                {/* Авторизация */}
+                {!this.props.token ? <NavLink to='/auth' className='auth__btn inner-item'>Войти</NavLink> :
+                  <span className='auth__btn inner-item'
                     onClick={this.props.logout}
                   >Выход</span>}
               </div>

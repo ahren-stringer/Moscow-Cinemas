@@ -49,24 +49,11 @@ const SearchingForm = (props) => {
     const CloseList = () => {
         props.setSearched({ requestNumber: 0, request: [] })
     }
-    return (<div className="searching__form">
+    return (<div className="searching__form inner-item">
         <div className="search">
             <input className='search__input' type="text" value={props.newSearchText}
                 onChange={onSearchChange}
                 ref={searchInput}
-                style={{
-                    margin: 0,
-                    background: '#E0EFCA',
-                    width: '100%',
-                    height: '42px',
-                    paddingLeft: '10px',
-                    border: '2px solid #7BA7AB',
-                    borderRadius: '5px',
-                    outline: 'none',
-                    background: '#F9F0DA',
-                    color: '#9E9C9C',
-                    boxSizing: 'inherit'
-                }}
                 name="s"
                 placeholder="Искать здесь..."
             />

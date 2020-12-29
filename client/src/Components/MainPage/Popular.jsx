@@ -22,7 +22,182 @@ function Popular(props) {
     };
 
     let [ls, setLs] = useState(props.liked);
-    let [popular, setPopular] = useState(props.popular)
+    let [popular, setPopular] = useState([
+        {
+            popular: 10,
+            phones: ["(499) 125-04-48", "(499) 125-01-35"],
+            coordinates: [37.571298748323, 55.682806921335],
+            name: "Государственный музей имени Пушкина",
+            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
+            email: "salut-cinema@mail.ru",
+            workHours:
+                [{
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+                {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+            ],
+            numberOfHalls: 2,
+            webSite: "salut-cinema.ru",
+            photos: {
+                photoLarge: "https://www.mobrep.ru/b/c/28427.jpg",
+                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
+                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
+                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
+            },
+            placeCategory: "Кинотеатры",
+            categoryUrl: "cinemas"
+        },
+        {
+            popular: 9,
+            phones: ["(499) 125-04-48", "(499) 125-01-35"],
+            coordinates: [37.571298748323, 55.682806921335],
+            name: "Государственный музей имени Пушкина",
+            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
+            email: "salut-cinema@mail.ru",
+            workHours:
+                [{
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+                {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+            ],
+            numberOfHalls: 2,
+            webSite: "salut-cinema.ru",
+            photos: {
+                photoLarge: "https://pushkinmuseum.art/museum/22_img_pc.jpg",
+                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
+                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
+                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
+            },
+            placeCategory: "Кинотеатры",
+            categoryUrl: "cinemas"
+        },
+        {
+            popular: 8,
+            phones: ["(499) 125-04-48", "(499) 125-01-35"],
+            coordinates: [37.571298748323, 55.682806921335],
+            name: "Государственный музей имени Пушкина",
+            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
+            email: "salut-cinema@mail.ru",
+            workHours:
+                [{
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+                {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+            ],
+            numberOfHalls: 2,
+            webSite: "salut-cinema.ru",
+            photos: {
+                photoLarge: "https://www.mobrep.ru/b/c/28427.jpg",
+                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
+                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
+                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
+            },
+            placeCategory: "Кинотеатры",
+            categoryUrl: "cinemas"
+        },
+        {
+            popular: 7,
+            phones: ["(499) 125-04-48", "(499) 125-01-35"],
+            coordinates: [37.571298748323, 55.682806921335],
+            name: "Государственный музей имени Пушкина",
+            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
+            email: "salut-cinema@mail.ru",
+            workHours:
+                [{
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+                {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                }, {
+                    DayWeek: "понедельник",
+                    WorkHours: "10:00-23:00"
+                },
+            ],
+            numberOfHalls: 2,
+            webSite: "salut-cinema.ru",
+            photos: {
+                photoLarge: "https://pushkinmuseum.art/museum/22_img_pc.jpg",
+                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
+                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
+                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
+            },
+            placeCategory: "Кинотеатры",
+            categoryUrl: "cinemas"
+        },
+    ]
+        //props.popular
+        )
 
     useEffect(() => {
         setLs(props.liked)
@@ -44,19 +219,19 @@ function Popular(props) {
         props.setCounter(counter)
         console.log(localStorage)
     }
-    useEffect(
-        () => {
-            async function fetchData() {
-                const req = await axios.get('http://localhost:8001/popular');
-                props.SetPopular(req.data)
-                console.log(req.data)
-            }
-            fetchData()
-        }
-        , [])
-    useEffect(() => {
-        setPopular(props.popular)
-    }, [props.popular])
+    // useEffect(
+    //     () => {
+    //         async function fetchData() {
+    //             const req = await axios.get('http://localhost:8001/popular');
+    //             props.SetPopular(req.data)
+    //             console.log(req.data)
+    //         }
+    //         fetchData()
+    //     }
+    //     , [])
+    // useEffect(() => {
+    //     setPopular(props.popular)
+    // }, [props.popular])
 
     return (
         <div>
@@ -68,7 +243,8 @@ function Popular(props) {
             <div className='slider__wrapper'>
                 <Slider {...settings}>
                     {
-                        props.popular.map((item, index, array) => {
+                        //props.popular
+                        popular.map((item, index, array) => {
 
                             return <div className='place'>
                                 <div className='place__wrapper'>

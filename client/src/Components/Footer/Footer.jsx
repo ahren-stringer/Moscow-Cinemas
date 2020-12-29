@@ -64,20 +64,6 @@ MailForm = reduxForm({ form: 'mailForm' })(MailForm)
 
 const Footer = (props) => {
 
-    // let [form, setForm] = useState({
-    //     name: '',
-    //     message: '',
-    //     email: ''
-    // });
-
-    // let onInputChange = (event) => {
-    //     setForm({ ...form, [event.target.name]: event.target.value })
-    // }
-
-    // const sendEmail = async () => {
-    //     await axios.post('http://localhost:8001/email', { ...form })
-    // }
-
     let submit = async (formData) => {
         // print the form values to the console
         console.log(formData)
@@ -92,43 +78,15 @@ const Footer = (props) => {
             <div className="container">
                 <div className="row">
                     <div className="col l6 s12">
-                        {/* <div className="row">
-                            <div className="row">
-                                <div className="row">
-                                        <div className="input-field col s12">
-                                            <input id="first_name" type="text" className="validate" name='name' onChange={onInputChange} />
-                                            <label for="first_name">First Name</label>
-                                        </div>
-                                    <div className="input-field col s12">
-                                        <input id="email" type="email" className="validate" name='email' onChange={onInputChange} />
-                                        <label for="email">Email</label>
-                                    </div>
-                                    <div className="input-field col s12">
-                                        <textarea id="textarea1" className="materialize-textarea" name='message' onChange={onInputChange}></textarea>
-                                        <label for="textarea1">Textarea</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <button className='btn' onClick={sendEmail}>отправить</button>
-                        </div> */}
-                        <MailForm/>
-                    </div>
-                    <div className="col l4 offset-l2 s12">
-                        <h5 className="white-text">Links</h5>
-                        <ul>
-                            <li><a className="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                            <li><a className="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                            <li><a className="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                            <li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                        </ul>
+                    <h5 className="white-text">Обратная связь</h5>
+                        <MailForm onSubmit={submit}/>
+
                     </div>
                 </div>
             </div>
             <div className="footer-copyright">
-                <div className="container">
-                    © 2014 Copyright Text
-  <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-                </div>
+               
+            
             </div>
         </footer>
 

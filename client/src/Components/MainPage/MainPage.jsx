@@ -18,95 +18,85 @@ function MainPage(props) {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        autoplay:true,
+        //autoplay:true,
         autoplaySpeed: 5000
     };
 
-    let [categores, setCategores] = useState([]);
-    let [popular, setPopular] = useState(props.popular)
-
-    useEffect(
-        () => {
-            async function fetchData() {
-                const req = await axios.get('http://localhost:8001/place_category');
-                setCategores(req.data)
-                console.log(req.data)
-            }
-            fetchData()
+    let [categores, setCategores] = useState([
+        {
+            category: "Кинотеатры",
+            categoryUrl: "cinemas",
+            img: "https://www.mobrep.ru/b/c/28427.jpg"
+        },
+        {
+            category: "Театры",
+            categoryUrl: "theatres",
+            img: "https://blog.edinoepole.ru/wp-content/uploads/2016/08/km091.jpg"
+        },
+        {
+            category: "Галереи",
+            categoryUrl: "galleries",
+            img: "https://upload.wikimedia.org/wikipedia/commons/0/06/The_State_Tretyakov_Gallery.jpg"
+        },
+        {
+            category: "Музеи",
+            categoryUrl: "museums",
+            img: 'https://www.nlb.by/upload/iblock/c4c/296a2067.jpg'
         }
-        , [])
+    ]);
 
     // useEffect(
     //     () => {
     //         async function fetchData() {
-    //             const req = await axios.get('http://localhost:8001/popular');
-    //             props.SetPopular(req.data)
+    //             const req = await axios.get('http://localhost:8001/place_category');
+    //             setCategores(req.data)
     //             console.log(req.data)
     //         }
     //         fetchData()
     //     }
     //     , [])
-    // useEffect(()=>{
-    //     debugger
-    //     setPopular(props.popular)
-    // },[props.popular])
 
     return (
         <div>
             <div className='title'>
                 <Slider {...settings}>
                     <div style={{ position: 'static' }}>
-                        <div className='title__slide-1' style={{ position: 'relative' }}>
-                            <div className='title__slide-container-2'
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    marginRight: '-50%',
-                                    transform: 'translate(-50%, -50%)'
-                                }}
-                            >
+                        <div className='title__slide-wrapper'>
+                            <div className='title__slide-container'>
                                 <h3>Добро пожаловать на MosCulture</h3>
                                 <div>
                                     Сайт о местах культурного наследия России и Мира
                             </div>
                             </div>
+                            <div className='title__slide-1'>
+
+                            </div>
                         </div>
                     </div>
                     <div style={{ position: 'static' }}>
-                        <div className='title__slide-2' style={{ position: 'relative' }}>
-                            <div className='title__slide-container-2'
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    marginRight: '-50%',
-                                    transform: 'translate(-50%, -50%)'
-                                }}
-                            >
+                        <div className='title__slide-wrapper'>
+                            <div className='title__slide-container'>
                                 <h3>Будьте в курсе событий</h3>
                                 <div>
                                     К вашему вниманию представлена актуализированная информация о культырных местах москвы
                             </div>
                             </div>
+                            <div className='title__slide-2' style={{ position: 'relative' }}>
+
+                            </div>
                         </div>
                     </div>
 
                     <div style={{ position: 'static' }}>
-                        <div className='title__slide-3' style={{ position: 'relative' }}>
-                            <div className='title__slide-container-3'
-                                style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    marginRight: '-50%',
-                                    transform: 'translate(-50%, -50%)'
-                                }}
-                            >
+                        <div className='title__slide-wrapper'>
+                            <div className='title__slide-container'>
                                 <h3>Делитесь отзывами</h3>
                                 <div>
                                     Здесь вы можете смотреть и оставлять отзывы
                             </div>
+                            </div>
+                            <div className='title__slide-3' style={{ position: 'relative' }}>
+
                             </div>
                         </div>
                     </div>
@@ -142,9 +132,7 @@ function MainPage(props) {
                     }
 
                 </div>
-                {/* {popular?  */}
-                <Popular/>
-                {/* :<Preloader/>} */}
+                <Popular />
             </div>
         </div>
     );
