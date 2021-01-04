@@ -10,11 +10,12 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-@media only screen and (min-width: 993px){
-.container {
-    width: 90%;
+@media (max-width: 1200px){
+  .__container{
+    max-width: 90%;
+  }
 }
-}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

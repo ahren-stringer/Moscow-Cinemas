@@ -7,7 +7,7 @@ import axios from 'axios';
 import Pagination from './Pagination';
 
 const Coments = (props) => {
-    let [coments,setComents]=useState(props.coments)
+    let [coments, setComents] = useState(props.coments)
     let [disabled, setDisabled] = useState(true)
     let arr = [1, 2, 3, 4, 5];
 
@@ -67,14 +67,14 @@ const Coments = (props) => {
                 "Authorization": ('Bearer ' + props.token)
             }
         });
-        let arr=[...coments]
+        let arr = [...coments]
         arr.push(req.data[0])
         setComents(arr)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setComents(props.coments)
-    },[props.coments])
+    }, [props.coments])
 
     let onColorChange = (item) => {
         if (item == 0) {
@@ -91,68 +91,71 @@ const Coments = (props) => {
         }
         setForm({ ...form, size: item })
     }
-
+    debugger
     return (
         <div>
             <div className={s.coment__form}>
                 <h4 className={s.title}>Оставить отзыв</h4>
-                {!props.token?
-                <div>
-                    Чтобы оставить коментарий, вам нужно авторизироваться
+                {!props.token ?
+                    <div>
+                        Чтобы оставить коментарий, вам нужно авторизироваться
                 </div>
-                : 
-                <div className="row">
+                    :
                     <div className="row">
+                        <div className="row">
 
-                        <div className="input-field col s12">
-                            <textarea id="textarea1" className="materialize-textarea" name='coment' onChange={onInputChange}></textarea>
-                            <label for="textarea1">Textarea</label>
+                            <div className="input-field col s12">
+                                <textarea id="textarea1" className="materialize-textarea" name='coment' onChange={onInputChange}></textarea>
+                                <label for="textarea1">Textarea</label>
+                            </div>
+
                         </div>
-
+                        <div className={s.coment__otcenka}> <span className={s.coment__size}>Оценка:</span>   {arr.map((item, index, array) => {
+                            return (
+                                <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
+                            )
+                        })
+                        }
+                        </div>
+                        <button className='btn'
+                            onClick={sendComent}
+                            disabled={disabled}
+                            style={{ margin: '0 .75rem' }}>отправить</button>
                     </div>
-                    <div className={s.coment__otcenka}> <span className={s.coment__size}>Оценка:</span>   {arr.map((item, index, array) => {
-                        return (
-                            <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
-                        )
-                    })
-                    }
-                    </div>
-                    <button className='btn'
-                        onClick={sendComent}
-                        disabled={disabled}
-                        style={{ margin: '0 .75rem' }}>отправить</button>
-                </div>
                 }
             </div>
             <h4 className={s.title}>Коментарии</h4>
-            <div className={s.coment__wrapper}>
-                <ul >
-                    {coments.map((item) => {
-                        if (item.place == props.infoData[0].name) return <li className={s.coment}>
-                            <img src={user} className={s.coment__ava} />
-                            <div className={s.coment__container}>
-                                <div className={s.coment__name}>{item.name}</div>
-                                <div>{item.email}</div>
-                                <div>Оценка: {
-                                    arr.map((star, index, array) => {
-                                        if (index < item.size) return <FontAwesomeIcon icon={faStar} style={{ color: 'red' }} />
-                                    })
-                                } </div>
-                                <div className={s.coment__coment}>{item.coment} </div>
-                                <div className={s.coment__date}>{item.date} </div>
-                            </div>
-                        </li>
-                    })}
-                </ul>
-                {
-                props.totalCount<props.onOnePage? null : <Pagination SetTotalCount={props.SetTotalCount}
-                    SetPageCount={props.SetPageCount}
-                    totalCount={props.totalCount}
-                    numberOfPage={props.numberOfPage}
-                    onOnePage={props.onOnePage}
-                    onPageChange={props.onPageChange}
-                    infoData={props.infoData}/>}
-            </div>
+            {coments.length === 0 ? <div className={s.no_coments}>
+                        Здесь пока нет коментариев
+                    </div>
+                : <div className={s.coment__wrapper}>
+                    <ul >
+                        {coments.map((item) => {
+                            if (item.place == props.infoData[0].name) return <li className={s.coment}>
+                                <img src={user} className={s.coment__ava} />
+                                <div className={s.coment__container}>
+                                    <div className={s.coment__name}>{item.name}</div>
+                                    <div>{item.email}</div>
+                                    <div>Оценка: {
+                                        arr.map((star, index, array) => {
+                                            if (index < item.size) return <FontAwesomeIcon icon={faStar} style={{ color: 'red' }} />
+                                        })
+                                    } </div>
+                                    <div className={s.coment__coment}>{item.coment} </div>
+                                    <div className={s.coment__date}>{item.date} </div>
+                                </div>
+                            </li>
+                        })}
+                    </ul>
+                    {
+                        props.totalCount < props.onOnePage ? null : <Pagination SetTotalCount={props.SetTotalCount}
+                            SetPageCount={props.SetPageCount}
+                            totalCount={props.totalCount}
+                            numberOfPage={props.numberOfPage}
+                            onOnePage={props.onOnePage}
+                            onPageChange={props.onPageChange}
+                            infoData={props.infoData} />}
+                </div>}
         </div>
     );
 

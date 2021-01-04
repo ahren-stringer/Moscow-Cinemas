@@ -87,6 +87,7 @@ a.active{
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    z-index: 9;
 }
 .menu-btn{
 	/* width: 32px;
@@ -98,9 +99,10 @@ a.active{
 	left: -40px;
 	top: 10px;
 }
-@media (max-width: 960px){
+@media (max-width: 650px){
 .menu-btn {
     display: inline-block;
+    color:#2980b9;
 }
 .menu-active {
     right: 0;

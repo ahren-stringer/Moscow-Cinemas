@@ -7,6 +7,8 @@ const SET_LIKED = 'navReuser/SET-LIKED';
 const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
 const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
 const SET_POPULAR = "navReuser/SET_POPULAR"
+const SET_CATEGORY_COUNT='infoReuser/SET_CATEGORY_COUNT'
+
 
 let init = {
     navData: [],
@@ -18,13 +20,19 @@ let init = {
     onOnePage: 6,
     request: true,
     typeTitle: '',
-    popular: null
+    popular: null,
+    categoryCount:0,
 };
 
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-        return { ...state, navData: action.prevNanData.concat(action.navData)}
+            // let arr=[action.navData[0]];
+            // for (let i=0;i<9;i++){
+            //     arr.push(action.navData[1])
+            // }
+            // return { ...state, navData: arr}
+            return { ...state, navData: action.prevNanData.concat(action.navData) }
         case SET_NAMES:
             return { ...state, names: action.names }
         case SET_NEW_TEXT:
@@ -39,6 +47,9 @@ const navReduser = (state = init, action) => {
             return { ...state, typeTitle: action.typeTitle }
         case SET_POPULAR:
             return { ...state, popular: action.popular }
+        case SET_CATEGORY_COUNT: {
+            return { ...state, categoryCount: action.categoryCount }
+        }
         default:
             return state
     }
@@ -53,5 +64,6 @@ export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 export const Setliked = (liked) => ({ type: SET_LIKED, liked })
 export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
 export const SetPopular = (popular) => ({ type: SET_POPULAR, popular })
+export const setCategoryCount = (categoryCount) => ({ type: SET_CATEGORY_COUNT, categoryCount })
 
 export default navReduser

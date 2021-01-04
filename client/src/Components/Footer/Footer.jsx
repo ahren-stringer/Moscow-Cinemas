@@ -75,15 +75,17 @@ const Footer = (props) => {
 
     return (
         <footer className="page-footer" style={{'background-color': "#2980b9"}}>
-            <div className="container">
-                <div className="row">
-                    <div className="col l6 s12">
+            <div className="__container">
+                {/* <div className="row">
+                    <div className="col l6 s12"> */}
+                    <div style={{maxWidth:'400px'}}>
                     <h5 className="white-text">Обратная связь</h5>
                         <MailForm onSubmit={submit}/>
 
                     </div>
-                </div>
-            </div>
+                    </div>
+                {/* </div>
+            </div> */}
             <div className="footer-copyright">
                
             

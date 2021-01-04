@@ -11,9 +11,9 @@
 .Info{
     max-width: 857px;
 }
-/* .liked__nothing{
-    min-height: 65vh;
-} */
+.favorite__title{
+    text-align: center;
+}
 .liked__nothing-title{
     text-align: center;
 }

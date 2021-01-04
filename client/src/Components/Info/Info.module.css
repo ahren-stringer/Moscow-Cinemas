@@ -9,6 +9,13 @@
 .description__place{
     font-size: 39px;
     color: white;
+    min-height: 200px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    border-radius: 4px;
+    margin: 20px 0 10px
 }
 .description__item{
     margin-bottom: 2px;
@@ -86,4 +93,20 @@
 .pagination{
     width: auto;
     margin: 0;
+}
+.no_coments{
+    margin-bottom: 50px;
+}
+@media (max-width: 1000px){
+    .description__wrapper{
+        flex-direction: column;
+    }
+    .description__info{
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 530px){
+    .description__liked{
+        margin: 14px auto 20px;
+    }
 }

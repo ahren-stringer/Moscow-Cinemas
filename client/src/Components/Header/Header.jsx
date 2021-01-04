@@ -38,13 +38,13 @@ class Header extends React.Component {
         <div className='__container'>
           {/* <div className='header__inner'> */}
           <div className='header__wrapper'>
-            {this.state.menuBtn || <NavLink to='/' className='logo' activeClassName='active'>
-              <div>
-                <span className='logo__title'>
+             <NavLink to='/' className='logo' activeClassName='active'>
+              
+                <span className='logo__title' style={this.state.menuBtn ? {color:'#2980b9'}:{}}>
                   MosCulture
                 </span>
-              </div>
-            </NavLink>}
+              
+            </NavLink>
             <div className='menu__wrapper'>
               <a className="menu-btn">
                 {
@@ -87,10 +87,10 @@ class Header extends React.Component {
                     {!this.state.menuBtn || <span class="new badge">
                       {this.props.counter}
                     </span>}
-                    {this.state.menuBtn ? <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
+                    {this.state.menuBtn ? <NavLink to='/liked'>
                       Избранное
                     </NavLink>
-                      : <NavLink to={'/liked' + (!this.state.favorteArr[0] ? '' : ('/' + this.state.favorteArr[0][0]))}>
+                      : <NavLink to='/liked'>
                         <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                       </NavLink>}
                     {this.state.menuBtn ||

@@ -31,20 +31,13 @@ const Description = (props) => {
     props.setCounter(counter)
     console.log(localStorage)
   }
-
+  debugger
   return (
     <div className={s.description}>
 
-      <div className={s.description__place} style={{
-        'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')',
-        'minHeight': '200px',
-        'width': '100%',
-        'backgroundSize': 'cover',
-        'backgroundPosition': 'center center',
-        'position': 'relative',
-        'borderRadius': '4px',
-        'margin': '20px 0 10px'
-      }}>
+      <div className={s.description__place}
+        style={{ 'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')' }}
+      >
         {props.infoData[0].name}
       </div>
       <div className={s.description__wrapper}>
@@ -64,27 +57,24 @@ const Description = (props) => {
             </div>)}
           </div>
           <div className={s.description__item}>
-          <span className={s.description__item_title}>Количество залов:</span> {props.infoData[0].numberOfHalls}
+            <span className={s.description__item_title}>Количество залов:</span> {props.infoData[0].numberOfHalls}
           </div>
           <div className={s.description__item}>
-          <span className={s.description__item_title}>Сайт:</span> <a href={'http://www.' + props.infoData[0].webSite}>{props.infoData[0].webSite}</a>
+            <span className={s.description__item_title}>Сайт:</span> <a href={'http://www.' + props.infoData[0].webSite}>{props.infoData[0].webSite}</a>
           </div>
         </div>
 
         <div className={s.photos__galery}>
-          {props.infoData[0].photos.photosSlider ? props.infoData[0].photos.photosSlider.map(item => {
+          {(props.infoData[0].photos.photosSlider && props.infoData[0].photos.photosSlider[0] != '') ? props.infoData[0].photos.photosSlider.map(item => {
             images.push(
               {
                 original: item,
                 thumbnail: item,
 
-              },
-            )
-            // return <img src={item}></img>
+              })
           })
-            : <div>
-              <h3>Фотокарточки</h3>
-            </div>}
+            : null
+          }
 
           <ImageGallery items={images} showNav={false} showFullscreenButton={false} showPlayButton={false} />
         </div>

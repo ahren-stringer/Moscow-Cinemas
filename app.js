@@ -83,30 +83,6 @@ app.get('/cinema/coments_count/:place', async (req, res) => {
     }
 })
 
-//Фотки
-
-app.post('/cinema/photos', (req, res) => {
-    const dbPhotos = req.body
-
-    Photos.create(dbPhotos, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(201).send(data)
-        }
-    })
-})
-
-app.get('/cinema/photos', (req, res) => {
-    Photos.find((err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(200).send(data)
-        }
-    })
-})
-
 // Авторизация
 
 const transporter = nodemailer.createTransport({
@@ -330,6 +306,14 @@ app.get('/place_category/places/some/:placeCategory/:limit/:skip', async (req, r
         const places = await Place.find({categoryUrl:req.params.placeCategory}).limit(+req.params.limit).skip(+req.params.skip)
         console.log(req.params.limit,req.params.skip)
         res.json(places)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+app.get('/place_category/places/category_count/:category', async (req, res) => {
+    try {
+        const place = await Place.find({categoryUrl: req.params.category})
+        res.json(place.length)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }

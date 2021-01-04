@@ -1,10 +1,9 @@
 .title{
     margin: 0 auto;
     text-align: center;
-    background-color: #000;
 }
 .title__slide-wrapper{
-    position: relative
+    position: relative;
 }
 .title__slide-1,
 .title__slide-2,
@@ -16,10 +15,9 @@
     background-position: center center;
     color: white;
     position: relative;
-    opacity: .9;
 }
 .title__slide-1{
-    background-image: url(https://versiya.info/uploads/posts/2020-01/1580486225_90495-temple-saint_petersburg-hotel-town_square-tourist_attraction-2048x1152.jpg); 
+    background-image: url(../../img/title-1.jpg); 
 }
 .title__slide-2{
     background-image: url(https://b1.m24.ru/c/1114597.jpg); 
@@ -34,7 +32,6 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
-    z-index: 1;
 }
 .place__type-wrapper{
     margin: 50px auto;
@@ -57,9 +54,13 @@
     bottom: 26px;
     left: 22px;
 }
-.slider__wrapper{
+.slider__wrapper-big{
     width: 93%;
     margin: 0 auto 50px;
+}
+.slider__wrapper-small{
+    display: none;
+    margin: 0 auto 50px
 }
 .place{
     border-radius: 3px;
@@ -69,6 +70,13 @@
 .place__wrapper{
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin: 0 10px;
+    padding-bottom: 2px;
+}
+.place__img{
+    min-height: 185px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
 }
 .place__name{
     margin: 5px;
@@ -77,4 +85,54 @@
 }
 .place__liked{
     margin: 5px;
+    font-size: 16px;
+}
+.place__liked-small{
+    display: none;
+}
+.place__liked-text{
+    margin-right: 5px;
+}
+
+@media (max-width: 1200px){
+    .place__img{
+      min-height: 150px;
+    }
+  }
+  @media (max-width: 992px){
+    .pagination{
+      width: inherit;
+    }
+  }
+  @media (max-width: 820px){
+    .place__name{
+      font-size: 16px;
+    }
+    .place__liked{
+        font-size: 15px;
+    }
+  }
+@media (max-width: 760px){
+    .place__liked-big{
+        display: none;
+    }
+    .place__liked-small{
+        display: block;
+    }
+}
+@media (max-width: 720px){
+    .place__name{
+        font-size: 14px;
+      }
+      .place__img{
+        min-height: 120px;
+      }
+}
+@media (max-width: 720px){
+    .slider__wrapper-big{
+        display: none;
+    }
+    .slider__wrapper-small{
+        display: block;
+    }
 }

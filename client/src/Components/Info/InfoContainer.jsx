@@ -15,6 +15,7 @@ class InfoContainer extends React.Component {
     }
     componentDidMount() {
         let id = this.props.match.params.id;
+        debugger
         if (id) {
             axios.get(`http://localhost:8001/place_category/places/${id}`)
                 .then(response => {
@@ -55,23 +56,23 @@ class InfoContainer extends React.Component {
                         infoFlag: false
                     })
                     // Коменты
-                    // axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
-                    //     headers: {
-                    //         "Authorization": ('Bearer ' + this.props.token)
-                    //     }
-                    // })
-                    //     .then(req => {
-                    //         this.props.setComents(req.data)
-                    //         debugger
-                    //     });
-                    // Количество коментов
-                    // axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
-                    //     headers: {
-                    //         "Authorization": ('Bearer ' + this.props.token)
-                    //     }
-                    // }).then(count => {
-                    //     this.props.SetTotalCount(count.data)
-                    // });
+                    axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
+                        headers: {
+                            "Authorization": ('Bearer ' + this.props.token)
+                        }
+                    })
+                        .then(req => {
+                            this.props.setComents(req.data)
+                            debugger
+                        });
+                    //Количество коментов
+                    axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
+                        headers: {
+                            "Authorization": ('Bearer ' + this.props.token)
+                        }
+                    }).then(count => {
+                        this.props.SetTotalCount(count.data)
+                    });
                 })
         }
     }

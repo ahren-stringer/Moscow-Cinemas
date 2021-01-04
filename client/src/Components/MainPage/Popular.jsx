@@ -11,193 +11,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { SetPopular } from '../../redux/navReduser';
 import { connect } from 'react-redux';
+import { Setliked } from '../../redux/navReduser';
+import { setCounter } from '../../redux/headerReduser';
 
 function Popular(props) {
 
-    var settings = {
+    let settings1 = {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
         dots: true
     };
+    let settings2 = {
+        speed: 500,
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        dots: true,
+        arrows: false,
+    };
 
     let [ls, setLs] = useState(props.liked);
-    let [popular, setPopular] = useState([
-        {
-            popular: 10,
-            phones: ["(499) 125-04-48", "(499) 125-01-35"],
-            coordinates: [37.571298748323, 55.682806921335],
-            name: "Государственный музей имени Пушкина",
-            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
-            email: "salut-cinema@mail.ru",
-            workHours:
-                [{
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-                {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-            ],
-            numberOfHalls: 2,
-            webSite: "salut-cinema.ru",
-            photos: {
-                photoLarge: "https://www.mobrep.ru/b/c/28427.jpg",
-                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
-                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
-                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
-            },
-            placeCategory: "Кинотеатры",
-            categoryUrl: "cinemas"
-        },
-        {
-            popular: 9,
-            phones: ["(499) 125-04-48", "(499) 125-01-35"],
-            coordinates: [37.571298748323, 55.682806921335],
-            name: "Государственный музей имени Пушкина",
-            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
-            email: "salut-cinema@mail.ru",
-            workHours:
-                [{
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-                {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-            ],
-            numberOfHalls: 2,
-            webSite: "salut-cinema.ru",
-            photos: {
-                photoLarge: "https://pushkinmuseum.art/museum/22_img_pc.jpg",
-                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
-                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
-                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
-            },
-            placeCategory: "Кинотеатры",
-            categoryUrl: "cinemas"
-        },
-        {
-            popular: 8,
-            phones: ["(499) 125-04-48", "(499) 125-01-35"],
-            coordinates: [37.571298748323, 55.682806921335],
-            name: "Государственный музей имени Пушкина",
-            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
-            email: "salut-cinema@mail.ru",
-            workHours:
-                [{
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-                {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-            ],
-            numberOfHalls: 2,
-            webSite: "salut-cinema.ru",
-            photos: {
-                photoLarge: "https://www.mobrep.ru/b/c/28427.jpg",
-                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
-                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
-                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
-            },
-            placeCategory: "Кинотеатры",
-            categoryUrl: "cinemas"
-        },
-        {
-            popular: 7,
-            phones: ["(499) 125-04-48", "(499) 125-01-35"],
-            coordinates: [37.571298748323, 55.682806921335],
-            name: "Государственный музей имени Пушкина",
-            address: "г. Москва, улица Нелидовская, д. 10, стр. 1",
-            email: "salut-cinema@mail.ru",
-            workHours:
-                [{
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-                {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                }, {
-                    DayWeek: "понедельник",
-                    WorkHours: "10:00-23:00"
-                },
-            ],
-            numberOfHalls: 2,
-            webSite: "salut-cinema.ru",
-            photos: {
-                photoLarge: "https://pushkinmuseum.art/museum/22_img_pc.jpg",
-                photosSlider: ["https://b1.m24.ru/c/1321540.580xp.jpg",
-                    "https://www.mos.ru/upload/newsfeed/newsfeed/salut-sl2.jpg",
-                    "https://www.osd.ru/photos/txt/3153_txt_0081.jpg"]
-            },
-            placeCategory: "Кинотеатры",
-            categoryUrl: "cinemas"
-        },
-    ]
-        //props.popular
-        )
+    let [popular, setPopular] = useState(props.popular)
 
     useEffect(() => {
         setLs(props.liked)
@@ -219,74 +53,122 @@ function Popular(props) {
         props.setCounter(counter)
         console.log(localStorage)
     }
-    // useEffect(
-    //     () => {
-    //         async function fetchData() {
-    //             const req = await axios.get('http://localhost:8001/popular');
-    //             props.SetPopular(req.data)
-    //             console.log(req.data)
-    //         }
-    //         fetchData()
-    //     }
-    //     , [])
-    // useEffect(() => {
-    //     setPopular(props.popular)
-    // }, [props.popular])
+    useEffect(
+        () => {
+            async function fetchData() {
+                const req = await axios.get('http://localhost:8001/popular');
+                props.SetPopular(req.data)
+                console.log(req.data)
+            }
+            fetchData()
+        }
+        , [])
+    useEffect(() => {
+        setPopular(props.popular)
+    }, [props.popular])
 
     return (
         <div>
-            {popular? 
-            <div>
-            <div>
-                <h3>Популярные места</h3>
-            </div>
-            <div className='slider__wrapper'>
-                <Slider {...settings}>
-                    {
-                        //props.popular
-                        popular.map((item, index, array) => {
+            {popular ?
+                <div>
+                    <div>
+                        <h3>Популярные места</h3>
+                    </div>
+                    <div className='slider__wrapper-big'>
+                        <Slider {...settings1}>
+                            {
+                                //props.popular
+                                popular.map((item, index, array) => {
 
-                            return <div className='place'>
-                                <div className='place__wrapper'>
-                                    <NavLink to={`/cinemas/${item.name}`}>
-                                        <div style={{
-                                            'backgroundImage': 'url(' + item.photos.photoLarge + ')',
-                                            'minHeight': '185px',
-                                            'width': '100%',
-                                            'backgroundSize': 'cover',
-                                            'backgroundPosition': 'center center',
-                                        }}>
+                                    return <div className='place'>
+                                        <div className='place__wrapper'>
+                                            <NavLink to={`/cinemas/${item.name}`}>
+                                                <div className='place__img'
+                                                    style={{ 'backgroundImage': 'url(' + item.photos.photoLarge + ')' }}>
+                                                </div>
+                                                <div className='place__name'>
+                                                    {item.name}
+                                                </div>
+                                            </NavLink>
+                                            <div className='place__liked'
+                                                onClick={() => {
+                                                    Liked(item.name, item.categoryUrl)
+                                                }}>
+                                                <div className='place__liked-big'>
+                                                    <span className='place__liked-text'>
+                                                        Добавить в избранное
+                                                    </span>
+                                                    {
+                                                        !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                                                    }
+                                                </div>
+                                                <div className='place__liked-small'>
+                                                    {
+                                                        ls[item.name] ? <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                                                        :<FontAwesomeIcon icon={faHeart} />
+                                                    }
+                                                </div>
+
+                                            </div>
                                         </div>
-                                        <div className='place__name'>
-                                            {item.name}
-                                        </div>
-                                    </NavLink>
-                                    <div className='place__liked'
-                                        onClick={() => {
-                                            Liked(item.name, item.categoryUrl)
-                                        }}>
-                                        Добавить в избранное {
-                                            !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                                        }
                                     </div>
-                                </div>
-                            </div>
-                        })
-                    }
-                </Slider>
-            </div>
-            </div>
-        : <Preloader/>    
-        }
+                                })
+                            }
+                        </Slider>
+                    </div>
+                    <div className='slider__wrapper-small'>
+                        <Slider {...settings2}>
+                            {
+                                props.popular.map((item, index, array) => {
+
+                                    return <div className='place'>
+                                        <div className='place__wrapper'>
+                                            <NavLink to={`/cinemas/${item.name}`}>
+                                                <div className='place__img'
+                                                    style={{ 'backgroundImage': 'url(' + item.photos.photoLarge + ')' }}>
+                                                </div>
+                                                <div className='place__name'>
+                                                    {item.name}
+                                                </div>
+                                            </NavLink>
+                                            <div className='place__liked'
+                                                onClick={() => {
+                                                    Liked(item.name, item.categoryUrl)
+                                                }}>
+                                                <div className='place__liked-big'>
+                                                    <span className='place__liked-text'>
+                                                        Добавить в избранное
+                                                    </span>
+                                                    {
+                                                        !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                                                    }
+                                                </div>
+                                                <div className='place__liked-small'>
+                                                    {
+                                                        ls[item.name] ? <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                                                        :<FontAwesomeIcon icon={faHeart} />
+                                                    }
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </Slider>
+                    </div>
+                </div>
+                : <Preloader />
+            }
         </div>
     );
 }
 
 let mapStateToProps = (state) => {
     return {
-        popular:state.navData.popular,
+        popular: state.navData.popular,
         liked: state.navData.liked,
     }
 }
 
-export default connect(mapStateToProps, {SetPopular})(Popular)
+export default connect(mapStateToProps, { SetPopular, setCounter, Setliked })(Popular)
