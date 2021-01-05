@@ -28,6 +28,7 @@ function Popular(props) {
         slidesToScroll: 2,
         dots: true,
         arrows: false,
+        adaptiveHeight:true
     };
 
     let [ls, setLs] = useState(props.liked);

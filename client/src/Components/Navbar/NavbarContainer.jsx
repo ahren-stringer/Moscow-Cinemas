@@ -22,7 +22,7 @@ class NavbarContainer extends React.Component {
             })
     }
     onPageChange = (numberOfPage, type, prevNavData) => {
-        axios.get(`http://localhost:8001/place_category/places/some/${type}/${this.props.onOnePage}/${numberOfPage - 6}`)
+        axios.get(`http://localhost:8001/place_category/places/some/${type}/${this.props.onOnePage}/${numberOfPage - this.props.onOnePage}`)
             .then(response => {
                 debugger
                 this.props.setNavData(response.data, prevNavData)

@@ -13,7 +13,7 @@ const placeSchema=mongoose.Schema({
     photos: Object,
     placeCategory: String,
     categoryUrl: String,
-    popular:Number,
+    popular:{type:Number, default: 0},
     owner: [{type: mongoose.Types.ObjectId, ref: 'placeCategory'}]
 });
 

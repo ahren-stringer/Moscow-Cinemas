@@ -17,7 +17,7 @@ let init = {
     liked: { ...localStorage },
     totalCount: 1,
     numberOfPage: 2,
-    onOnePage: 6,
+    onOnePage: 12,
     request: true,
     typeTitle: '',
     popular: null,

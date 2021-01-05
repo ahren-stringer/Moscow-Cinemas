@@ -142,7 +142,12 @@ const Coments = (props) => {
                                         })
                                     } </div>
                                     <div className={s.coment__coment}>{item.coment} </div>
-                                    <div className={s.coment__date}>{item.date} </div>
+                                    <div className={s.coment__date}>{item.date
+                                    .replace( /-/g, "." )
+                                    .match(/[\d\.]+/)
+                                    .join('')
+                                    //.replace( /(\d+)(\d+)(\d+)/, '$1', '$3' )
+                                    } </div>
                                 </div>
                             </li>
                         })}

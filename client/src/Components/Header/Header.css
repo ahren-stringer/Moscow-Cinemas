@@ -102,7 +102,7 @@ a.active{
 @media (max-width: 650px){
 .menu-btn {
     display: inline-block;
-    color:#2980b9;
+    color:#fff;
 }
 .menu-active {
     right: 0;
