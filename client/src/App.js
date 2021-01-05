@@ -14,9 +14,10 @@ import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
 import { setToken, setUserId, setLogin, setLoaded } from './redux/authReduser'
 import MainPage from './Components/MainPage/MainPage';
+import PopularPage from './Components/Popular/PopularPage';
 
 function App(props) {
-  
+
   const login = useCallback((jwtToken, id) => {
     props.setToken(jwtToken)
     props.setUserId(id)
@@ -53,14 +54,18 @@ function App(props) {
         <Header />
       </div>
       <Route exact path="/" render={() => <MainPage />} />
-      <div className='__container'>
-      <Route exact path="/category/:type" render={() => <Navbar />} />
-      <Route path='/cinemas/:id' render={() => <Info />} />
-      <Route path='/search/:riched' render={() => <Search />} />
-      <Route path='/liked/:id?' render={() => <Liked />} />
-      <Route path='/auth' render={() => <Auth />} />
-      <Route path='/register' render={() => <Register />} />
+      <div className='main'>
+        <div className='__container'>
+          <Route exact path="/category/:type" render={() => <Navbar />} />
+          <Route path='/cinemas/:id' render={() => <Info />} />
+          <Route path='/search/:riched' render={() => <Search />} />
+          <Route path='/liked/:id?' render={() => <Liked />} />
+          <Route path='/auth' render={() => <Auth />} />
+          <Route path='/register' render={() => <Register />} />
+          <Route path='/popular' render={() => <PopularPage />} />
+        </div>
       </div>
+
       <Footer />
     </div>
   );

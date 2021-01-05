@@ -8,7 +8,7 @@ const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
 const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
 const SET_POPULAR = "navReuser/SET_POPULAR"
 const SET_CATEGORY_COUNT='infoReuser/SET_CATEGORY_COUNT'
-
+const SET_COUNTER = 'infoReuser/SET-COUNTER';
 
 let init = {
     navData: [],
@@ -22,16 +22,12 @@ let init = {
     typeTitle: '',
     popular: null,
     categoryCount:0,
+    count: localStorage.getItem("count"),
 };
 
 const navReduser = (state = init, action) => {
     switch (action.type) {
         case SET_NAV_DATA:
-            // let arr=[action.navData[0]];
-            // for (let i=0;i<9;i++){
-            //     arr.push(action.navData[1])
-            // }
-            // return { ...state, navData: arr}
             return { ...state, navData: action.prevNanData.concat(action.navData) }
         case SET_NAMES:
             return { ...state, names: action.names }
@@ -50,6 +46,8 @@ const navReduser = (state = init, action) => {
         case SET_CATEGORY_COUNT: {
             return { ...state, categoryCount: action.categoryCount }
         }
+        case SET_COUNTER:
+            return { ...state, count: action.count }
         default:
             return state
     }
@@ -65,5 +63,23 @@ export const Setliked = (liked) => ({ type: SET_LIKED, liked })
 export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
 export const SetPopular = (popular) => ({ type: SET_POPULAR, popular })
 export const setCategoryCount = (categoryCount) => ({ type: SET_CATEGORY_COUNT, categoryCount })
+export const setCounter = (count) => ({ type: SET_COUNTER, count });
+
+export const likedThunk=(name, item)=>
+    async (dispatch)=>{
+        let counter = +localStorage.getItem('count');
+        if (localStorage.getItem(name)) {
+            localStorage.removeItem(name)
+            counter = counter - 1
+            localStorage.setItem('count', counter)
+            dispatch(Setliked({ ...localStorage }))
+        } else {
+            localStorage.setItem(name, JSON.stringify(item))
+            counter = counter + 1
+            localStorage.setItem('count', counter)
+            dispatch(Setliked({ ...localStorage }))
+        }
+        dispatch(setCounter(counter))
+  }
 
 export default navReduser

@@ -1,7 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
 import * as axios from 'axios';
-import { setNavData, setNames, SetTotalCount, SetPageCount, concatNavData, Setliked, SetTypeTitle, setCategoryCount } from '../../redux/navReduser';
+import { setNavData, setNames, SetTotalCount, SetPageCount, concatNavData, Setliked, SetTypeTitle, setCategoryCount,
+    likedThunk } from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -17,14 +18,12 @@ class NavbarContainer extends React.Component {
             })
         axios.get(`http://localhost:8001/place_category/places/category_count/${type}`)
             .then(res => {
-                debugger
                 this.props.setCategoryCount(res.data)
             })
     }
     onPageChange = (numberOfPage, type, prevNavData) => {
         axios.get(`http://localhost:8001/place_category/places/some/${type}/${this.props.onOnePage}/${numberOfPage - this.props.onOnePage}`)
             .then(response => {
-                debugger
                 this.props.setNavData(response.data, prevNavData)
             })
     };
@@ -59,5 +58,6 @@ export default connect(
         concatNavData,
         Setliked,
         SetTypeTitle,
-        setCategoryCount
+        setCategoryCount,
+        likedThunk
     })(withRouter(NavbarContainer));

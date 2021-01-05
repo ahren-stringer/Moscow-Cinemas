@@ -47,6 +47,15 @@
     background-position: center center;
     position: relative;
 }
+.plase__type-img{
+    max-width: 1720px;
+    min-height: 310px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    border-radius: 4px
+}
 .plase__type-title{
     position: absolute;
     color: white;

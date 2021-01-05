@@ -36,7 +36,6 @@ class Header extends React.Component {
     return (
       <div className='header'>
         <div className='__container'>
-          {/* <div className='header__inner'> */}
           <div className='header__wrapper'>
              <NavLink to='/' className='logo' activeClassName='active'>
               
@@ -107,7 +106,6 @@ class Header extends React.Component {
               </div>
             </div>
           </div>
-          {/* </div> */}
         </div>
       </div>
     );
@@ -116,7 +114,7 @@ class Header extends React.Component {
 
 let mapStateToPros = (state) => {
   return {
-    counter: state.header.count,
+    counter: state.navData.count,
     newSearchText: state.navData.newSearchText,
     navData: state.navData.navData,
     names: state.navData.names,

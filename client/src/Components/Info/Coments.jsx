@@ -28,34 +28,6 @@ const Coments = (props) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         debugger
-    //         const req = await axios.get(`http://localhost:8001/cinema/coments/some/${props.infoData[0].name}/${props.onOnePage}/0`, {
-    //             headers: {
-    //                 "Authorization": ('Bearer ' + props.token)
-    //             }
-    //         });
-    //         const count = await axios.get(`http://localhost:8001/cinema/coments_count/${props.infoData[0].name}`, {
-    //             headers: {
-    //                 "Authorization": ('Bearer ' + props.token)
-    //             }
-    //         });
-    //         setComents(req.data)
-    //         props.SetTotalCount(count.data)
-    //     }
-    //     fetchData()
-    // }, [])
-
-    // let onPageChange = (page) => {
-    //     debugger
-    //     axios.get(`http://localhost:8001/cinema/coments/some/${props.infoData[0].name}/${props.onOnePage}/${page*props.onOnePage}`)
-    //         .then(req => {
-    //             debugger
-    //             setComents(req.data)
-    //         })
-    // };
-
     const sendComent = async () => {
         await axios.post('http://localhost:8001/coment', { ...form }, {
             headers: {
@@ -91,7 +63,7 @@ const Coments = (props) => {
         }
         setForm({ ...form, size: item })
     }
-    debugger
+    
     return (
         <div>
             <div className={s.coment__form}>

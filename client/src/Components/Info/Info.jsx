@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Info.module.css'
 import Description from './Description';
 import InfoMap from './InfoMap';
 import Coments from './Coments';
@@ -11,7 +10,8 @@ const Info = (props) => {
       <Description infoData={props.infoData}
       liked={props.liked}
       Setliked={props.Setliked}
-      setCounter={props.setCounter}/>
+      setCounter={props.setCounter}
+      likedThunk={props.likedThunk}/>
       <InfoMap infoData={props.infoData} />
       {!props.coments? <Preloader/>
       :

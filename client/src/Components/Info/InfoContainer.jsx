@@ -2,7 +2,7 @@ import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
 import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount } from '../../redux/infoReduser';
-import { Setliked } from '../../redux/navReduser';
+import { Setliked,likedThunk} from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -15,7 +15,6 @@ class InfoContainer extends React.Component {
     }
     componentDidMount() {
         let id = this.props.match.params.id;
-        debugger
         if (id) {
             axios.get(`http://localhost:8001/place_category/places/${id}`)
                 .then(response => {
@@ -63,7 +62,6 @@ class InfoContainer extends React.Component {
                     })
                         .then(req => {
                             this.props.setComents(req.data)
-                            debugger
                         });
                     //Количество коментов
                     axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
@@ -77,14 +75,12 @@ class InfoContainer extends React.Component {
         }
     }
     onPageChange = (name,onOnePage,page) => {
-        debugger
         axios.get(`http://localhost:8001/cinema/coments/some/${name}/${onOnePage}/${page*onOnePage}`)
             .then(req => {
                 this.props.setComents(req.data)
             })
     };
     render() {
-        //if (this.props.match.url == '/liked' && !this.props.infoData) return <div>Вам, пока что, ничего не нравится :)</div>
         if (!this.props.infoData || this.state.infoFlag) return <Preloader />
         return <Info {...this.props} id={this.props.match.params.id}
         onPageChange={this.onPageChange}
@@ -108,5 +104,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, setCounter, Setliked, SetTotalCount, SetPageCount })
+    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, setCounter, Setliked, SetTotalCount, SetPageCount,likedThunk })
 )(InfoContainer)

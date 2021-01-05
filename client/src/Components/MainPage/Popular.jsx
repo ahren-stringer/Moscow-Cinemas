@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,10 +9,11 @@ import './MainPage.css'
 import s from '../Navbar/Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { SetPopular } from '../../redux/navReduser';
+import { SetPopular,likedThunk} from '../../redux/navReduser';
 import { connect } from 'react-redux';
 import { Setliked } from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
+import SingleCard from '../Navbar/SingleCard';
 
 function Popular(props) {
 
@@ -28,7 +29,7 @@ function Popular(props) {
         slidesToScroll: 2,
         dots: true,
         arrows: false,
-        adaptiveHeight:true
+        adaptiveHeight: true
     };
 
     let [ls, setLs] = useState(props.liked);
@@ -38,26 +39,10 @@ function Popular(props) {
         setLs(props.liked)
     }, [props.liked])
 
-    const Liked = (name, categoryUrl) => {
-        let counter = +localStorage.getItem('count');
-        if (localStorage.getItem(name)) {
-            localStorage.removeItem(name)
-            counter = counter - 1
-            localStorage.setItem('count', counter)
-            props.Setliked({ ...localStorage })
-        } else {
-            localStorage.setItem(name, categoryUrl)
-            counter = counter + 1
-            localStorage.setItem('count', counter)
-            props.Setliked({ ...localStorage })
-        }
-        props.setCounter(counter)
-        console.log(localStorage)
-    }
     useEffect(
         () => {
             async function fetchData() {
-                const req = await axios.get('http://localhost:8001/popular');
+                const req = await axios.get('http://localhost:8001/popular/some');
                 props.SetPopular(req.data)
                 console.log(req.data)
             }
@@ -73,46 +58,20 @@ function Popular(props) {
             {popular ?
                 <div>
                     <div>
-                        <h3>Популярные места</h3>
+                        <NavLink to='/popular'>
+                            <h3>Популярные места</h3>
+                        </NavLink>
                     </div>
                     <div className='slider__wrapper-big'>
                         <Slider {...settings1}>
                             {
-                                //props.popular
                                 popular.map((item, index, array) => {
-
-                                    return <div className='place'>
-                                        <div className='place__wrapper'>
-                                            <NavLink to={`/cinemas/${item.name}`}>
-                                                <div className='place__img'
-                                                    style={{ 'backgroundImage': 'url(' + item.photos.photoLarge + ')' }}>
-                                                </div>
-                                                <div className='place__name'>
-                                                    {item.name}
-                                                </div>
-                                            </NavLink>
-                                            <div className='place__liked'
-                                                onClick={() => {
-                                                    Liked(item.name, item.categoryUrl)
-                                                }}>
-                                                <div className='place__liked-big'>
-                                                    <span className='place__liked-text'>
-                                                        Добавить в избранное
-                                                    </span>
-                                                    {
-                                                        !!ls[item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                                                    }
-                                                </div>
-                                                <div className='place__liked-small'>
-                                                    {
-                                                        ls[item.name] ? <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                                                        :<FontAwesomeIcon icon={faHeart} />
-                                                    }
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
+                                    return <SingleCard item={item}
+                                        ls={ls}
+                                        Setliked={props.Setliked}
+                                        setCounter={props.setCounter}
+                                        match={props.match} 
+                                        likedThunk={props.likedThunk}/>
                                 })
                             }
                         </Slider>
@@ -134,7 +93,7 @@ function Popular(props) {
                                             </NavLink>
                                             <div className='place__liked'
                                                 onClick={() => {
-                                                    Liked(item.name, item.categoryUrl)
+                                                    props.likedThunk(item.name, item.categoryUrl)
                                                 }}>
                                                 <div className='place__liked-big'>
                                                     <span className='place__liked-text'>
@@ -147,7 +106,7 @@ function Popular(props) {
                                                 <div className='place__liked-small'>
                                                     {
                                                         ls[item.name] ? <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
-                                                        :<FontAwesomeIcon icon={faHeart} />
+                                                            : <FontAwesomeIcon icon={faHeart} />
                                                     }
                                                 </div>
 
@@ -172,4 +131,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { SetPopular, setCounter, Setliked })(Popular)
+export default connect(mapStateToProps, { SetPopular, setCounter, Setliked,likedThunk })(withRouter(Popular))

@@ -304,7 +304,6 @@ app.get('/place_category/places/category/:placeCategory', async (req, res) => {
 app.get('/place_category/places/some/:placeCategory/:limit/:skip', async (req, res) => {
     try {
         const places = await Place.find({categoryUrl:req.params.placeCategory}).limit(+req.params.limit).skip(+req.params.skip)
-        console.log(req.params.limit,req.params.skip)
         res.json(places)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
@@ -340,8 +339,7 @@ app.put('/place_category/places/:id', async (req, res) => {
     }
 })
 app.get('/popular', async (req, res) => {
-    try {
-        
+    try {      
         let places= await Place.find().exec()
         let arr=[]
         for (let i=0;i<places.length;i++){
@@ -351,6 +349,21 @@ app.get('/popular', async (req, res) => {
         }
         arr.sort((a, b) => b.popular - a.popular)
         res.json(arr)
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+    }
+})
+app.get('/popular/some', async (req, res) => {
+    try {
+        let places= await Place.find().exec()
+        let arr=[]
+        for (let i=0;i<places.length;i++){
+            if ('popular' in places[i] && places[i].popular){
+                arr.push(places[i])
+            }
+        }
+        arr.sort((a, b) => b.popular - a.popular)
+        res.json(arr.slice(0,6))
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }

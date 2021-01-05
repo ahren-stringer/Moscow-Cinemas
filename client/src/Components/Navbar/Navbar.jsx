@@ -18,7 +18,8 @@ function Navbar(props) {
         navData={props.navData}
         Setliked={props.Setliked}
         setCounter={props.setCounter}
-        match={props.match}/>
+        match={props.match}
+        likedThunk={props.likedThunk}/>
       {props.categoryCount === props.navData.length ? null :
         <div onClick={onPageChange} className={s.pagination}>
           <h4>Загрузить еще</h4>

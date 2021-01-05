@@ -15,31 +15,8 @@ const Description = (props) => {
     setLs(props.liked)
   }, [props.liked])
 
-  const Liked = (name, index) => {
-    let counter = +localStorage.getItem('count');
-    if (localStorage.getItem(name)) {
-      localStorage.removeItem(name)
-      counter = counter - 1
-      localStorage.setItem('count', counter)
-      props.Setliked({ ...localStorage })
-    } else {
-      localStorage.setItem(name, index)
-      counter = counter + 1
-      localStorage.setItem('count', counter)
-      props.Setliked({ ...localStorage })
-    }
-    props.setCounter(counter)
-    console.log(localStorage)
-  }
-  debugger
   return (
     <div className={s.description}>
-
-      {/* <div className={s.description__place}
-        style={{ 'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')' }}
-      >
-        {props.infoData[0].name}
-      </div> */}
       <div className={s.description__place} style={(props.infoData[0].photos.photoLarge && props.infoData[0].photos.photoLarge != '') ?
         { 'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')' }
         : { 'backgroundImage': 'url(https://avatars.mds.yandex.net/get-zen_doc/964926/pub_5e95cfdebe5bae634e20a1e3_5e95dac81fba7924e8001525/scale_1200)' }}>
@@ -88,7 +65,7 @@ const Description = (props) => {
 
       <div
         className={s.description__liked}
-        onClick={() => { Liked(props.infoData[0].name, props.infoData[0].name) }}>
+        onClick={() => { props.likedThunk(props.infoData[0].name, props.infoData[0].name) }}>
         <span style={{ marginRight: '10px' }}>Добавить в избранное</span>
         {
           !!ls[props.infoData[0].name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />

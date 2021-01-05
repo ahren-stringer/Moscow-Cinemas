@@ -4,23 +4,10 @@ import { NavLink } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import './MainPage.css'
 import Popular from './Popular';
-import { connect } from 'react-redux';
 
 function MainPage(props) {
-//alert(document.documentElement.clientWidth)
-    var settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false,
-        //autoplay:true,
-        autoplaySpeed: 5000
-    };
 
     let [categores, setCategores] = useState([]);
 
@@ -29,7 +16,6 @@ function MainPage(props) {
             async function fetchData() {
                 const req = await axios.get('http://localhost:8001/place_category');
                 setCategores(req.data)
-                console.log(req.data)
             }
             fetchData()
         }
@@ -38,48 +24,18 @@ function MainPage(props) {
     return (
         <div>
             <div className='title'>
-                {/* <Slider {...settings}> */}
-                    <div style={{ position: 'static' }}>
-                        <div className='title__slide-wrapper'>
-                            
-                            <div className='title__slide-1'>
+                <div style={{ position: 'static' }}>
+                    <div className='title__slide-wrapper'>
+                        <div className='title__slide-1'>
                             <div className='title__slide-container'>
                                 <h3>Добро пожаловать на MosCulture</h3>
                                 <div>
                                     Сайт о местах культурного наследия России и Мира
                             </div>
                             </div>
-                            </div>
                         </div>
                     </div>
-                    {/* <div style={{ position: 'static' }}>
-                        <div className='title__slide-wrapper'>
-                            <div className='title__slide-container'>
-                                <h3>Будьте в курсе событий</h3>
-                                <div>
-                                    К вашему вниманию представлена актуализированная информация о культырных местах москвы
-                            </div>
-                            </div>
-                            <div className='title__slide-2' style={{ position: 'relative' }}>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={{ position: 'static' }}>
-                        <div className='title__slide-wrapper'>
-                            <div className='title__slide-container'>
-                                <h3>Делитесь отзывами</h3>
-                                <div>
-                                    Здесь вы можете смотреть и оставлять отзывы
-                            </div>
-                            </div>
-                            <div className='title__slide-3' style={{ position: 'relative' }}>
-
-                            </div>
-                        </div>
-                    </div> */}
-                {/* </Slider> */}
+                </div>
             </div>
             <div className='__container'>
                 <div className='place__type-wrapper'>
@@ -88,17 +44,10 @@ function MainPage(props) {
                             ? categores.map(item =>
                                 <div className='place__type'>
                                     <NavLink to={'/category/' + item.categoryUrl} className='place__type__link'>
-
-                                        <div style={{
-                                            'backgroundImage': 'url(' + item.img + ')',
-                                            'maxWidth': ' 1720px',
-                                            'minHeight': '310px',
-                                            'width': '100%',
-                                            'backgroundSize': 'cover',
-                                            'backgroundPosition': 'center center',
-                                            'position': 'relative',
-                                            'borderRadius': '4px'
-                                        }}
+                                        <div className='plase__type-img'
+                                            style={{
+                                                'backgroundImage': 'url(' + item.img + ')',
+                                            }}
                                             classNmae='plase__type-card'>
                                             <span className='plase__type-title'>
                                                 {item.category}
