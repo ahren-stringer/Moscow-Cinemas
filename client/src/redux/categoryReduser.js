@@ -1,17 +1,18 @@
-const SET_NAV_DATA = 'navReuser/SET-NAV-DATA';
-const SET_NAMES = 'navReuser/SET-NAMES';
-const SET_NEW_TEXT = 'navReuser/SET-NEW-TEXT';
-const TOTAL_COUNT = 'navReuser/TOTAL-COUNT';
-const SET_PAGE = 'navReuser/SET-PAGE';
-const SET_LIKED = 'navReuser/SET-LIKED';
-const CONCAT_NAV_DATA = "navReuser/CONCAT_NAV_DATA";
-const SET_TYPE_TITLE = "navReuser/SET_TYPE_TITLE"
-const SET_POPULAR = "navReuser/SET_POPULAR"
-const SET_CATEGORY_COUNT='infoReuser/SET_CATEGORY_COUNT'
+import * as axios from 'axios';
+
+const SET_CATEGORY_DATA = 'categoryReuser/SET-CATEGORY-DATA';
+const SET_NAMES = 'categoryReuser/SET-NAMES';
+const SET_NEW_TEXT = 'categoryReuser/SET-NEW-TEXT';
+const TOTAL_COUNT = 'categoryReuser/TOTAL-COUNT';
+const SET_PAGE = 'categoryReuser/SET-PAGE';
+const SET_LIKED = 'categoryReuser/SET-LIKED';
+//const CONCAT_CATEGORY_DATA = "categoryReuser/CONCAT_CATEGORY_DATA";
+const SET_TYPE_TITLE = "categoryReuser/SET_TYPE_TITLE"
+const SET_CATEGORY_COUNT = 'infoReuser/SET_CATEGORY_COUNT'
 const SET_COUNTER = 'infoReuser/SET-COUNTER';
 
 let init = {
-    navData: [],
+    categoryData: [],
     names: [],
     newSearchText: '',
     liked: { ...localStorage },
@@ -20,15 +21,14 @@ let init = {
     onOnePage: 12,
     request: true,
     typeTitle: '',
-    popular: null,
-    categoryCount:0,
+    categoryCount: 0,
     count: localStorage.getItem("count"),
 };
 
-const navReduser = (state = init, action) => {
+const categoryReduser = (state = init, action) => {
     switch (action.type) {
-        case SET_NAV_DATA:
-            return { ...state, navData: action.prevNanData.concat(action.navData) }
+        case SET_CATEGORY_DATA:
+            return { ...state, categoryData: action.prevNanData.concat(action.categoryData) }
         case SET_NAMES:
             return { ...state, names: action.names }
         case SET_NEW_TEXT:
@@ -41,8 +41,6 @@ const navReduser = (state = init, action) => {
             return { ...state, liked: action.liked }
         case SET_TYPE_TITLE:
             return { ...state, typeTitle: action.typeTitle }
-        case SET_POPULAR:
-            return { ...state, popular: action.popular }
         case SET_CATEGORY_COUNT: {
             return { ...state, categoryCount: action.categoryCount }
         }
@@ -53,20 +51,33 @@ const navReduser = (state = init, action) => {
     }
 }
 
-export const setNavData = (navData, prevNanData) => ({ type: SET_NAV_DATA, navData, prevNanData });
-export const concatNavData = (navData) => ({ type: CONCAT_NAV_DATA, navData });
+export const setCategoryData = (categoryData, prevNanData) => ({ type: SET_CATEGORY_DATA, categoryData, prevNanData });
+// export const concatcategoryData = (categoryData) => ({ type: CONCAT_CATEGORY_DATA, categoryData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 export const Setliked = (liked) => ({ type: SET_LIKED, liked })
 export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
-export const SetPopular = (popular) => ({ type: SET_POPULAR, popular })
 export const setCategoryCount = (categoryCount) => ({ type: SET_CATEGORY_COUNT, categoryCount })
 export const setCounter = (count) => ({ type: SET_COUNTER, count });
 
-export const likedThunk=(name, item)=>
-    async (dispatch)=>{
+export const setCategoryDataThunk = (type,onOnePage,numberOfPage) =>
+    async (dispatch) => {
+        let req = await axios.get(`http://localhost:8001/place_category/places/some/${type}/${onOnePage}/${numberOfPage}`)
+        dispatch(setCategoryData(req.data, []))
+        dispatch(SetTypeTitle(req.data[0].placeCategory))
+
+    }
+
+export const setCategoryCountThunk = (type) =>
+    async (dispatch) => {
+        let req = await axios.get(`http://localhost:8001/place_category/places/category_count/${type}`)
+        dispatch(setCategoryCount(req.data))
+    }
+
+export const likedThunk = (name, item) =>
+    async (dispatch) => {
         let counter = +localStorage.getItem('count');
         if (localStorage.getItem(name)) {
             localStorage.removeItem(name)
@@ -80,6 +91,6 @@ export const likedThunk=(name, item)=>
             dispatch(Setliked({ ...localStorage }))
         }
         dispatch(setCounter(counter))
-  }
+    }
 
-export default navReduser
+export default categoryReduser

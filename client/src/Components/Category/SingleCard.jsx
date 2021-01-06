@@ -9,7 +9,7 @@ function SingleCard(props) {
     return (
         <div className={s.cinema} key={props.key}>
             <NavLink to={`/places/${props.item.name}`}>
-                <div className={s.nav__img} style={(props.item.photos.photoLarge && props.item.photos.photoLarge !== '') ?
+                <div className={s.category__img} style={(props.item.photos.photoLarge && props.item.photos.photoLarge !== '') ?
                     { 'backgroundImage': 'url(' + props.item.photos.photoLarge + ')' }
                     : (props.item.placeCategory === 'Театры') ?
                         { 'backgroundImage': 'url(https://avatars.mds.yandex.net/get-zen_doc/964926/pub_5e95cfdebe5bae634e20a1e3_5e95dac81fba7924e8001525/scale_1200)' }

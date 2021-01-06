@@ -3,14 +3,14 @@ import './Liked.css'
 import { connect } from 'react-redux';
 import Popular from '../MainPage/Popular';
 import CategoryCard from '../Category/CategoryCards';
-import { Setliked,likedThunk } from '../../redux/navReduser';
+import { Setliked,likedThunk } from '../../redux/categoryReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { withRouter } from 'react-router-dom';
 
 
 function Liked(props) {
   let [ls, setLs] = useState(props.liked);
-  let navData = Object.entries(ls).filter(item => item[0] !== "count" && item[0] !== "userData")
+  let categoryData = Object.entries(ls).filter(item => item[0] !== "count" && item[0] !== "userData")
   .map(item => JSON.parse(item[1])) 
   if (Object.entries(props.liked).filter(item => item[0] !== "count" && item[0] !== "userData").length === 0) return <div className='liked__nothing'>
     <h4 className='liked__nothing-title'>Вам, пока что, ничего не нравится :)</h4>
@@ -25,7 +25,7 @@ function Liked(props) {
       </h3>
     </div>
 <CategoryCard liked={props.liked}
-    navData={navData}
+    categoryData={categoryData}
     Setliked={props.Setliked}
     setCounter={props.setCounter}
     match={props.match}
@@ -37,8 +37,8 @@ function Liked(props) {
 
 let mapStateToProps = (state) => {
   return {
-    liked: state.navData.liked,
-    navData: state.navData.navData
+    liked: state.categoryData.liked,
+    categoryData: state.categoryData.categoryData
   }
 }
 

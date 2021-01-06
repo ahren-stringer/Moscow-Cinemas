@@ -2,7 +2,7 @@ import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
 import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount } from '../../redux/infoReduser';
-import { Setliked,likedThunk} from '../../redux/navReduser';
+import { Setliked,likedThunk} from '../../redux/categoryReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -16,29 +16,29 @@ class InfoContainer extends React.Component {
     componentDidMount() {
         let id = this.props.match.params.id;
         if (id) {
-            axios.get(`http://localhost:8001/place_category/places/${id}`)
-                .then(response => {
-                    this.props.setInfoData(response.data)
-                    let pop = +response.data[0].popular + 1;
-                    axios.put(`http://localhost:8001/place_category/places/${response.data[0]._id}`, { popular: pop })
-                    // Коменты
-                    axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
-                        headers: {
-                            "Authorization": ('Bearer ' + this.props.token)
-                        }
-                    })
-                        .then(req => {
-                            this.props.setComents(req.data)
-                        });
-                    // Количество коментов
-                    axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
-                        headers: {
-                            "Authorization": ('Bearer ' + this.props.token)
-                        }
-                    }).then(count => {
-                        this.props.SetTotalCount(count.data)
-                    });
-                })
+            // axios.get(`http://localhost:8001/place_category/places/${id}`)
+            //     .then(response => {
+            //         this.props.setInfoData(response.data)
+            //         let pop = +response.data[0].popular + 1;
+            //         axios.put(`http://localhost:8001/place_category/places/${response.data[0]._id}`, { popular: pop })
+            //         // Коменты
+            //         axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
+            //             headers: {
+            //                 "Authorization": ('Bearer ' + this.props.token)
+            //             }
+            //         })
+            //             .then(req => {
+            //                 this.props.setComents(req.data)
+            //             });
+            //         // Количество коментов
+            //         axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
+            //             headers: {
+            //                 "Authorization": ('Bearer ' + this.props.token)
+            //             }
+            //         }).then(count => {
+            //             this.props.SetTotalCount(count.data)
+            //         });
+            //     })
         }
     }
     componentDidUpdate(prevProps, prevState) {
@@ -95,7 +95,7 @@ let mapStateToProps = (state) => {
         newComentText: state.infoData.newComentText,
         coments: state.infoData.coments,
         token: state.auth.token,
-        liked: state.navData.liked,
+        liked: state.categoryData.liked,
         totalCount: state.infoData.totalCount,
         numberOfPage: state.infoData.numberOfPage,
         onOnePage: state.infoData.onOnePage,

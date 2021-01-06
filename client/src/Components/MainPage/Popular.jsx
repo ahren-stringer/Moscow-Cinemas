@@ -8,7 +8,8 @@ import Slider from "react-slick";
 import './MainPage.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { SetPopular, likedThunk } from '../../redux/navReduser';
+import { likedThunk } from '../../redux/categoryReduser';
+import { setPopularSliderThunk} from '../../redux/popularReduser';
 import { connect } from 'react-redux';
 import SingleCard from '../Category/SingleCard';
 
@@ -30,21 +31,19 @@ function Popular(props) {
     };
 
     let [ls, setLs] = useState(props.liked);
-    let [popular, setPopular] = useState(props.popular)
+    let [popular, setPopular] = useState(props.popularSlider)
 
     useEffect(() => {
         setLs(props.liked)
     }, [props.liked])
 
-    useEffect(
-        async () => {
-            const req = await axios.get('http://localhost:8001/popular/some');
-            props.SetPopular(req.data)
+    useEffect(() => {
+            props.setPopularSliderThunk()
         }
         , [])
     useEffect(() => {
-        setPopular(props.popular)
-    }, [props.popular])
+        setPopular(props.popularSlider)
+    }, [props.popularSlider])
 
     return (
         <div>
@@ -71,7 +70,7 @@ function Popular(props) {
                     <div className='slider__wrapper-small'>
                         <Slider {...settings2}>
                             {
-                                props.popular.map((item, index, array) => {
+                                props.popularSlider.map((item, index, array) => {
 
                                     return <div className='place'>
                                         <div className='place__wrapper'>
@@ -118,9 +117,9 @@ function Popular(props) {
 
 let mapStateToProps = (state) => {
     return {
-        popular: state.navData.popular,
-        liked: state.navData.liked,
+        popularSlider: state.popularData.popularSlider,
+        liked: state.categoryData.liked,
     }
 }
 
-export default connect(mapStateToProps, { SetPopular, likedThunk })(withRouter(Popular))
+export default connect(mapStateToProps, { setPopularSliderThunk, likedThunk })(withRouter(Popular))

@@ -58,7 +58,10 @@ const SearchingForm = (props) => {
                 placeholder="Искать здесь..."
             />
             <button className='search__btn'>
-                <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
+                <NavLink to={"/search/" + props.newSearchText} onClick={() => {
+                    CloseList()
+                    props.SearchChange('')
+                }}>
                     <FontAwesomeIcon icon={faSearch} />
                 </NavLink>
             </button>
@@ -78,7 +81,10 @@ const SearchingForm = (props) => {
                     {
                         (searched.request.length === 0) ? null :
                             <li className="collection-item">
-                                <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
+                                <NavLink to={"/search/" + props.newSearchText} onClick={() => {
+                                    CloseList()
+                                    props.SearchChange('')
+                                }}>
                                     Все результаты
                                 </NavLink>
                             </li>

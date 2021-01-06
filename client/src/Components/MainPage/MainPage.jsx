@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
@@ -6,15 +5,16 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './MainPage.css'
 import Popular from './Popular';
+import {MainPageAPI} from '../../API/api'
 
-function MainPage(props) {
+function MainPage() {
 
-    let [categores, setCategores] = useState([]);
+    let [categores, setCategores] = useState(null);
 
     useEffect(
-        async function fetchData() {
-            const req = await axios.get('http://localhost:8001/place_category');
-            setCategores(req.data)
+        async ()=> {
+            const req = await MainPageAPI.getCategories();
+            setCategores(req)
         }
         , [])
 
@@ -55,7 +55,6 @@ function MainPage(props) {
                                 </div>)
                             : <Preloader />
                     }
-
                 </div>
                 <Popular />
             </div>

@@ -17,9 +17,14 @@ const Description = (props) => {
 
   return (
     <div className={s.description}>
-      <div className={s.description__place} style={(props.infoData[0].photos.photoLarge && props.infoData[0].photos.photoLarge != '') ?
-        { 'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')' }
-        : { 'backgroundImage': 'url(https://avatars.mds.yandex.net/get-zen_doc/964926/pub_5e95cfdebe5bae634e20a1e3_5e95dac81fba7924e8001525/scale_1200)' }}>
+      <div className={s.description__place} style={(props.infoData[0].photos.photoLarge && props.infoData[0].photos.photoLarge !== '') ?
+                    { 'backgroundImage': 'url(' + props.infoData[0].photos.photoLarge + ')' }
+                    : (props.infoData[0].placeCategory === 'Театры') ?
+                        { 'backgroundImage': 'url(https://avatars.mds.yandex.net/get-zen_doc/964926/pub_5e95cfdebe5bae634e20a1e3_5e95dac81fba7924e8001525/scale_1200)' }
+                        : (props.infoData[0].placeCategory === 'Галереи') ?
+                            { 'backgroundImage': 'url(https://ru.moscovery.com/wp-content/uploads/2016/03/header-92.jpg)' }
+                            : { 'backgroundImage': 'url(https://felicina.ru/wp-content/uploads/2018/05/main2-1.jpg)' }
+                }>
         {props.infoData[0].name}
       </div>
       <div className={s.description__wrapper}>

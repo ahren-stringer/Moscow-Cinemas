@@ -13,14 +13,12 @@ function CategoryCard(props) {
 
   return (
     <div>
-      <div className={s.nav__wrapper}>
-        <div className={s.nav}>
+      <div className={s.category__wrapper}>
+        <div className={s.category}>
           {
-            props.navData.map((item) => {
+            props.categoryData.map((item) => {
               return <SingleCard item={item}
                 ls={ls}
-                Setliked={props.Setliked}
-                setCounter={props.setCounter}
                 match={props.match}
                 likedThunk={props.likedThunk}/>
             })

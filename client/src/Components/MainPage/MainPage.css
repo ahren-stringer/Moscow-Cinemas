@@ -102,6 +102,9 @@
 .place__liked-text{
     margin-right: 5px;
 }
+.popular__title a{
+    color: black;
+}
 
 @media (max-width: 1200px){
     .place__img{

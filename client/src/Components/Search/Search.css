@@ -11,7 +11,10 @@
     list-style-type: none;
 }
 .list__img{
-    width: 160px;
+    min-height: 101px;
+    width: 159px;
+    background-size: cover;
+    background-position: center center;
     border-radius: 4px;
     box-shadow: 0 0 4px rgba(0,0,0,0.5);
 }

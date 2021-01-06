@@ -1,6 +1,7 @@
 import express from 'express';
 const {Router} = express;
 const router=Router()
+import nodemailer from 'nodemailer'
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.mail.ru',

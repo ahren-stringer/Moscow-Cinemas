@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
-import { SearchChange } from '../../redux/navReduser';
+import { SearchChange } from '../../redux/categoryReduser';
 import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr } from '../../redux/headerReduser';
 import { logout } from '../../redux/authReduser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -114,14 +114,14 @@ class Header extends React.Component {
 
 let mapStateToPros = (state) => {
   return {
-    counter: state.navData.count,
-    newSearchText: state.navData.newSearchText,
-    navData: state.navData.navData,
-    names: state.navData.names,
+    counter: state.categoryData.count,
+    newSearchText: state.categoryData.newSearchText,
+    categoryData: state.categoryData.categoryData,
+    names: state.categoryData.names,
     searched: state.header.searched,
     isClosed: state.header.isClosed,
     isListLoading: state.header.isListLoading,
-    liked: state.navData.liked,
+    liked: state.categoryData.liked,
     requestNumber: state.header.requestNumber,
     token: state.auth.token,
   }

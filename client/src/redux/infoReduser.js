@@ -1,9 +1,11 @@
+import * as axios from 'axios';
+
 const SET_INFO_DATA = 'infoReuser/SET-INFO-DATA';
 const SET_FEATURES = 'infoReuser/SET-FEATURES';
 const SET_NEW_TEXT = 'infoReuser/SET-NEW-TEXT';
 const SET_COMENT = 'infoReuser/SET-COMENT';
-const TOTAL_COUNT='infoReuser/TOTAL-COUNT';
-const SET_PAGE='infoReuser/SET-PAGE';
+const TOTAL_COUNT = 'infoReuser/TOTAL-COUNT';
+const SET_PAGE = 'infoReuser/SET-PAGE';
 
 let init = {
     infoData: null,
@@ -40,7 +42,32 @@ export const setInfoData = (infoData) => ({ type: SET_INFO_DATA, infoData });
 export const setFeatures = (features) => ({ type: SET_FEATURES, features });
 export const ComentChange = (text) => ({ type: SET_NEW_TEXT, text })
 export const setComents = (coments) => ({ type: SET_COMENT, coments })
-export const SetTotalCount=(totalCount)=> ({type: TOTAL_COUNT, totalCount})
-export const SetPageCount=(numberOfPage)=> ({type: SET_PAGE, numberOfPage})
+export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
+export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
+
+export const setInfoDataThunk = (id,onOnePage,token) =>
+    async (dispatch) => {
+        let req = await axios.get(`http://localhost:8001/place_category/places/${id}`)
+        dispatch(setInfoData(req.data))
+        let pop = +req.data[0].popular + 1;
+        await axios.put(`http://localhost:8001/place_category/places/${req.data[0]._id}`, { popular: pop })
+        // Коменты
+        axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${onOnePage}/0`, {
+            headers: {
+                "Authorization": ('Bearer ' + token)
+            }
+        })
+            .then(req => {
+                dispatch(setComents(req.data))
+            });
+        // Количество коментов
+        axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
+            headers: {
+                "Authorization": ('Bearer ' + this.props.token)
+            }
+        }).then(count => {
+            dispatch(SetTotalCount(count.data))
+        });
+    }
 
 export default infoReduser
