@@ -1,20 +1,18 @@
 import React from 'react';
 import s from './Navbar.module.css'
 import Introdaction from './Introdaction';
-import NavbarCard from './NavbarCard';
+import CategoryCard from './CategoryCards';
 
-function Navbar(props) {
+function Category(props) {
 
   let onPageChange = (e) => {
     props.SetPageCount(props.numberOfPage + 1)
     props.onPageChange(props.numberOfPage * props.onOnePage, props.type, props.navData)
   };
-
-  debugger
   return (
     <div>
       <Introdaction typeTitle={props.typeTitle} />
-      <NavbarCard liked={props.liked}
+      <CategoryCard liked={props.liked}
         navData={props.navData}
         Setliked={props.Setliked}
         setCounter={props.setCounter}
@@ -29,4 +27,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default Category;

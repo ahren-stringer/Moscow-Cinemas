@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { required, aol, email, minLength6 } from '../../validators'
+import { required, aol, email} from '../../validators'
 
 const input = ({ input, label, type, meta: { touched, error, warning } }) => {
     return (<div className="row">

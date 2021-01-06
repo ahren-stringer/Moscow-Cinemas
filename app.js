@@ -12,6 +12,8 @@ import pkg from 'express-validator';
 const { check, validationResult } = pkg;
 //import auth from './middleware/auth.middleware.js'
 import nodemailer from 'nodemailer'
+import auth from './routes/auth.routes.js'
+
 
 //API Config
 const app = expess();
@@ -21,6 +23,7 @@ const connection_url = 'mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mo
 //Middlewares
 app.use(expess.json())
 app.use(Cors())
+app.use('',auth)
 
 //DB Config
 mongoose.connect(connection_url, {
@@ -85,113 +88,113 @@ app.get('/cinema/coments_count/:place', async (req, res) => {
 
 // Авторизация
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.mail.ru',
-    port: 465,
-    secure: true,
-    auth: {
-        user: 'mos_culture@mail.ru',
-        pass: 'youwi11neverpass'
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-});
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.mail.ru',
+//     port: 465,
+//     secure: true,
+//     auth: {
+//         user: 'mos_culture@mail.ru',
+//         pass: 'youwi11neverpass'
+//     },
+//     tls: {
+//         rejectUnauthorized: false
+//     }
+// });
 
-const mailer= message =>{
-    transporter.sendMail(message,(err,info)=>{
-        if (err) return console.log('Error ',err)
-        console.log('Email sent:', info)
-    })
-}
+// const mailer= message =>{
+//     transporter.sendMail(message,(err,info)=>{
+//         if (err) return console.log('Error ',err)
+//         console.log('Email sent:', info)
+//     })
+// }
 
-app.post(
-    '/cinema/register',
-    [
-        check('email', 'Неправильный email').isEmail(),
-        check('password', 'Минимальная длина пароля 6 символов')
-            .isLength({ min: 6 })
-    ],
-    async (req, res) => {
-        try {
-            console.log('body', req.body)
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некоректные данные'
-                })
-            }
+// app.post(
+//     '/cinema/register',
+//     [
+//         check('email', 'Неправильный email').isEmail(),
+//         check('password', 'Минимальная длина пароля 6 символов')
+//             .isLength({ min: 6 })
+//     ],
+//     async (req, res) => {
+//         try {
+//             console.log('body', req.body)
+//             const errors = validationResult(req)
+//             if (!errors.isEmpty()) {
+//                 return res.status(400).json({
+//                     errors: errors.array(),
+//                     message: 'Некоректные данные'
+//                 })
+//             }
 
-            const { name, email, password } = req.body
-            const condidate = await User.findOne({ email })
-            console.log(condidate)
-            if (condidate) {
-                return res.status(400).json({ message: 'Такой пользователь уже существует' })
-            }
-            const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({ name, email, password: hashedPassword });
+//             const { name, email, password } = req.body
+//             const condidate = await User.findOne({ email })
+//             console.log(condidate)
+//             if (condidate) {
+//                 return res.status(400).json({ message: 'Такой пользователь уже существует' })
+//             }
+//             const hashedPassword = await bcrypt.hash(password, 12);
+//             const user = new User({ name, email, password: hashedPassword });
 
-            await user.save()
+//             await user.save()
 
-            res.status(201).json({ message: 'Пользователь зарегистрирован' })
-            // Отправка на почту
+//             res.status(201).json({ message: 'Пользователь зарегистрирован' })
+//             // Отправка на почту
 
-            const message = {
-                from: 'MosCulture <mos_culture@mail.ru>',
-                to: req.body.email, 
-                subject: 'Вы зарегистрированны на сайте MosCulture',
-                text: `Вы зарегистрированны на сайте MosCulture
+//             const message = {
+//                 from: 'MosCulture <mos_culture@mail.ru>',
+//                 to: req.body.email, 
+//                 subject: 'Вы зарегистрированны на сайте MosCulture',
+//                 text: `Вы зарегистрированны на сайте MosCulture
                 
-                Данные вашей учетной записи:
-                Логин: ${req.body.email}
-                Пароль: ${req.body.password}`
-              };
+//                 Данные вашей учетной записи:
+//                 Логин: ${req.body.email}
+//                 Пароль: ${req.body.password}`
+//               };
 
-            mailer(message)
+//             mailer(message)
 
-        } catch (e) {
-            res.status(500).json({ message: 'Ошибка регистрации' })
-        }
-    })
+//         } catch (e) {
+//             res.status(500).json({ message: 'Ошибка регистрации' })
+//         }
+//     })
 
-app.post(
-    '/cinema/login',
-    [
-        check('email', 'Введите корректный email').normalizeEmail().isEmail(),
-        check('password', 'Ввкдите пароль').exists()
-    ],
-    async (req, res) => {
-        try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    errors: errors.array(),
-                    message: 'Некоректные данные'
-                })
-            }
+// app.post(
+//     '/cinema/login',
+//     [
+//         check('email', 'Введите корректный email').normalizeEmail().isEmail(),
+//         check('password', 'Ввкдите пароль').exists()
+//     ],
+//     async (req, res) => {
+//         try {
+//             const errors = validationResult(req)
+//             if (!errors.isEmpty()) {
+//                 return res.status(400).json({
+//                     errors: errors.array(),
+//                     message: 'Некоректные данные'
+//                 })
+//             }
 
-            const { email, password } = req.body
-            const user = await User.findOne({ email })
+//             const { email, password } = req.body
+//             const user = await User.findOne({ email })
 
-            if (!user) {
-                return res.status(400).json({ message: 'Такого пользователя не существует' })
-            }
-            const isMatch = bcrypt.compare(password, user.password)
-            if (!isMatch) {
-                return res, status(400).json({ message: 'Неверный пароль' })
-            }
+//             if (!user) {
+//                 return res.status(400).json({ message: 'Такого пользователя не существует' })
+//             }
+//             const isMatch = bcrypt.compare(password, user.password)
+//             if (!isMatch) {
+//                 return res, status(400).json({ message: 'Неверный пароль' })
+//             }
 
-            const token = jwt.sign(
-                { userId: user.id },
-                'TopSecret',
-                { expiresIn: '24h' }
-            )
-            res.json({ token, userId: user.id })
-        } catch (e) {
-            res.status(500).json({ message: 'Ошибка авторизации' })
-        }
-    })
+//             const token = jwt.sign(
+//                 { userId: user.id },
+//                 'TopSecret',
+//                 { expiresIn: '24h' }
+//             )
+//             res.json({ token, userId: user.id })
+//         } catch (e) {
+//             res.status(500).json({ message: 'Ошибка авторизации' })
+//         }
+//     })
 
 //Наборы данных
 

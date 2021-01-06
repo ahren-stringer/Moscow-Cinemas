@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import 'materialize-css'
 import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
@@ -6,7 +6,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, setLoaded } from '../../redux/authReduser'
 import { Field, reduxForm } from 'redux-form'
-import { required, aol, email, minLength6 } from '../../validators'
+import { required, aol, email} from '../../validators'
 
 const input = ({ input, label, type, meta: { touched, error, warning } }) => {
 
@@ -23,7 +23,7 @@ const input = ({ input, label, type, meta: { touched, error, warning } }) => {
 
 function AuthForm(props) {
     
-    const { handleSubmit, pristine, reset, submitting } = props
+    const { submitting } = props
 
     return <form onSubmit={props.handleSubmit}>
         <div className="row">
@@ -62,12 +62,9 @@ function Auth(props) {
     let message = useMessage();
 
     let submit = async (formData) => {
-        // print the form values to the console
-        console.log(formData)
         //props.loginThunk(formData.email, formData.password, formData.rememberMe)
         try {
             const req = await axios.post('http://localhost:8001/cinema/login', { ...formData })
-            console.log(req)
             props.login(req.data.token, req.data.userId)
             props.history.goBack()
         } catch (e) { }

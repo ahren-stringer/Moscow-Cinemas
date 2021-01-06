@@ -1,12 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css'
-import s from '../Navbar/Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { SetPopular, likedThunk } from '../../redux/navReduser';

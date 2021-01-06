@@ -6,14 +6,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css'
-import s from '../Navbar/Navbar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import { SetPopular,likedThunk} from '../../redux/navReduser';
+import { SetPopular, likedThunk } from '../../redux/navReduser';
 import { connect } from 'react-redux';
-import { Setliked } from '../../redux/navReduser';
-import { setCounter } from '../../redux/headerReduser';
-import SingleCard from '../Navbar/SingleCard';
+import SingleCard from '../Category/SingleCard';
 
 function Popular(props) {
 
@@ -40,13 +37,9 @@ function Popular(props) {
     }, [props.liked])
 
     useEffect(
-        () => {
-            async function fetchData() {
-                const req = await axios.get('http://localhost:8001/popular/some');
-                props.SetPopular(req.data)
-                console.log(req.data)
-            }
-            fetchData()
+        async () => {
+            const req = await axios.get('http://localhost:8001/popular/some');
+            props.SetPopular(req.data)
         }
         , [])
     useEffect(() => {
@@ -68,10 +61,8 @@ function Popular(props) {
                                 popular.map((item, index, array) => {
                                     return <SingleCard item={item}
                                         ls={ls}
-                                        Setliked={props.Setliked}
-                                        setCounter={props.setCounter}
-                                        match={props.match} 
-                                        likedThunk={props.likedThunk}/>
+                                        match={props.match}
+                                        likedThunk={props.likedThunk} />
                                 })
                             }
                         </Slider>
@@ -131,4 +122,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { SetPopular, setCounter, Setliked,likedThunk })(withRouter(Popular))
+export default connect(mapStateToProps, { SetPopular, likedThunk })(withRouter(Popular))

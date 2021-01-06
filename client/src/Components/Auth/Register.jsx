@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import 'materialize-css'
 import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
-
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email, minLength6 } from '../../validators'
 import { withRouter } from 'react-router-dom';
@@ -20,7 +19,7 @@ const input = ({ input, label, type, meta: { touched, error, warning } }) => {
 }
 
 function RegisterForm(props) {
-    const { handleSubmit, pristine, reset, submitting } = props
+    const { submitting } = props
 
     return <form onSubmit={props.handleSubmit}>
         <Field
@@ -56,12 +55,9 @@ RegisterForm = reduxForm({ form: 'register' })(RegisterForm)
 function Register(props) {
 
     let submit = async (formData) => {
-        // print the form values to the console
-        console.log(formData)
         //props.loginThunk(formData.email, formData.password, formData.rememberMe)
         try {
-            const data = await axios.post('http://localhost:8001/cinema/register', { ...formData })
-            console.log('Зарегистрировался ',data)
+            await axios.post('http://localhost:8001/cinema/register', { ...formData })
             props.history.goBack()
         } catch (e) { }
     }

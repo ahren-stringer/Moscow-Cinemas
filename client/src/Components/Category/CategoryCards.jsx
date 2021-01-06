@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import s from './Navbar.module.css'
+import s from './Category.module.css'
 import SingleCard from './SingleCard';
 
-function NavbarCard(props) {
+function CategoryCard(props) {
   let [ls, setLs] = useState(props.liked);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ function NavbarCard(props) {
   );
 }
 
-export default NavbarCard;
+export default CategoryCard;

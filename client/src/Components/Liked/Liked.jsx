@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Liked.css'
 import { connect } from 'react-redux';
 import Popular from '../MainPage/Popular';
-import NavbarCard from '../Navbar/NavbarCard';
+import CategoryCard from '../Category/CategoryCards';
 import { Setliked,likedThunk } from '../../redux/navReduser';
 import { setCounter } from '../../redux/headerReduser';
 import { withRouter } from 'react-router-dom';
@@ -24,7 +24,7 @@ function Liked(props) {
         Избранное
       </h3>
     </div>
-<NavbarCard liked={props.liked}
+<CategoryCard liked={props.liked}
     navData={navData}
     Setliked={props.Setliked}
     setCounter={props.setCounter}

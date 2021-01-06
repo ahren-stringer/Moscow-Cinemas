@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './App.css';
 import Header from '../src/Components/Header/Header';
-import { BrowserRouter, Route, withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Liked from './Components/Liked/Liked';
-import Navbar from './Components/Navbar/NavbarContainer';
+import Navbar from './Components/Category/CategoryContainer';
 import Info from './Components/Info/InfoContainer';
 import 'materialize-css'
 import Search from './Components/Search/Search';
@@ -56,7 +56,7 @@ function App(props) {
       <Route exact path="/" render={() => <MainPage />} />
       <div className='main'>
         <div className='__container'>
-          <Route exact path="/category/:type" render={() => <Navbar />} />
+          <Route exact path="/category/:type" render={() => <Category />} />
           <Route path='/cinemas/:id' render={() => <Info />} />
           <Route path='/search/:riched' render={() => <Search />} />
           <Route path='/liked/:id?' render={() => <Liked />} />
