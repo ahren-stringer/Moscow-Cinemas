@@ -30,7 +30,7 @@ const SearchingForm = (props) => {
             props.setReqNumber(+props.requestNumber + 1)
             setCounter(counter + 1)
             console.log('номер', counter)
-            if (search == '') {
+            if (search === '') {
                 props.setSearched({ requestNumber: props.requestNumber, request: [] })
             } else {
                 props.setSearched({ requestNumber: props.requestNumber, request: req.data })
@@ -66,17 +66,17 @@ const SearchingForm = (props) => {
                 :
                 <ul className="collection">
                     {
-                        (props.isClosed && searched.request.length == 0) ? null :
+                        (props.isClosed && searched.request.length === 0) ? null :
                             searched.request.map((item) => {
                                 return <li className="collection-item" onClick={() => { props.SearchChange('') }}>
-                                    <NavLink to={`/cinemas/${item.name}`}
+                                    <NavLink to={`/places/${item.name}`}
                                         onClick={CloseList}>{item.name}
                                     </NavLink>
                                 </li>
                             })
                     }
                     {
-                        (searched.request.length == 0) ? null :
+                        (searched.request.length === 0) ? null :
                             <li className="collection-item">
                                 <NavLink to={"/search/" + props.newSearchText} onClick={CloseList}>
                                     Все результаты

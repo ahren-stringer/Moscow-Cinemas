@@ -62,7 +62,8 @@ function Popular(props) {
                                     return <SingleCard item={item}
                                         ls={ls}
                                         match={props.match}
-                                        likedThunk={props.likedThunk} />
+                                        likedThunk={props.likedThunk}
+                                        key={index+1} />
                                 })
                             }
                         </Slider>
@@ -74,7 +75,7 @@ function Popular(props) {
 
                                     return <div className='place'>
                                         <div className='place__wrapper'>
-                                            <NavLink to={`/cinemas/${item.name}`}>
+                                            <NavLink to={`/places/${item.name}`}>
                                                 <div className='place__img'
                                                     style={{ 'backgroundImage': 'url(' + item.photos.photoLarge + ')' }}>
                                                 </div>

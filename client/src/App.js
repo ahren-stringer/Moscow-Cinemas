@@ -3,7 +3,7 @@ import './App.css';
 import Header from '../src/Components/Header/Header';
 import { Route, withRouter } from 'react-router-dom';
 import Liked from './Components/Liked/Liked';
-import Navbar from './Components/Category/CategoryContainer';
+import Category from './Components/Category/CategoryContainer';
 import Info from './Components/Info/InfoContainer';
 import 'materialize-css'
 import Search from './Components/Search/Search';
@@ -42,7 +42,7 @@ function App(props) {
       onClick={onCloseList}
     >
       <div className='Header'
-        style={props.location.pathname == '/' ? {
+        style={props.location.pathname === '/' ? {
           position: 'absolute',
           width: '100%',
           zIndex: '1',
@@ -57,7 +57,7 @@ function App(props) {
       <div className='main'>
         <div className='__container'>
           <Route exact path="/category/:type" render={() => <Category />} />
-          <Route path='/cinemas/:id' render={() => <Info />} />
+          <Route path='/places/:id' render={() => <Info />} />
           <Route path='/search/:riched' render={() => <Search />} />
           <Route path='/liked/:id?' render={() => <Liked />} />
           <Route path='/auth' render={() => <Auth />} />
@@ -77,7 +77,6 @@ let mapStateToProps = (state) => {
     loaded: state.auth.loaded,
     token: state.auth.token,
     userId: state.auth.userId,
-    loaded: state.auth.loaded,
   }
 }
 

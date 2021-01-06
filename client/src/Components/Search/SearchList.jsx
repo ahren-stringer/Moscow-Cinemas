@@ -11,7 +11,7 @@ function SearchList(props) {
             <ul class="collection">
                 {
                     props.list.map((item) => <li class="item">
-                        <NavLink to={`/cinemas/${item.name}`}>
+                        <NavLink to={`/places/${item.name}`}>
                         <div className='list__container'>
                             <div className='list__info'>
                                 <div className='list__name'>
