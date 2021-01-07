@@ -1,9 +1,9 @@
 import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
-import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount } from '../../redux/infoReduser';
-import { Setliked,likedThunk} from '../../redux/categoryReduser';
-import { setCounter } from '../../redux/headerReduser';
+import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount, 
+    setInfoDataThunk} from '../../redux/infoReduser';
+import { likedThunk} from '../../redux/categoryReduser';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
@@ -16,29 +16,7 @@ class InfoContainer extends React.Component {
     componentDidMount() {
         let id = this.props.match.params.id;
         if (id) {
-            // axios.get(`http://localhost:8001/place_category/places/${id}`)
-            //     .then(response => {
-            //         this.props.setInfoData(response.data)
-            //         let pop = +response.data[0].popular + 1;
-            //         axios.put(`http://localhost:8001/place_category/places/${response.data[0]._id}`, { popular: pop })
-            //         // Коменты
-            //         axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
-            //             headers: {
-            //                 "Authorization": ('Bearer ' + this.props.token)
-            //             }
-            //         })
-            //             .then(req => {
-            //                 this.props.setComents(req.data)
-            //             });
-            //         // Количество коментов
-            //         axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
-            //             headers: {
-            //                 "Authorization": ('Bearer ' + this.props.token)
-            //             }
-            //         }).then(count => {
-            //             this.props.SetTotalCount(count.data)
-            //         });
-            //     })
+            this.props.setInfoDataThunk(id,this.props.onOnePage,this.props.token)
         }
     }
     componentDidUpdate(prevProps, prevState) {
@@ -47,31 +25,7 @@ class InfoContainer extends React.Component {
             this.setState({
                 infoFlag: true
             })
-            //место
-            axios.get(`http://localhost:8001/place_category/places/${id}`)
-                .then(response => {
-                    this.props.setInfoData(response.data)
-                    this.setState({
-                        infoFlag: false
-                    })
-                    // Коменты
-                    axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${this.props.onOnePage}/0`, {
-                        headers: {
-                            "Authorization": ('Bearer ' + this.props.token)
-                        }
-                    })
-                        .then(req => {
-                            this.props.setComents(req.data)
-                        });
-                    //Количество коментов
-                    axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
-                        headers: {
-                            "Authorization": ('Bearer ' + this.props.token)
-                        }
-                    }).then(count => {
-                        this.props.SetTotalCount(count.data)
-                    });
-                })
+            this.props.setInfoDataThunk(id,this.props.onOnePage,this.props.token)
         }
     }
     onPageChange = (name,onOnePage,page) => {
@@ -104,5 +58,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, setCounter, Setliked, SetTotalCount, SetPageCount,likedThunk })
+    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount,likedThunk,setInfoDataThunk })
 )(InfoContainer)

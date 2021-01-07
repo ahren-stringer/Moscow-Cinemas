@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './Info.module.css'
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import Preloader from '../Preloader/Preloader';
 import ImageGallery from 'react-image-gallery';
 
 const Description = (props) => {

@@ -2,7 +2,6 @@ import * as axios from 'axios';
 
 const SET_CATEGORY_DATA = 'categoryReuser/SET-CATEGORY-DATA';
 const SET_NAMES = 'categoryReuser/SET-NAMES';
-const SET_NEW_TEXT = 'categoryReuser/SET-NEW-TEXT';
 const TOTAL_COUNT = 'categoryReuser/TOTAL-COUNT';
 const SET_PAGE = 'categoryReuser/SET-PAGE';
 const SET_LIKED = 'categoryReuser/SET-LIKED';
@@ -14,7 +13,6 @@ const SET_COUNTER = 'infoReuser/SET-COUNTER';
 let init = {
     categoryData: [],
     names: [],
-    newSearchText: '',
     liked: { ...localStorage },
     totalCount: 1,
     numberOfPage: 2,
@@ -31,8 +29,6 @@ const categoryReduser = (state = init, action) => {
             return { ...state, categoryData: action.prevNanData.concat(action.categoryData) }
         case SET_NAMES:
             return { ...state, names: action.names }
-        case SET_NEW_TEXT:
-            return { ...state, newSearchText: action.text }
         case TOTAL_COUNT:
             return { ...state, totalCount: action.totalCount }
         case SET_PAGE:
@@ -54,7 +50,6 @@ const categoryReduser = (state = init, action) => {
 export const setCategoryData = (categoryData, prevNanData) => ({ type: SET_CATEGORY_DATA, categoryData, prevNanData });
 // export const concatcategoryData = (categoryData) => ({ type: CONCAT_CATEGORY_DATA, categoryData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
-export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 export const Setliked = (liked) => ({ type: SET_LIKED, liked })

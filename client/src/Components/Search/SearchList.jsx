@@ -1,7 +1,7 @@
 import React from 'react';
 import 'materialize-css'
 import { NavLink, withRouter } from 'react-router-dom';
-import { setSearchedPage } from '../../redux/headerReduser';
+import { setSearchedPage } from '../../redux/serachReduser';
 import { connect } from 'react-redux';
 import './Search.css'
 

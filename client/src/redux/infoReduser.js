@@ -47,27 +47,24 @@ export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 
 export const setInfoDataThunk = (id,onOnePage,token) =>
     async (dispatch) => {
-        let req = await axios.get(`http://localhost:8001/place_category/places/${id}`)
-        dispatch(setInfoData(req.data))
-        let pop = +req.data[0].popular + 1;
-        await axios.put(`http://localhost:8001/place_category/places/${req.data[0]._id}`, { popular: pop })
+        let placesReq = await axios.get(`http://localhost:8001/place_category/places/${id}`)
+        dispatch(setInfoData(placesReq.data))
+        let pop = +placesReq.data[0].popular + 1;
+        await axios.put(`http://localhost:8001/place_category/places/${placesReq.data[0]._id}`, { popular: pop })
         // Коменты
-        axios.get(`http://localhost:8001/cinema/coments/some/${response.data[0].name}/${onOnePage}/0`, {
+        let comentsReq = await axios.get(`http://localhost:8001/cinema/coments/some/${placesReq.data[0].name}/${onOnePage}/0`, {
+            headers: {
+                "Authorization": ('Bearer ' + token)
+            }
+        })    
+        dispatch(setComents(comentsReq.data))
+        // Количество коментов
+        let comentsCountReq = await axios.get(`http://localhost:8001/cinema/coments_count/${placesReq.data[0].name}`, {
             headers: {
                 "Authorization": ('Bearer ' + token)
             }
         })
-            .then(req => {
-                dispatch(setComents(req.data))
-            });
-        // Количество коментов
-        axios.get(`http://localhost:8001/cinema/coments_count/${response.data[0].name}`, {
-            headers: {
-                "Authorization": ('Bearer ' + this.props.token)
-            }
-        }).then(count => {
-            dispatch(SetTotalCount(count.data))
-        });
+        dispatch(SetTotalCount(comentsCountReq.data))
     }
 
 export default infoReduser

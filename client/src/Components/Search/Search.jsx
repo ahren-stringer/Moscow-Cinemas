@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'materialize-css'
 import { withRouter } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
-import { setSearchedPage } from '../../redux/headerReduser';
+import { setSearchedPage } from '../../redux/serachReduser';
 import { connect } from 'react-redux';
 import './Search.css'
 import SearchList from './SearchList';
@@ -36,7 +36,7 @@ function Search(props) {
 }
 let mapStateToPros = (state) => {
     return {
-        searchedPage: state.header.searchedPage,
+        searchedPage: state.serach.searchedPage,
     }
 }
 

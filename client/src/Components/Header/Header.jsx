@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
-import { SearchChange } from '../../redux/categoryReduser';
-import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr } from '../../redux/headerReduser';
+import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr,SearchChange,
+  searchThunk,
+  CloseListThunk } from '../../redux/serachReduser';
 import { logout } from '../../redux/authReduser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -28,10 +29,10 @@ class Header extends React.Component {
     }
   };
 
-  openMenu = (e) => {
-    debugger
-    e.currentTarget.parentNode.style.right = '0'
-  }
+  // openMenu = (e) => {
+  //   debugger
+  //   e.currentTarget.parentNode.style.right = '0'
+  // }
   render() {
     return (
       <div className='header'>
@@ -115,16 +116,16 @@ class Header extends React.Component {
 let mapStateToPros = (state) => {
   return {
     counter: state.categoryData.count,
-    newSearchText: state.categoryData.newSearchText,
-    categoryData: state.categoryData.categoryData,
-    names: state.categoryData.names,
-    searched: state.header.searched,
-    isClosed: state.header.isClosed,
-    isListLoading: state.header.isListLoading,
+    newSearchText: state.serach.newSearchText,
+    searched: state.serach.searched,
+    isClosed: state.serach.isClosed,
+    isListLoading: state.serach.isListLoading,
     liked: state.categoryData.liked,
-    requestNumber: state.header.requestNumber,
+    requestNumber: state.serach.requestNumber,
     token: state.auth.token,
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber, logout, setSearchedArr })(Header);
+export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber, logout, setSearchedArr,
+  searchThunk,
+  CloseListThunk })(Header);

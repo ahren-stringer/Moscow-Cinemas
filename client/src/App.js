@@ -8,7 +8,8 @@ import Info from './Components/Info/InfoContainer';
 import 'materialize-css'
 import Search from './Components/Search/Search';
 import { connect } from 'react-redux';
-import { setSearched } from './redux/headerReduser';
+import { setSearched,
+  CloseListThunk } from './redux/serachReduser';
 import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
@@ -34,12 +35,9 @@ function App(props) {
     props.setLoaded(true)
   }, [login]);
 
-  const onCloseList = () => {
-    props.setSearched({ requestNumber: 0, request: [] })
-  }
   return (
     <div className="App"
-      onClick={onCloseList}
+      onClick={()=>{CloseListThunk()}}
     >
       <div className='Header'
         style={props.location.pathname === '/' ? {
@@ -80,5 +78,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { setSearched, setToken, setUserId, setLogin, setLoaded })(withRouter(App));
+export default connect(mapStateToProps, { setSearched, setToken, setUserId, setLogin, setLoaded,
+  CloseListThunk })(withRouter(App));
 
