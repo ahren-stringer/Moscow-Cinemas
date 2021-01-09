@@ -12,7 +12,8 @@ const SearchingForm = (props) => {
     let searchInput = React.createRef();
 
     useEffect(() => {
-        //if (searched.requestNumber < props.searched.requestNumber)
+        if (searched.requestNumber < props.searched.requestNumber)
+        debugger
         setSearched(props.searched)
     }, [props.searched])
 
@@ -32,7 +33,7 @@ const SearchingForm = (props) => {
                     <FontAwesomeIcon icon={faSearch} />
                 </NavLink>
             </button>
-            {props.isListLoading ? <div>!!!!!!!!!!</div>
+            {props.isListLoading ? <PreloaderList/>
                 :
                 <ul className="collection">
                     {

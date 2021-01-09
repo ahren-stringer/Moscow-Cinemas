@@ -12,17 +12,23 @@ import Preloader from '../Preloader/Preloader';
 class CategoryContainer extends React.Component {
     componentDidMount() {
         let type = this.props.match.params.type;
-        this.props.setCategoryDataThunk(type,this.props.onOnePage,0)
+        this.props.setCategoryDataThunk(
+            type,
+            this.props.onOnePage*this.props.numberOfPage,
+            this.props.onOnePage*(this.props.numberOfPage-1)
+            )
         this.props.setCategoryCountThunk(type)
-        // axios.get(`http://localhost:8001/place_category/places/category_count/${type}`)
-        //     .then(res => {
-        //         this.props.setCategoryCount(res.data)
-        //     })
     }
-    onPageChange = (numberOfPage, type, prevCategoryData) => {
-        this.props.setCategoryDataThunk(type,this.props.onOnePage,numberOfPage - this.props.onOnePage)
-    };
+    componentWillUnmount(){
+        this.props.SetPageCount(1)
+        debugger
+    }
+    // onPageChange = (numberOfPage, type) => {
+    //     debugger
+    //     this.props.setCategoryDataThunk(type,numberOfPage,this.props.onOnePage)
+    // };
     render() {
+        debugger
         if (this.props.categoryData.length == 0) return <Preloader />
         return <Category {...this.props} onPageChange={this.onPageChange} type={this.props.match.params.type} />
     }

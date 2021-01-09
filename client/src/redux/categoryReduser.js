@@ -15,7 +15,7 @@ let init = {
     names: [],
     liked: { ...localStorage },
     totalCount: 1,
-    numberOfPage: 2,
+    numberOfPage: 1,
     onOnePage: 12,
     request: true,
     typeTitle: '',
@@ -26,7 +26,7 @@ let init = {
 const categoryReduser = (state = init, action) => {
     switch (action.type) {
         case SET_CATEGORY_DATA:
-            return { ...state, categoryData: action.prevNanData.concat(action.categoryData) }
+            return { ...state, categoryData: action.prevCategoryData.concat(action.categoryData) }
         case SET_NAMES:
             return { ...state, names: action.names }
         case TOTAL_COUNT:
@@ -47,7 +47,7 @@ const categoryReduser = (state = init, action) => {
     }
 }
 
-export const setCategoryData = (categoryData, prevNanData) => ({ type: SET_CATEGORY_DATA, categoryData, prevNanData });
+export const setCategoryData = (categoryData, prevCategoryData) => ({ type: SET_CATEGORY_DATA, categoryData, prevCategoryData });
 // export const concatcategoryData = (categoryData) => ({ type: CONCAT_CATEGORY_DATA, categoryData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
@@ -57,10 +57,15 @@ export const SetTypeTitle = (typeTitle) => ({ type: SET_TYPE_TITLE, typeTitle })
 export const setCategoryCount = (categoryCount) => ({ type: SET_CATEGORY_COUNT, categoryCount })
 export const setCounter = (count) => ({ type: SET_COUNTER, count });
 
-export const setCategoryDataThunk = (type,onOnePage,numberOfPage) =>
+export const setCategoryDataThunk = (type,limit,skip, prevCategoryData) =>
     async (dispatch) => {
-        let req = await axios.get(`http://localhost:8001/place_category/places/some/${type}/${onOnePage}/${numberOfPage}`)
-        dispatch(setCategoryData(req.data, []))
+        let req = await axios.get(`http://localhost:8001/place_category/places/some/${type}/${limit}/${skip}`)
+        debugger
+        if (skip==0){
+            dispatch(setCategoryData(req.data, []))
+        }else{
+            dispatch(setCategoryData(req.data, prevCategoryData))
+        }
         dispatch(SetTypeTitle(req.data[0].placeCategory))
 
     }

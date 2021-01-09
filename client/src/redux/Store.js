@@ -1,7 +1,7 @@
 import infoReduser from "./infoReduser";
 import categoryReduser from "./categoryReduser";
 import headerReduser from "./headerReduser";
-import serachReduser from "./serchReduser";
+import searchReduser from "./searchReduser";
 import thunkMiddleware from "redux-thunk"
 import authReduser from "./authReduser";
 import { reducer as formReducer } from 'redux-form'
@@ -13,7 +13,7 @@ let redusers= combineReducers({
     infoData: infoReduser,
     categoryData:categoryReduser,
     header: headerReduser,
-    serch: serachReduser,
+    search: searchReduser,
     auth: authReduser,
     form: formReducer,
     popularData:popularReduser

@@ -5,7 +5,7 @@ import './Header.css'
 import SearchingForm from './SearchingForm';
 import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr,SearchChange,
   searchThunk,
-  CloseListThunk } from '../../redux/serachReduser';
+  CloseListThunk } from '../../redux/searchReduser';
 import { logout } from '../../redux/authReduser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -116,12 +116,12 @@ class Header extends React.Component {
 let mapStateToPros = (state) => {
   return {
     counter: state.categoryData.count,
-    newSearchText: state.serach.newSearchText,
-    searched: state.serach.searched,
-    isClosed: state.serach.isClosed,
-    isListLoading: state.serach.isListLoading,
+    newSearchText: state.search.newSearchText,
+    searched: state.search.searched,
+    isClosed: state.search.isClosed,
+    isListLoading: state.search.isListLoading,
     liked: state.categoryData.liked,
-    requestNumber: state.serach.requestNumber,
+    requestNumber: state.search.requestNumber,
     token: state.auth.token,
   }
 }

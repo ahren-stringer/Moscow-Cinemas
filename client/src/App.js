@@ -9,7 +9,7 @@ import 'materialize-css'
 import Search from './Components/Search/Search';
 import { connect } from 'react-redux';
 import { setSearched,
-  CloseListThunk } from './redux/serachReduser';
+  CloseListThunk } from './redux/searchReduser';
 import Footer from './Components/Footer/Footer';
 import Auth from './Components/Auth/Auth';
 import Register from './Components/Auth/Register';
@@ -37,7 +37,8 @@ function App(props) {
 
   return (
     <div className="App"
-      onClick={()=>{CloseListThunk()}}
+      onClick={()=>{debugger
+        props.CloseListThunk()}}
     >
       <div className='Header'
         style={props.location.pathname === '/' ? {

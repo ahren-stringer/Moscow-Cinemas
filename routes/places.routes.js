@@ -51,6 +51,8 @@ router.post('/place_category/places', async (req, res) => {
 router.get('/place_category/places/search/:search', async (req, res) => {
     try {
         const places = await Place.find()
+
+        if (req.params.search==='') res.json([])
         
         res.json(places.filter(item=> item.name.toLowerCase().includes(req.params.search)).slice(0,8))
     } catch (e) {

@@ -7,7 +7,13 @@ function Category(props) {
 
   let onPageChange = (e) => {
     props.SetPageCount(props.numberOfPage + 1)
-    props.onPageChange(props.numberOfPage * props.onOnePage, props.type, props.categoryData)
+    props.setCategoryDataThunk(
+      props.type,
+      props.onOnePage*(props.numberOfPage+1),
+      props.onOnePage*props.numberOfPage,
+      props.categoryData
+      )
+    debugger
   };
   return (
     <div>

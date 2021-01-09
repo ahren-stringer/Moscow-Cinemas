@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Navbar.module.css'
+import s from './Category.module.css'
 
 function Introdaction(props) {
   return <div className={s.intro}>

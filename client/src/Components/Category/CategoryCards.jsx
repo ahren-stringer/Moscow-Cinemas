@@ -17,10 +17,12 @@ function CategoryCard(props) {
         <div className={s.category}>
           {
             props.categoryData.map((item) => {
-              return <SingleCard item={item}
-                ls={ls}
-                match={props.match}
-                likedThunk={props.likedThunk}/>
+              return <div className={s.card__wrapper}>
+                <SingleCard item={item}
+                  ls={ls}
+                  match={props.match}
+                  likedThunk={props.likedThunk} />
+              </div>
             })
           }
         </div>

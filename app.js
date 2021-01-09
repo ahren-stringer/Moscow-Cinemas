@@ -11,7 +11,8 @@ import places from './routes/places.routes.js'
 const app = expess();
 const port = process.env.PORT || 8001;
 const connection_url = 'mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority';
-
+//'mongodb+srv://Reacter2:4SI0GUVM2zWy3SXr@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority'
+//4SI0GUVM2zWy3SXr
 //Middlewares
 app.use(expess.json())
 app.use(Cors())

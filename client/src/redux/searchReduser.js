@@ -10,7 +10,7 @@ const SET_SEARCHED_ARR = 'headerReuser/SET_SEARCHED_ARR'
 const SET_NEW_TEXT = 'categoryReuser/SET-NEW-TEXT';
 
 let init = {
-requestNumber: 1,
+    requestNumber: 1,
     searched: { requestNumber: 0, request: [] },
     searchedArr: [],
     searchedPage: [],
@@ -34,7 +34,7 @@ const searchReduser = (state = init, action) => {
             return { ...state, isListLoading: action.isListLoading }
         case SET_REQ_NUMBER:
             return { ...state, requestNumber: action.requestNumber }
-            case SET_NEW_TEXT:
+        case SET_NEW_TEXT:
             return { ...state, newSearchText: action.text }
         default:
             return state
@@ -57,19 +57,12 @@ export const searchThunk = (search, requestNumber) =>
         dispatch(toggleList(true))
         dispatch(loadList(true))
 
-        function request(req) {
-            dispatch(setReqNumber(+requestNumber + 1))
-            if (search === '') {
-                dispatch(setSearched({ requestNumber, request: [] }))
-            } else {
-                dispatch(setSearched({ requestNumber, request: req.data }))
-            }
-            // props.loadList(false)
-        }
-
         let req = await axios.get(`http://localhost:8001/place_category/places/search/${search}`)
-        request(req)
+        dispatch(setReqNumber(+requestNumber + 1))
+        dispatch(setSearched({ requestNumber, request: req.data }))
+        // props.loadList(false)
         dispatch(loadList(false))
+        debugger
     }
 
 export const CloseListThunk = () =>
