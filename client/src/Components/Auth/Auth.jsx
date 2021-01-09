@@ -58,7 +58,6 @@ function AuthForm(props) {
 AuthForm = reduxForm({ form: 'auth' })(AuthForm)
 
 function Auth(props) {
-    debugger
     let message = useMessage();
 
     let submit = async (formData) => {

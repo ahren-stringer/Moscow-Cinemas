@@ -1,6 +1,8 @@
 import express from 'express';
 const {Router} = express;
 const router=Router()
+import jwt  from 'jsonwebtoken'
+import User from '../models/User.js'
 import Coment from "../models/Coment.js"
 
 router.post('/coment', async (req, res) => {
@@ -11,6 +13,7 @@ router.post('/coment', async (req, res) => {
         if (!token) return res.status(400).json({ message: 'Вы не авторизованны' })
         const decoded = jwt.verify(token, 'TopSecret')
         //req.user=decoded
+        console.log(coment)
         console.log(decoded)
         const user = await User.findOne({ _id: decoded.userId })
         console.log(user)

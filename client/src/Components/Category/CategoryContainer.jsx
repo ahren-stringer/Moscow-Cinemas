@@ -42,7 +42,7 @@ let mapStateToProps = (state) => {
         totalCount: state.categoryData.totalCount,
         numberOfPage: state.categoryData.numberOfPage,
         onOnePage: state.categoryData.onOnePage,
-        searchRedirect: state.header.searchRedirect,
+        searchRedirect: state.search.searchRedirect,
         typeTitle: state.categoryData.typeTitle,
         categoryCount: state.categoryData.categoryCount
     }

@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
 import SearchingForm from './SearchingForm';
-import { setSearched, toggleList, loadList, setReqNumber, setSearchedArr,SearchChange,
+import {
+  setSearched, toggleList, loadList, setReqNumber, setSearchedArr, SearchChange,
   searchThunk,
-  CloseListThunk } from '../../redux/searchReduser';
+  CloseListThunk
+} from '../../redux/searchReduser';
 import { logout } from '../../redux/authReduser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -29,28 +31,35 @@ class Header extends React.Component {
     }
   };
 
-  // openMenu = (e) => {
-  //   debugger
-  //   e.currentTarget.parentNode.style.right = '0'
-  // }
+  closeMenu = (event) => {
+    if (event.target.nodeName === 'A') {
+      let menu=event.currentTarget;
+      menu.style.right = '-283px'
+      debugger
+      this.setState({
+        menuBtn: false
+      })
+    }
+  }
   render() {
     return (
       <div className='header'>
         <div className='__container'>
           <div className='header__wrapper'>
-             <NavLink to='/' className='logo' activeClassName='active'>
-              
-                <span className='logo__title' style={this.state.menuBtn ? {color:'#2980b9'}:{}}>
-                  MosCulture
+            <NavLink to='/' className='logo' activeClassName='active' style={this.state.menuBtn ? { display: 'none' } : {}}>
+
+              <span className='logo__title'>
+                MosCulture
                 </span>
-              
+
             </NavLink>
-            <div className='menu__wrapper'>
-              <a className="menu-btn">
+            <div className='menu__wrapper' onClick={this.closeMenu}
+            style={!this.state.menuBtn?{right:'-283px'}:{right:'0'}}
+            >
+              <span className="menu-btn">
                 {
                   !this.state.menuBtn ?
                     <span onClick={(e) => {
-                      e.currentTarget.parentNode.parentNode.style.right = '0'
                       this.setState({
                         menuBtn: true
                       })
@@ -58,7 +67,7 @@ class Header extends React.Component {
                       <FontAwesomeIcon icon={faBars} />
                     </span>
                     : <span onClick={(e) => {
-                      e.currentTarget.parentNode.parentNode.style.right = '-283px'
+                      this.props.SearchChange('')
                       this.setState({
                         menuBtn: false
                       })
@@ -66,14 +75,12 @@ class Header extends React.Component {
                       <FontAwesomeIcon icon={faTimes} />
                     </span>
                 }
-              </a>
+              </span>
               {
-                this.state.menuBtn && <NavLink to='/' className='logo' activeClassName='active'>
-                  <div>
-                    <span className='logo__title'>
+                this.state.menuBtn && <NavLink to='/' className='logo logo__title' activeClassName='active'>
+                    {/* <span className='logo__title'> */}
                       MosCulture
-                  </span>
-                  </div>
+                  {/* </span> */}
                 </NavLink>
               }
               <div className='header__inner'>
@@ -83,7 +90,7 @@ class Header extends React.Component {
 
                 {/* Избранное */}
                 <div className="liked inner-item">
-                  <a class="collection-item">
+                  <span class="collection-item">
                     {!this.state.menuBtn || <span class="new badge">
                       {this.props.counter}
                     </span>}
@@ -96,7 +103,7 @@ class Header extends React.Component {
                     {this.state.menuBtn ||
                       this.props.counter
                     }
-                  </a>
+                  </span>
                 </div>
 
                 {/* Авторизация */}
@@ -126,6 +133,8 @@ let mapStateToPros = (state) => {
   }
 }
 
-export default connect(mapStateToPros, { SearchChange, setSearched, toggleList, loadList, setReqNumber, logout, setSearchedArr,
+export default connect(mapStateToPros, {
+  SearchChange, setSearched, toggleList, loadList, setReqNumber, logout, setSearchedArr,
   searchThunk,
-  CloseListThunk })(Header);
+  CloseListThunk
+})(Header);

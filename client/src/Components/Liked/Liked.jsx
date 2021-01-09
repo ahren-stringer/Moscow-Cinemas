@@ -3,8 +3,7 @@ import './Liked.css'
 import { connect } from 'react-redux';
 import Popular from '../MainPage/Popular';
 import CategoryCard from '../Category/CategoryCards';
-import { Setliked,likedThunk } from '../../redux/categoryReduser';
-import { setCounter } from '../../redux/headerReduser';
+import { Setliked,setCounter,likedThunk } from '../../redux/categoryReduser';
 import { withRouter } from 'react-router-dom';
 
 

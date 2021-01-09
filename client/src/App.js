@@ -37,7 +37,7 @@ function App(props) {
 
   return (
     <div className="App"
-      onClick={()=>{debugger
+      onClick={()=>{
         props.CloseListThunk()}}
     >
       <div className='Header'
@@ -72,7 +72,7 @@ function App(props) {
 
 let mapStateToProps = (state) => {
   return {
-    isClosed: state.header.isClosed,
+    isClosed: state.search.isClosed,
     loaded: state.auth.loaded,
     token: state.auth.token,
     userId: state.auth.userId,

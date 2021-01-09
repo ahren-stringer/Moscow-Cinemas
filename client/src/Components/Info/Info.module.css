@@ -26,7 +26,7 @@
     font-weight: 700;
 }
 .photos__galery{
-    width: 450px;
+    max-width: 450px;
 }
 .description__liked{
     text-align: center;
@@ -52,7 +52,7 @@
     margin-bottom: 40px;
 }
 .coment__form{
-    width: 430px;
+    max-width: 430px;
     margin: 40px 0;
 }
 .coment{
@@ -78,7 +78,7 @@
     margin-bottom: 10px;
 }
 .photos__galery img{
-    width: 250px;
+    max-width: 250px;
 }
 .coment__otcenka{
     margin-bottom: 12px;

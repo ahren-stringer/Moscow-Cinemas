@@ -1,6 +1,5 @@
 import infoReduser from "./infoReduser";
 import categoryReduser from "./categoryReduser";
-import headerReduser from "./headerReduser";
 import searchReduser from "./searchReduser";
 import thunkMiddleware from "redux-thunk"
 import authReduser from "./authReduser";
@@ -12,7 +11,6 @@ const { createStore, combineReducers, applyMiddleware } = require("redux");
 let redusers= combineReducers({
     infoData: infoReduser,
     categoryData:categoryReduser,
-    header: headerReduser,
     search: searchReduser,
     auth: authReduser,
     form: formReducer,

@@ -71,9 +71,7 @@ padding-left: 5px;
 .search ul li{
     border-bottom: 1px solid #777;
 }
-a.active{
-    color: red;
-}
+
 .search__input{
     margin: 0; 
     height: 2em;

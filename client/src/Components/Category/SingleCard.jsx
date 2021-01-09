@@ -27,7 +27,7 @@ function SingleCard(props) {
             {
                ( props.match.url === '/liked' 
                && Object.entries(localStorage).filter(item => item[0] !== "count" && item[0] !== "userData").length !== 0) 
-               ? <p onClick={() => { props.likedThunk(props.item.name, props.item) }}>
+               ? <p className={s.liked__delete} onClick={() => { props.likedThunk(props.item.name, props.item) }}>
                     Удалить из избранного
             </p> :
                     <div className={s.liked} onClick={() => {

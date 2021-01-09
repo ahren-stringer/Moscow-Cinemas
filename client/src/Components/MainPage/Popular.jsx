@@ -12,7 +12,7 @@ import { likedThunk } from '../../redux/categoryReduser';
 import { setPopularSliderThunk} from '../../redux/popularReduser';
 import { connect } from 'react-redux';
 import SingleCard from '../Category/SingleCard';
-
+//localStorage.clear()
 function Popular(props) {
 
     let settings1 = {
@@ -58,11 +58,14 @@ function Popular(props) {
                         <Slider {...settings1}>
                             {
                                 popular.map((item, index, array) => {
-                                    return <SingleCard item={item}
+                                    return <div className='popular-card__wrapper'>
+                                        <SingleCard item={item}
                                         ls={ls}
                                         match={props.match}
                                         likedThunk={props.likedThunk}
                                         key={index+1} />
+                                    </div>
+                                    
                                 })
                             }
                         </Slider>
@@ -84,7 +87,7 @@ function Popular(props) {
                                             </NavLink>
                                             <div className='place__liked'
                                                 onClick={() => {
-                                                    props.likedThunk(item.name, item.categoryUrl)
+                                                    props.likedThunk(item.name, item)
                                                 }}>
                                                 <div className='place__liked-big'>
                                                     <span className='place__liked-text'>

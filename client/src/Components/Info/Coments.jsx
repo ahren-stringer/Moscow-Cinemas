@@ -40,6 +40,10 @@ const Coments = (props) => {
             }
         });
         let arr = [...coments]
+        // if (arr.length>props.onOnePage){
+        //     setComents(req.data)
+        //     props.SetTotalCount(props.totalCount+1)
+        // }
         arr.push(req.data[0])
         setComents(arr)
     }
@@ -49,9 +53,7 @@ const Coments = (props) => {
     }, [props.coments])
 
     let onColorChange = (item) => {
-        if (item == 0) {
-            item = 'без оценки'
-        } else {
+
             for (let i = 1; i <= 5; i++) {
                 let id = i + "s";
                 document.getElementById(id).style.color = 'black'
@@ -60,7 +62,6 @@ const Coments = (props) => {
                 let id = i + "s";
                 document.getElementById(id).style.color = 'red'
             }
-        }
         setForm({ ...form, size: item })
     }
     
@@ -82,10 +83,9 @@ const Coments = (props) => {
                             </div>
 
                         </div>
-                        <div className={s.coment__otcenka}> <span className={s.coment__size}>Оценка:</span>   {arr.map((item, index, array) => {
-                            return (
-                                <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
-                            )
+                        <div className={s.coment__otcenka}> <span className={s.coment__size}>Оценка:</span>
+                        {arr.map(item => {
+                            return <FontAwesomeIcon icon={faStar} id={item + 's'} onClick={() => { onColorChange(item) }} />
                         })
                         }
                         </div>
@@ -108,11 +108,13 @@ const Coments = (props) => {
                                 <div className={s.coment__container}>
                                     <div className={s.coment__name}>{item.name}</div>
                                     <div>{item.email}</div>
-                                    <div>Оценка: {
+                                    {item.size===0? <div>Без оценки</div>:
+                                    <div>Оценка:{
                                         arr.map((star, index, array) => {
                                             if (index < item.size) return <FontAwesomeIcon icon={faStar} style={{ color: 'red' }} />
                                         })
-                                    } </div>
+                                    }
+                                    </div>}
                                     <div className={s.coment__coment}>{item.coment} </div>
                                     <div className={s.coment__date}>{item.date
                                     .replace( /-/g, "." )
