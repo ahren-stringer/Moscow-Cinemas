@@ -13,14 +13,14 @@ const SearchingForm = (props) => {
 
     useEffect(() => {
         if (searched.requestNumber < props.searched.requestNumber)
-        debugger
+            debugger
         setSearched(props.searched)
     }, [props.searched])
 
     return (<div className="searching__form inner-item">
         <div className="search">
             <input className='search__input' type="text" value={props.newSearchText}
-                onChange={()=>{props.searchThunk(searchInput.current.value, props.requestNumber)}}
+                onChange={() => { props.searchThunk(searchInput.current.value, props.requestNumber) }}
                 ref={searchInput}
                 name="s"
                 placeholder="Искать здесь..."
@@ -33,7 +33,9 @@ const SearchingForm = (props) => {
                     <FontAwesomeIcon icon={faSearch} />
                 </NavLink>
             </button>
-            {props.isListLoading ? <PreloaderList/>
+            {props.isListLoading ? <div className='preloader'>
+                <PreloaderList />
+            </div>
                 :
                 <ul className="collection">
                     {
@@ -41,7 +43,7 @@ const SearchingForm = (props) => {
                             searched.request.map((item) => {
                                 return <li className="collection-item" onClick={() => { props.SearchChange('') }}>
                                     <NavLink to={`/places/${item.name}`}
-                                        onClick={()=>{props.CloseListThunk()}}>{item.name}
+                                        onClick={() => { props.CloseListThunk() }}>{item.name}
                                     </NavLink>
                                 </li>
                             })
