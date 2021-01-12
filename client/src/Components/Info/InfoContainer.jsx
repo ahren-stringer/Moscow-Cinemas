@@ -29,7 +29,7 @@ class InfoContainer extends React.Component {
         }
     }
     onPageChange = (name,onOnePage,page) => {
-        axios.get(`http://localhost:8001/cinema/coments/some/${name}/${onOnePage}/${page*onOnePage}`)
+        axios.get(`/coments/some/${name}/${onOnePage}/${page*onOnePage}`)
             .then(req => {
                 this.props.setComents(req.data)
             })

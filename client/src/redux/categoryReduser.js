@@ -59,7 +59,7 @@ export const setCounter = (count) => ({ type: SET_COUNTER, count });
 
 export const setCategoryDataThunk = (type,limit,skip, prevCategoryData) =>
     async (dispatch) => {
-        let req = await axios.get(`http://localhost:8001/place_category/places/some/${type}/${limit}/${skip}`)
+        let req = await axios.get(`/place_category/places/some/${type}/${limit}/${skip}`)
         debugger
         if (skip==0){
             dispatch(setCategoryData(req.data, []))
@@ -72,7 +72,7 @@ export const setCategoryDataThunk = (type,limit,skip, prevCategoryData) =>
 
 export const setCategoryCountThunk = (type) =>
     async (dispatch) => {
-        let req = await axios.get(`http://localhost:8001/place_category/places/category_count/${type}`)
+        let req = await axios.get(`/place_category/places/category_count/${type}`)
         dispatch(setCategoryCount(req.data))
     }
 

@@ -24,7 +24,7 @@ export const setPopular = (popular) => ({ type: SET_POPULAR, popular });
 
 export const setPopularSliderThunk=()=>
     async (dispatch)=>{
-        const req = await axios.get('http://localhost:8001/popular/some');
+        const req = await axios.get('/popular/some');
         dispatch(SetPopularSlider(req.data))
   }
 

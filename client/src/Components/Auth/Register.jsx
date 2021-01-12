@@ -1,6 +1,5 @@
 import React from 'react';
 import 'materialize-css'
-import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email, minLength6 } from '../../validators'
@@ -55,9 +54,8 @@ RegisterForm = reduxForm({ form: 'register' })(RegisterForm)
 function Register(props) {
 
     let submit = async (formData) => {
-        //props.loginThunk(formData.email, formData.password, formData.rememberMe)
         try {
-            await axios.post('http://localhost:8001/cinema/register', { ...formData })
+            await axios.post('/cinema/register', { ...formData })
             props.history.goBack()
         } catch (e) { }
     }

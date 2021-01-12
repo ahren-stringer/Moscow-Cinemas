@@ -1,6 +1,5 @@
 import React from 'react';
 import 'materialize-css'
-import { useMessage } from '../../Hooks/message.hook';
 import axios from 'axios';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -58,12 +57,10 @@ function AuthForm(props) {
 AuthForm = reduxForm({ form: 'auth' })(AuthForm)
 
 function Auth(props) {
-    let message = useMessage();
 
     let submit = async (formData) => {
-        //props.loginThunk(formData.email, formData.password, formData.rememberMe)
         try {
-            const req = await axios.post('http://localhost:8001/cinema/login', { ...formData })
+            const req = await axios.post('/cinema/login', { ...formData })
             props.login(req.data.token, req.data.userId)
             props.history.goBack()
         } catch (e) { }

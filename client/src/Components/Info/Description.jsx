@@ -55,7 +55,6 @@ const Description = (props) => {
               {
                 original: item,
                 thumbnail: item,
-
               })
           })
             : null

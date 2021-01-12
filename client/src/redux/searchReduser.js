@@ -57,7 +57,7 @@ export const searchThunk = (search, requestNumber) =>
         dispatch(toggleList(true))
         dispatch(loadList(true))
 
-        let req = await axios.get(`http://localhost:8001/place_category/places/search/${search}`)
+        let req = await axios.get(`/place_category/places/search/${search}`)
         dispatch(setReqNumber(+requestNumber + 1))
         dispatch(setSearched({ requestNumber, request: req.data }))
         // props.loadList(false)

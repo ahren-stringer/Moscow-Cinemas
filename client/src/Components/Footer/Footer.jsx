@@ -28,7 +28,7 @@ const textarea = ({ input, label, type, meta: { touched, error, warning } }) => 
 }
 
 function MailForm(props) {
-    const { handleSubmit, pristine, reset, submitting } = props
+    const {submitting } = props
 
     return <form onSubmit={props.handleSubmit}>
         <Field
@@ -62,33 +62,27 @@ function MailForm(props) {
 MailForm = reduxForm({ form: 'mailForm' })(MailForm)
 
 
-const Footer = (props) => {
+const Footer = () => {
 
     let submit = async (formData) => {
-        // print the form values to the console
-        console.log(formData)
-        //props.loginThunk(formData.email, formData.password, formData.rememberMe)
+
         try {
-            await axios.post('http://localhost:8001/email', { ...formData })
+            await axios.post('/email', { ...formData })
         } catch (e) { }
     }
 
     return (
         <footer className="page-footer" style={{'background-color': "#2980b9"}}>
             <div className="__container">
-                {/* <div className="row">
-                    <div className="col l6 s12"> */}
+
                     <div style={{maxWidth:'400px'}}>
                     <h5 className="white-text">Обратная связь</h5>
                         <MailForm onSubmit={submit}/>
 
                     </div>
                     </div>
-                {/* </div>
-            </div> */}
-            <div className="footer-copyright">
-               
-            
+
+            <div className="footer-copyright">               
             </div>
         </footer>
 

@@ -7,9 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 function SingleCard(props) {
 
     return (
-        <div className={s.cinema} key={props.key} 
-        // style={{width: '266px'}}
-        >
+        <div className={s.cinema} key={props.key} >
             <NavLink to={`/places/${props.item.name}`}>
                 <div className={s.category__img} style={(props.item.photos.photoLarge && props.item.photos.photoLarge !== '') ?
                     { 'backgroundImage': 'url(' + props.item.photos.photoLarge + ')' }

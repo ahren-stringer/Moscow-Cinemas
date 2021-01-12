@@ -13,7 +13,7 @@ function PopularPage(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const req = await axios.get(`http://localhost:8001/popular`);
+            const req = await axios.get(`/popular`);
             props.setPopular(req.data)
         }
         fetchData()

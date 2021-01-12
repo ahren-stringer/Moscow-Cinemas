@@ -13,7 +13,6 @@ function Category(props) {
       props.onOnePage*props.numberOfPage,
       props.categoryData
       )
-    debugger
   };
   return (
     <div>

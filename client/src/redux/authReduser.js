@@ -10,15 +10,11 @@ let init = {
     userId: null,
     loaded: false,
     login: () => { },
-    // logout:noop,
     isAuth: false
 };
 
 const authReduser = (state = init, action) => {
     switch (action.type) {
-        // case LOGIN:
-        //     localStorage.setItem('userData', JSON.stringify({ userId: action.id, token: action.jwtToken }))
-        //     return { ...state, token: action.jwtToken, userId: action.id }
         case LOGOUT:
             localStorage.removeItem('userData')
             return { ...state, token: null, userId: null }

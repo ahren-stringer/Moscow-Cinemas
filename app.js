@@ -6,16 +6,23 @@ import category from './routes/category.routes.js'
 import coments from './routes/coments.routes.js'
 import email from './routes/email.routes.js'
 import places from './routes/places.routes.js'
+import path from 'path'
 
 //API Config
 const app = expess();
 const port = process.env.PORT || 8001;
 const connection_url = 'mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority';
-//'mongodb+srv://Reacter2:4SI0GUVM2zWy3SXr@cluster0.8y24l.mongodb.net/myTinder?retryWrites=true&w=majority'
-//4SI0GUVM2zWy3SXr
+
 //Middlewares
 app.use(expess.json())
-app.use(Cors())
+//app.use(Cors())
+app.use(
+    Cors({
+      credentials: true,
+      origin: ["http://localhost:8001"],
+      optionsSuccessStatus: 200
+    })
+  );
 // Авторизация
 app.use('',auth)
 // Категории
@@ -34,6 +41,14 @@ mongoose.connect(connection_url, {
     useUnifiedTopology: true
 
 })
+
+if (process.env.NODE_ENV ==='ptoduction'){
+    app.use(expess.static('client/build'))
+
+    app.get('*', (req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
 //Listener
 

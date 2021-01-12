@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 import './Header.css'
 import PreloaderList from '../Preloader/PreloaderList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +12,6 @@ const SearchingForm = (props) => {
 
     useEffect(() => {
         if (searched.requestNumber < props.searched.requestNumber)
-            debugger
         setSearched(props.searched)
     }, [props.searched])
 

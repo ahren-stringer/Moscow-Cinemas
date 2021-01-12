@@ -29,21 +29,17 @@ const Coments = (props) => {
     }
 
     const sendComent = async () => {
-        await axios.post('http://localhost:8001/coment', { ...form }, {
+        await axios.post('/coment', { ...form }, {
             headers: {
                 "Authorization": ('Bearer ' + props.token)
             }
         })
-        const req = await axios.get(`http://localhost:8001/cinema/coments/${props.infoData[0].name}`, {
+        const req = await axios.get(`/coments/${props.infoData[0].name}`, {
             headers: {
                 "Authorization": ('Bearer ' + props.token)
             }
         });
         let arr = [...coments]
-        // if (arr.length>props.onOnePage){
-        //     setComents(req.data)
-        //     props.SetTotalCount(props.totalCount+1)
-        // }
         arr.push(req.data[0])
         setComents(arr)
     }

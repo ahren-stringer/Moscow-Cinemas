@@ -14,9 +14,8 @@ function Search(props) {
     useEffect(() => {
         async function fetchData() {
             let riched = props.match.params.riched;
-            const req = await axios.get(`http://localhost:8001/place_category/places/search_all/${riched}`);
+            const req = await axios.get(`/place_category/places/search_all/${riched}`);
             props.setSearchedPage(req.data)
-            console.log(req.data)
         }
         fetchData()
     }, [props.match.params.riched])

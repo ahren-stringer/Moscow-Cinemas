@@ -21,14 +21,8 @@ class CategoryContainer extends React.Component {
     }
     componentWillUnmount(){
         this.props.SetPageCount(1)
-        debugger
     }
-    // onPageChange = (numberOfPage, type) => {
-    //     debugger
-    //     this.props.setCategoryDataThunk(type,numberOfPage,this.props.onOnePage)
-    // };
     render() {
-        debugger
         if (this.props.categoryData.length == 0) return <Preloader />
         return <Category {...this.props} onPageChange={this.onPageChange} type={this.props.match.params.type} />
     }

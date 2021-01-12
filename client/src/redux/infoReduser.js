@@ -47,19 +47,19 @@ export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 
 export const setInfoDataThunk = (id,onOnePage,token) =>
     async (dispatch) => {
-        let placesReq = await axios.get(`http://localhost:8001/place_category/places/${id}`)
+        let placesReq = await axios.get(`/place_category/places/${id}`)
         dispatch(setInfoData(placesReq.data))
         let pop = +placesReq.data[0].popular + 1;
-        await axios.put(`http://localhost:8001/place_category/places/${placesReq.data[0]._id}`, { popular: pop })
+        await axios.put(`/place_category/places/${placesReq.data[0]._id}`, { popular: pop })
         // Коменты
-        let comentsReq = await axios.get(`http://localhost:8001/cinema/coments/some/${placesReq.data[0].name}/${onOnePage}/0`, {
+        let comentsReq = await axios.get(`/cinema/coments/some/${placesReq.data[0].name}/${onOnePage}/0`, {
             headers: {
                 "Authorization": ('Bearer ' + token)
             }
         })    
         dispatch(setComents(comentsReq.data))
         // Количество коментов
-        let comentsCountReq = await axios.get(`http://localhost:8001/cinema/coments_count/${placesReq.data[0].name}`, {
+        let comentsCountReq = await axios.get(`/cinema/coments_count/${placesReq.data[0].name}`, {
             headers: {
                 "Authorization": ('Bearer ' + token)
             }
