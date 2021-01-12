@@ -28,12 +28,19 @@ app.use('',email)
 app.use('',places)
 
 //DB Config
-mongoose.connect(connection_url, {
+try{
+  mongoose.connect(connection_url, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
-
 })
+}catch(error){
+  console.log(error)
+}
+
+mongoose.connection.on('error', err => {
+  console.log(err);
+});
 
 if (process.env.NODE_ENV ==='production'){
     app.use(expess.static('client/build'))

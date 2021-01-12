@@ -47,7 +47,7 @@ export const setSearchRedirect = (searchRedirect) => ({ type: SET_REDIRECT, sear
 export const toggleList = (isClosed) => ({ type: CLOSE_LIST, isClosed })
 export const loadList = (isListLoading) => ({ type: LOAD_LIST, isListLoading })
 export const setReqNumber = (requestNumber) => ({ type: SET_REQ_NUMBER, requestNumber })
-export const setSearchedArr = (searchedArr) => ({ type: SET_SEARCHED_ARR, searchedArr })
+export const setSearchedArr = (searchedArr) => ({ type: SET_SEARCHED_ARR, searchedArr})
 export const SearchChange = (text) => ({ type: SET_NEW_TEXT, text })
 
 export const searchThunk = (search, requestNumber) =>
