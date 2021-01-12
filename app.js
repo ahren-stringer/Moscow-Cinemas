@@ -15,14 +15,7 @@ const connection_url = 'mongodb+srv://Reacter:6Jf4B0YhZXRsZCAg@cluster0.8y24l.mo
 
 //Middlewares
 app.use(expess.json())
-//app.use(Cors())
-app.use(
-    Cors({
-      credentials: true,
-      origin: ["http://localhost:8001"],
-      optionsSuccessStatus: 200
-    })
-  );
+app.use(Cors())
 // Авторизация
 app.use('',auth)
 // Категории
