@@ -35,7 +35,7 @@ mongoose.connect(connection_url, {
 
 })
 
-if (process.env.NODE_ENV ==='ptoduction'){
+if (process.env.NODE_ENV ==='production'){
     app.use(expess.static('client/build'))
 
     app.get('*', (req,res)=>{
