@@ -16,8 +16,8 @@ const Coments = (props) => {
         size: 0,
         coment: '',
         place: props.infoData[0].name,
-        // token: props.token
-        userId:JSON.parse(localStorage.getItem('userData')).userId
+        token: props.token
+        //userId:JSON.parse(localStorage.getItem('userData')).userId
     });
 
     let onInputChange = (event) => {

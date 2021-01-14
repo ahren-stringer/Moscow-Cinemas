@@ -1,4 +1,3 @@
-import * as axios from 'axios';
 import { InfoAPI } from '../API/api';
 
 const SET_INFO_DATA = 'infoReuser/SET-INFO-DATA';

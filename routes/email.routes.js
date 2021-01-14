@@ -8,12 +8,12 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'site_mailsender@mail.ru',
-        pass: 'youwi11neverpa22'
+        user: 'third3@bk.ru',
+        pass: 'tRoRPoOyi1*7'
     },
-    tls: {
-        rejectUnauthorized: false
-    }
+    // tls: {
+    //     rejectUnauthorized: false
+    // }
 });
 
 const mailer= message =>{
@@ -26,7 +26,7 @@ const mailer= message =>{
 router.post('/email',(req,res)=>{
     if (!req.body.email || !req.body.message) return res.sendStatus(400)
     const message = {
-        from: `site_mailsender@mail.ru`,
+        from: `third3@bk.ru`,
         to: 'pavel12g@mail.ru', // Почта сайта
         subject: req.body.name,
         html: req.body.message

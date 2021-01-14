@@ -22,7 +22,7 @@ class CategoryContainer extends React.Component {
         this.props.SetPageCount(1)
     }
     render() {
-        if (this.props.categoryData.length == 0) return <Preloader />
+        if (this.props.categoryData.length === 0) return <Preloader />
         return <Category {...this.props} onPageChange={this.onPageChange} type={this.props.match.params.type} />
     }
 }

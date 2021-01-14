@@ -29,18 +29,22 @@ class InfoContainer extends React.Component {
             // this.setState({
             //     infoFlag: true
             // })
+            this.props.SetPageCount(1)
             this.props.setInfoDataThunk(id, this.props.onOnePage, this.props.numberOfPage-1)
         }
     }
     componentWillUnmount(){
-        this.props.SetPageCount(0)
+        this.props.SetPageCount(1)
     }
     onPageChange = async (name, onOnePage, numberOfPage) => {
         let req = await InfoAPI.getComents(name, onOnePage, numberOfPage)
         this.props.setComents(req)
     };
     render() {
-        if (!this.props.infoData && !this.props.coments && !this.props.totalCount) return <Preloader />
+        debugger
+        if (!this.props.infoData 
+            //&& !this.props.coments && !this.props.totalCount
+            ) return <Preloader />
         return <Info {...this.props} id={this.props.match.params.id}
             onPageChange={this.onPageChange}
         />

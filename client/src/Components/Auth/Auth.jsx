@@ -3,7 +3,7 @@ import 'materialize-css'
 import {AuthAPI} from '../../API/api'
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login, setLoaded } from '../../redux/authReduser'
+//import { login, setLoaded } from '../../redux/authReduser'
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email} from '../../validators'
 

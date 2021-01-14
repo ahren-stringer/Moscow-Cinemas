@@ -10,12 +10,12 @@ import nodemailer from 'nodemailer'
 const router=Router()
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.mail.ru',
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-        user: 'site_mailsender@mail.ru',
-        pass: 'youwi11neverpa22'
+        user: 'ahrenstringer800@gmail.com',
+        pass: 'newpasword1516'
     },
     tls: {
         rejectUnauthorized: false
@@ -62,7 +62,7 @@ router.post(
             // Отправка на почту
 
             const message = {
-                from: 'MosCulture <mos_culture@mail.ru>',
+                from: 'ahrenstringer800@gmail.com',
                 to: req.body.email, 
                 subject: 'Вы зарегистрированны на сайте MosCulture',
                 text: `Вы зарегистрированны на сайте MosCulture

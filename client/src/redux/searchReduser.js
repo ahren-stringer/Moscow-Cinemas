@@ -1,4 +1,3 @@
-import * as axios from 'axios';
 import { SearchAPI } from '../API/api';
 
 const SET_SEARCHED = 'headerReuser/SET-SEARCHED';
