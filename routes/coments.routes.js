@@ -8,11 +8,11 @@ import Coment from "../models/Coment.js"
 router.post('/coment', async (req, res) => {
 
     try {
-        const { coment, size, userId, token } = req.body
+        const { coment, size, place, token } = req.body
         if (!token) return res.status(400).json({ message: 'Вы не авторизованны' })
        const decoded = jwt.verify(token, 'TopSecret')
         //req.user=decoded
-        const user = await User.findById(userId)
+        const user = await User.findById(decoded.userId)
         const newComent = new Coment({ coment, size, place, name: user.name, email: user.email, owner: decoded.userId })
         await newComent.save()
         res.status(201).json({ newComent })
