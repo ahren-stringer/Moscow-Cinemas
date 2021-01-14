@@ -98,7 +98,7 @@ router.get('/place_category/places/category_count/:category', async (req, res) =
 // по местам
 router.get('/place_category/places/:name', async (req, res) => {
     try {
-        const places = await Place.find({name:req.params.name}).exec()
+        const places = await Place.find({name:req.params.name})
         res.json(places)
     } catch (e) {
         res.status(500).json({ message: 'Что-то пошло не так' })

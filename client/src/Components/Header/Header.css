@@ -40,6 +40,7 @@ padding-left: 5px;
     border-radius: 4px;
     width: 100%;
     position: absolute;
+    z-index: 100;
 }
 .search{
     position: relative;
@@ -98,8 +99,6 @@ padding-left: 5px;
     z-index: 9;
 }
 .menu-btn{
-	/* width: 32px;
-    height: 32px; */
     font-size: 30px;
     color: white;
 	display: none;
@@ -107,6 +106,7 @@ padding-left: 5px;
 	left: -40px;
 	top: 10px;
 }
+
 @media (max-width: 650px){
 .menu-btn {
     display: inline-block;

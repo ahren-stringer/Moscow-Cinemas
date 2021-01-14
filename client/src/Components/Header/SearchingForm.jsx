@@ -11,8 +11,8 @@ const SearchingForm = (props) => {
     let searchInput = React.createRef();
 
     useEffect(() => {
-        if (searched.requestNumber < props.searched.requestNumber)
-        setSearched(props.searched)
+        if (searched.requestNumber < props.searched.requestNumber || props.searched.requestNumber === 0)
+            setSearched(props.searched)
     }, [props.searched])
 
     return (<div className="searching__form inner-item">
@@ -24,12 +24,14 @@ const SearchingForm = (props) => {
                 placeholder="Искать здесь..."
             />
             <button className='search__btn'>
-                <NavLink to={"/search/" + props.newSearchText} onClick={() => {
-                    props.CloseListThunk()
-                    props.SearchChange('')
-                }}>
-                    <FontAwesomeIcon icon={faSearch} />
-                </NavLink>
+                {props.newSearchText !== ''
+                    ? <NavLink to={"/search/" + props.newSearchText} onClick={() => {
+                        props.CloseListThunk()
+                        props.SearchChange('')
+                    }}>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </NavLink>
+                    : <FontAwesomeIcon icon={faSearch} />}
             </button>
             {props.isListLoading ? <div className='preloader'>
                 <PreloaderList />
@@ -39,11 +41,14 @@ const SearchingForm = (props) => {
                     {
                         (props.isClosed && searched.request.length === 0) ? null :
                             searched.request.map((item) => {
-                                return <li className="collection-item" onClick={() => { props.SearchChange('') }}>
-                                    <NavLink to={`/places/${item.name}`}
-                                        onClick={() => { props.CloseListThunk() }}>{item.name}
-                                    </NavLink>
-                                </li>
+                                return <NavLink to={`/places/${item.name}`}
+                                className="collection-item"
+                                onClick={() => {
+                                    props.SearchChange('')
+                                    props.CloseListThunk()
+                                }}>
+                                        {item.name}
+                                </NavLink>
                             })
                     }
                     {

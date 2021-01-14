@@ -5,6 +5,7 @@ import s from './Info.module.css'
 import user from '../../img/user.png'
 import axios from 'axios';
 import Pagination from './Pagination';
+import { InfoAPI } from '../../API/api';
 
 const Coments = (props) => {
     let [coments, setComents] = useState(props.coments)
@@ -15,7 +16,8 @@ const Coments = (props) => {
         size: 0,
         coment: '',
         place: props.infoData[0].name,
-        token: props.token
+        // token: props.token
+        userId:JSON.parse(localStorage.getItem('userData')).userId
     });
 
     let onInputChange = (event) => {
@@ -29,18 +31,10 @@ const Coments = (props) => {
     }
 
     const sendComent = async () => {
-        await axios.post('/coment', { ...form }, {
-            headers: {
-                "Authorization": ('Bearer ' + props.token)
-            }
-        })
-        const req = await axios.get(`/coments/${props.infoData[0].name}`, {
-            headers: {
-                "Authorization": ('Bearer ' + props.token)
-            }
-        });
+        await InfoAPI.sendComent(form,props.token)
+        const req = await InfoAPI.getComent(props.infoData[0].name,props.token)
         let arr = [...coments]
-        arr.push(req.data[0])
+        arr.push(req)
         setComents(arr)
     }
 

@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './MainPage.css'
 import Popular from './Popular';
-import axios from 'axios';
+import {MainPageAPI} from '../../API/api'
 
 function MainPage() {
 
@@ -13,8 +13,8 @@ function MainPage() {
 
     useEffect(
         async ()=> {
-            const req = await axios.get('/place_category')
-            setCategores(req.data)
+            const req = await MainPageAPI.getCategories()
+            setCategores(req)
         }
         , [])
 

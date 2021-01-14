@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import { SearchAPI } from '../API/api';
 
 const SET_SEARCHED = 'headerReuser/SET-SEARCHED';
 const SET_SEARCHED_PAGE = 'headerReuser/SET-SEARCHED-PAGE';
@@ -57,12 +58,12 @@ export const searchThunk = (search, requestNumber) =>
         dispatch(toggleList(true))
         dispatch(loadList(true))
 
-        let req = await axios.get(`/place_category/places/search/${search}`)
+        let req = await SearchAPI.getSearchList(search)
         dispatch(setReqNumber(+requestNumber + 1))
-        dispatch(setSearched({ requestNumber, request: req.data }))
-        // props.loadList(false)
+        dispatch(setSearched({ requestNumber, request: req }))
+
         dispatch(loadList(false))
-        debugger
+        //dispatch(toggleList(true))
     }
 
 export const CloseListThunk = () =>

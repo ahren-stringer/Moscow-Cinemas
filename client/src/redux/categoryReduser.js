@@ -1,11 +1,10 @@
-import * as axios from 'axios';
+import {CategoryAPI} from '../API/api'
 
 const SET_CATEGORY_DATA = 'categoryReuser/SET-CATEGORY-DATA';
 const SET_NAMES = 'categoryReuser/SET-NAMES';
 const TOTAL_COUNT = 'categoryReuser/TOTAL-COUNT';
 const SET_PAGE = 'categoryReuser/SET-PAGE';
 const SET_LIKED = 'categoryReuser/SET-LIKED';
-//const CONCAT_CATEGORY_DATA = "categoryReuser/CONCAT_CATEGORY_DATA";
 const SET_TYPE_TITLE = "categoryReuser/SET_TYPE_TITLE"
 const SET_CATEGORY_COUNT = 'infoReuser/SET_CATEGORY_COUNT'
 const SET_COUNTER = 'infoReuser/SET-COUNTER';
@@ -48,7 +47,6 @@ const categoryReduser = (state = init, action) => {
 }
 
 export const setCategoryData = (categoryData, prevCategoryData) => ({ type: SET_CATEGORY_DATA, categoryData, prevCategoryData });
-// export const concatcategoryData = (categoryData) => ({ type: CONCAT_CATEGORY_DATA, categoryData });
 export const setNames = (names) => ({ type: SET_NAMES, names });
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
@@ -59,21 +57,20 @@ export const setCounter = (count) => ({ type: SET_COUNTER, count });
 
 export const setCategoryDataThunk = (type,limit,skip, prevCategoryData) =>
     async (dispatch) => {
-        let req = await axios.get(`/place_category/places/some/${type}/${limit}/${skip}`)
-        debugger
+        let req = await CategoryAPI.getCategoryData(type,limit,skip)
         if (skip==0){
-            dispatch(setCategoryData(req.data, []))
+            dispatch(setCategoryData(req, []))
         }else{
-            dispatch(setCategoryData(req.data, prevCategoryData))
+            dispatch(setCategoryData(req, prevCategoryData))
         }
-        dispatch(SetTypeTitle(req.data[0].placeCategory))
+        dispatch(SetTypeTitle(req[0].placeCategory))
 
     }
 
 export const setCategoryCountThunk = (type) =>
     async (dispatch) => {
-        let req = await axios.get(`/place_category/places/category_count/${type}`)
-        dispatch(setCategoryCount(req.data))
+        let req = await CategoryAPI.getCategoryCount(type)
+        dispatch(setCategoryCount(req))
     }
 
 export const likedThunk = (name, item) =>

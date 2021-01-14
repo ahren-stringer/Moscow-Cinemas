@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css'
-import axios from 'axios';
+import {AuthAPI} from '../../API/api'
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, setLoaded } from '../../redux/authReduser'
@@ -60,8 +60,8 @@ function Auth(props) {
 
     let submit = async (formData) => {
         try {
-            const req = await axios.post('/cinema/login', { ...formData })
-            props.login(req.data.token, req.data.userId)
+            const req = await AuthAPI.auth(formData)
+            props.login(req.token, req.userId)
             props.history.goBack()
         } catch (e) { }
     }

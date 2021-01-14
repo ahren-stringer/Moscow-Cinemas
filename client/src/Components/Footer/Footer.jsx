@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email} from '../../validators'
+import {MailAPI} from '../../API/api'
 
 const input = ({ input, label, type, meta: { touched, error, warning } }) => {
     return (<div className="row">
@@ -65,9 +65,8 @@ MailForm = reduxForm({ form: 'mailForm' })(MailForm)
 const Footer = () => {
 
     let submit = async (formData) => {
-
         try {
-            await axios.post('/email', { ...formData })
+            await MailAPI.sendMail(formData)
         } catch (e) { }
     }
 

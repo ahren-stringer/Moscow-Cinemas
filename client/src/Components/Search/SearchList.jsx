@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import './Search.css'
 
 function SearchList(props) {
-
     return (
         <ul class="collection">
             {
@@ -39,7 +38,7 @@ function SearchList(props) {
 }
 let mapStateToPros = (state) => {
     return {
-        searchedPage: state.header.searchedPage,
+        searchedPage: state.search.searchedPage,
     }
 }
 

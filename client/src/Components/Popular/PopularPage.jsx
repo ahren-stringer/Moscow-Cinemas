@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import {PopularAPI} from '../../API/api'
 import 'materialize-css'
 import { withRouter } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
@@ -13,8 +13,8 @@ function PopularPage(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const req = await axios.get(`/popular`);
-            props.setPopular(req.data)
+            const req = await PopularAPI.getPopularAll()
+            props.setPopular(req)
         }
         fetchData()
     }, [])

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'materialize-css'
-import axios from 'axios';
+import {AuthAPI} from '../../API/api'
 import { Field, reduxForm } from 'redux-form'
 import { required, aol, email, minLength6 } from '../../validators'
 import { withRouter } from 'react-router-dom';
@@ -55,7 +55,7 @@ function Register(props) {
 
     let submit = async (formData) => {
         try {
-            await axios.post('/cinema/register', { ...formData })
+            await await AuthAPI.register(formData)
             props.history.goBack()
         } catch (e) { }
     }

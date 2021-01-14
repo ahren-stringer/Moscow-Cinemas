@@ -1,13 +1,16 @@
 import React from 'react';
 import Info from './Info';
 import * as axios from 'axios';
-import { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount, 
-    setInfoDataThunk} from '../../redux/infoReduser';
-import { likedThunk} from '../../redux/categoryReduser';
+import {
+    setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount,
+    setInfoDataThunk
+} from '../../redux/infoReduser';
+import { likedThunk } from '../../redux/categoryReduser';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
+import { InfoAPI } from '../../API/api';
 
 class InfoContainer extends React.Component {
     state = {
@@ -16,28 +19,30 @@ class InfoContainer extends React.Component {
     componentDidMount() {
         let id = this.props.match.params.id;
         if (id) {
-            this.props.setInfoDataThunk(id,this.props.onOnePage,this.props.token)
+            this.props.setInfoDataThunk(id, this.props.onOnePage, this.props.numberOfPage-1)
         }
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.id != this.props.match.params.id) {
+            debugger
             let id = this.props.match.params.id;
-            this.setState({
-                infoFlag: true
-            })
-            this.props.setInfoDataThunk(id,this.props.onOnePage,this.props.token)
+            // this.setState({
+            //     infoFlag: true
+            // })
+            this.props.setInfoDataThunk(id, this.props.onOnePage, this.props.numberOfPage-1)
         }
     }
-    onPageChange = (name,onOnePage,page) => {
-        axios.get(`/coments/some/${name}/${onOnePage}/${page*onOnePage}`)
-            .then(req => {
-                this.props.setComents(req.data)
-            })
+    componentWillUnmount(){
+        this.props.SetPageCount(0)
+    }
+    onPageChange = async (name, onOnePage, numberOfPage) => {
+        let req = await InfoAPI.getComents(name, onOnePage, numberOfPage)
+        this.props.setComents(req)
     };
     render() {
-        if (!this.props.infoData || this.state.infoFlag) return <Preloader />
+        if (!this.props.infoData && !this.props.coments && !this.props.totalCount) return <Preloader />
         return <Info {...this.props} id={this.props.match.params.id}
-        onPageChange={this.onPageChange}
+            onPageChange={this.onPageChange}
         />
     }
 }
@@ -53,10 +58,11 @@ let mapStateToProps = (state) => {
         totalCount: state.infoData.totalCount,
         numberOfPage: state.infoData.numberOfPage,
         onOnePage: state.infoData.onOnePage,
+        userId:state.auth.userId
     }
 }
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount,likedThunk,setInfoDataThunk })
+    connect(mapStateToProps, { setInfoData, setFeatures, ComentChange, setComents, SetTotalCount, SetPageCount, likedThunk, setInfoDataThunk })
 )(InfoContainer)

@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import { InfoAPI } from '../API/api';
 
 const SET_INFO_DATA = 'infoReuser/SET-INFO-DATA';
 const SET_FEATURES = 'infoReuser/SET-FEATURES';
@@ -12,7 +13,7 @@ let init = {
     features: null,
     newComentText: '',
     coments: null,
-    totalCount: 1,
+    totalCount: null,
     numberOfPage: 1,
     onOnePage: 5,
 };
@@ -45,26 +46,18 @@ export const setComents = (coments) => ({ type: SET_COMENT, coments })
 export const SetTotalCount = (totalCount) => ({ type: TOTAL_COUNT, totalCount })
 export const SetPageCount = (numberOfPage) => ({ type: SET_PAGE, numberOfPage })
 
-export const setInfoDataThunk = (id,onOnePage,token) =>
+export const setInfoDataThunk = (id,onOnePage,numberOfPage) =>
     async (dispatch) => {
-        let placesReq = await axios.get(`/place_category/places/${id}`)
-        dispatch(setInfoData(placesReq.data))
-        let pop = +placesReq.data[0].popular + 1;
-        await axios.put(`/place_category/places/${placesReq.data[0]._id}`, { popular: pop })
+        let placesReq = await InfoAPI.getPlaces(id)
+        dispatch(setInfoData(placesReq))
+        let pop = +placesReq[0].popular + 1;
+        await InfoAPI.putPopular(placesReq,pop)
         // Коменты
-        let comentsReq = await axios.get(`/cinema/coments/some/${placesReq.data[0].name}/${onOnePage}/0`, {
-            headers: {
-                "Authorization": ('Bearer ' + token)
-            }
-        })    
-        dispatch(setComents(comentsReq.data))
+        let comentsReq = await InfoAPI.getComents(placesReq[0].name,onOnePage,numberOfPage)
+        dispatch(setComents(comentsReq))
         // Количество коментов
-        let comentsCountReq = await axios.get(`/cinema/coments_count/${placesReq.data[0].name}`, {
-            headers: {
-                "Authorization": ('Bearer ' + token)
-            }
-        })
-        dispatch(SetTotalCount(comentsCountReq.data))
+        let comentsCountReq = await InfoAPI.getComentsCount(placesReq)
+        dispatch(SetTotalCount(comentsCountReq))
     }
 
 export default infoReduser

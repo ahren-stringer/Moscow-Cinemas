@@ -27,6 +27,7 @@ const Info = (props) => {
       onOnePage={props.onOnePage}
       setComents={props.setComents}
       onPageChange={props.onPageChange}
+      userId={props.userId}
       />
       }
     </div>

@@ -37,8 +37,10 @@ function App(props) {
 
   return (
     <div className="App"
-      onClick={()=>{
-        props.CloseListThunk()}}
+      onClick={(event)=>{
+        let list =event.target.parentNode.className;
+        if (list !=='collection') props.CloseListThunk()
+      }}
     >
       <div className='Header'
         style={props.location.pathname === '/' ? {

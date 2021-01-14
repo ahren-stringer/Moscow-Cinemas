@@ -1,6 +1,5 @@
 import React from 'react';
 import Category from './Category';
-import * as axios from 'axios';
 import { setCategoryData, setNames, SetTotalCount, SetPageCount, SetTypeTitle, setCategoryCount,
     likedThunk,
     setCategoryDataThunk,

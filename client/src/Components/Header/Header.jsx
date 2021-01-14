@@ -35,7 +35,6 @@ class Header extends React.Component {
     if (event.target.nodeName === 'A') {
       let menu=event.currentTarget;
       menu.style.right = '-283px'
-      debugger
       this.setState({
         menuBtn: false
       })

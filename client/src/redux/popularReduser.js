@@ -1,4 +1,4 @@
-import axios from "axios";
+import {PopularAPI} from '../API/api'
 
 const SET_POPULAR = 'popularReuser/SET_POPULAR';
 const SET_POPULAR_SLIDER = 'popularReuser/SET_POPULAR_SLIDER';
@@ -24,8 +24,8 @@ export const setPopular = (popular) => ({ type: SET_POPULAR, popular });
 
 export const setPopularSliderThunk=()=>
     async (dispatch)=>{
-        const req = await axios.get('/popular/some');
-        dispatch(SetPopularSlider(req.data))
+        const req = await PopularAPI.getPopularSome();
+        dispatch(SetPopularSlider(req))
   }
 
 export default popularReduser
