@@ -32,6 +32,7 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
+    text-shadow: 0 0 16px rgb(0 0 0);
 }
 .place__type-wrapper{
     margin: 50px auto;

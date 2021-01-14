@@ -67,7 +67,7 @@ const Description = (props) => {
 
       <div
         className={s.description__liked}
-        onClick={() => { props.likedThunk(props.infoData[0].name, props.infoData[0].name) }}>
+        onClick={() => { props.likedThunk(props.infoData[0].name, props.infoData[0]) }}>
         <span style={{ marginRight: '10px' }}>Добавить в избранное</span>
         {
           !!ls[props.infoData[0].name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />

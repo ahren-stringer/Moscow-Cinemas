@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './Liked.css'
 import { connect } from 'react-redux';
 import Popular from '../MainPage/Popular';
-import CategoryCard from '../Category/CategoryCards';
+import CategoryCards from '../Category/CategoryCards';
 import { Setliked,setCounter,likedThunk } from '../../redux/categoryReduser';
 import { withRouter } from 'react-router-dom';
 
@@ -11,6 +11,11 @@ function Liked(props) {
   let [ls, setLs] = useState(props.liked);
   let categoryData = Object.entries(ls).filter(item => item[0] !== "count" && item[0] !== "userData")
   .map(item => JSON.parse(item[1])) 
+
+  useEffect(()=>{
+    setLs(props.liked)
+  },[props.liked])
+
   if (Object.entries(props.liked).filter(item => item[0] !== "count" && item[0] !== "userData").length === 0) return <div className='liked__nothing'>
     <h4 className='liked__nothing-title'>Вам, пока что, ничего не нравится :)</h4>
     <Popular 
@@ -23,10 +28,8 @@ function Liked(props) {
         Избранное
       </h3>
     </div>
-<CategoryCard liked={props.liked}
+<CategoryCards liked={ls}
     categoryData={categoryData}
-    Setliked={props.Setliked}
-    setCounter={props.setCounter}
     match={props.match}
     likedThunk={props.likedThunk}/>
   </div>
