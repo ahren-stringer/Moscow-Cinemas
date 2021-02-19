@@ -72,7 +72,6 @@ export const setCategoryCountThunk = (type) =>
         let req = await CategoryAPI.getCategoryCount(type)
         dispatch(setCategoryCount(req))
     }
-
 export const likedThunk = (name, item) =>
     async (dispatch) => {
         let counter = +localStorage.getItem('count');
