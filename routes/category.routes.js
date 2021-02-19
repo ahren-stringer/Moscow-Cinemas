@@ -35,7 +35,7 @@ router.post(
         }
     })
     router.get(
-        '/category/cinemas',
+        '/category/:type',
         async (req, res) => {
             try {
                 console.log(path.normalize(dirname,'index.html'))
