@@ -9,7 +9,7 @@ import places from './routes/places.routes.js'
 import path from 'path'
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
-export const dirname = path.dirname(__filename);
+export const __dirname = path.dirname(__filename);
 
 //API Config
 const app = expess();

@@ -1,5 +1,5 @@
 import express from 'express';
-import { dirname } from '../app.js';
+import { __dirname } from '../app.js';
 const {Router} = express;
 const router=Router()
 import PlaceCategory from '../models/PlaceCategory.js'
@@ -29,6 +29,7 @@ router.post(
     async (req, res) => {
         try {
             const category = await PlaceCategory.find()
+            console.log(path.normalize(__dirname+'/'+'index.html'))
             res.json(category)
         } catch (e) {
             res.status(500).json({ message: 'Что-то пошло не так' })
@@ -38,9 +39,10 @@ router.post(
         '/category/:type',
         async (req, res) => {
             try {
-                console.log(path.normalize(dirname,'index.html'))
-                res.sendFile(path.normalize(dirname+'index.html'))
+                console.log(path.normalize(__dirname+'/'+'index.html'))
+                res.sendFile(path.normalize(__dirname+'/'+'index.html'))
             } catch (e) {
+                console.log(e)
                 res.status(500).json({ message: 'Что-то пошло не так' })
             }
         })
