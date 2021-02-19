@@ -7,6 +7,9 @@ import coments from './routes/coments.routes.js'
 import email from './routes/email.routes.js'
 import places from './routes/places.routes.js'
 import path from 'path'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+export const dirname = path.dirname(__filename);
 
 //API Config
 const app = expess();

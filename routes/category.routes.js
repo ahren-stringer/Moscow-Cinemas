@@ -1,7 +1,9 @@
 import express from 'express';
+import { dirname } from '../app.js';
 const {Router} = express;
 const router=Router()
 import PlaceCategory from '../models/PlaceCategory.js'
+import path from 'path'
 
 router.post(
     '/place_category',
@@ -32,5 +34,15 @@ router.post(
             res.status(500).json({ message: 'Что-то пошло не так' })
         }
     })
+    router.get(
+        '/category/cinemas',
+        async (req, res) => {
+            try {
+                console.log(path.normalize(dirname,'index.html'))
+                res.sendFile(path.normalize(dirname+'index.html'))
+            } catch (e) {
+                res.status(500).json({ message: 'Что-то пошло не так' })
+            }
+        })
 
     export default router
