@@ -39,7 +39,7 @@ function MainPage() {
                     {
                         categores
                             ? categores.map((item,index) =>
-                                <div className='place__type' key={index+1}>
+                                <div className='place__type'>
                                     <NavLink to={'/category/' + item.categoryUrl} className='place__type__link'>
                                         <div className='plase__type-img'
                                             style={{
