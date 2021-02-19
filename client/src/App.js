@@ -57,9 +57,9 @@ function App(props) {
       <Route exact path="/" render={() => <MainPage />} />
       <div className='main'>
         <div className='__container'>
-          <Route exact path="/category/:type" render={() => <Category />} />
-          <Route path='/places/:id' render={() => <Info />} />
-          <Route path='/search/:riched' render={() => <Search />} />
+          <Route exact path="/category/:type?" render={() => <Category />} />
+          <Route path='/places/:id?' render={() => <Info />} />
+          <Route path='/search/:riched?' render={() => <Search />} />
           <Route path='/liked/:id?' render={() => <Liked />} />
           <Route path='/auth' render={() => <Auth />} />
           <Route path='/register' render={() => <Register />} />

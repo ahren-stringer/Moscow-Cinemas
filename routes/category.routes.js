@@ -35,16 +35,16 @@ router.post(
             res.status(500).json({ message: 'Что-то пошло не так' })
         }
     })
-    router.get(
-        '/category/:type',
-        async (req, res) => {
-            try {
-                console.log(path.normalize(__dirname+'/'+'index.html'))
-                res.sendFile(path.normalize(__dirname+'/'+'index.html'))
-            } catch (e) {
-                console.log(e)
-                res.status(500).json({ message: 'Что-то пошло не так' })
-            }
-        })
+    // router.get(
+    //     '/category/:type',
+    //     async (req, res) => {
+    //         try {
+    //             console.log(path.normalize(__dirname+'/'+'index.html'))
+    //             res.sendFile(path.normalize(__dirname+'/'+'index.html'))
+    //         } catch (e) {
+    //             console.log(e)
+    //             res.status(500).json({ message: 'Что-то пошло не так' })
+    //         }
+    //     })
 
     export default router
