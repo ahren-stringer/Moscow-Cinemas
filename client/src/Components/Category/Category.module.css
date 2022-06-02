@@ -5,8 +5,7 @@
 .category{
     display: flex;
     flex-wrap: wrap;
-    margin: 50px auto 0px;
-    /* justify-content: space-between; */
+    margin: 50px auto 0px
 }
 .card__wrapper{
     margin: 0 16px 30px;
