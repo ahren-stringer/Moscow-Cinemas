@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const {Router} = express;
 const router=Router()
-import nodemailer from 'nodemailer'
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.mail.ru',
@@ -34,4 +34,4 @@ router.post('/email',(req,res)=>{
       mailer(message)
 })
 
-export default router
+module.exports = router

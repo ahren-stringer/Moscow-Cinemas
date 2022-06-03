@@ -1,11 +1,11 @@
-import express from 'express';
+const express = require('express');
 const {Router} = express;
-import bcrypt from 'bcrypt'
-import User from '../models/User.js'
-import jwt  from 'jsonwebtoken'
-import expressValidator from 'express-validator';
+const bcrypt = require('bcrypt');
+const User = require('../models/User.js');
+const jwt  = require('jsonwebtoken');
+const expressValidator = require('express-validator');
 const { check, validationResult } = expressValidator;
-import nodemailer from 'nodemailer'
+const nodemailer = require('nodemailer');
 
 const router=Router()
 
@@ -117,4 +117,4 @@ router.post(
         }
     })
 
-export default router
+    module.exports =  router

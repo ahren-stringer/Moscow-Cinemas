@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken');
 
 let auth=(req,res,next)=>{
     if (req.method==='OPTIONS') return next()

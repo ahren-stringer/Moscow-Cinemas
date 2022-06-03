@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 
 const PlaceCategorySchema=mongoose.Schema({
     categoryUrl: String,
@@ -6,4 +6,4 @@ const PlaceCategorySchema=mongoose.Schema({
     places: [{type: mongoose.Types.ObjectId, ref: 'place'}]
 });
 
-export default mongoose.model('placeCategory',PlaceCategorySchema)
+module.exports = mongoose.model('placeCategory',PlaceCategorySchema)

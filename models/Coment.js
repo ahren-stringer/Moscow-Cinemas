@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 
 const comentSchema=mongoose.Schema({
     name: String,
@@ -10,4 +10,4 @@ const comentSchema=mongoose.Schema({
     owner: [{type: mongoose.Types.ObjectId, ref: 'User'}]
 });
 
-export default mongoose.model('coment',comentSchema)
+module.exports = mongoose.model('coment',comentSchema)

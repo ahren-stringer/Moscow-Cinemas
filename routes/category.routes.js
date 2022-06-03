@@ -1,9 +1,9 @@
-import express from 'express';
-import { __dirname } from '../app.js';
+const express = require('express');
+//const { __dirname } = require('../app.js');
 const {Router} = express;
 const router=Router()
-import PlaceCategory from '../models/PlaceCategory.js'
-import path from 'path'
+const PlaceCategory = require('../models/PlaceCategory.js');
+const path = require('path');
 
 router.post(
     '/place_category',
@@ -47,4 +47,4 @@ router.post(
     //         }
     //     })
 
-    export default router
+    module.exports = router

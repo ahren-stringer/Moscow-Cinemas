@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 
 const placeSchema=mongoose.Schema({
     name: String,
@@ -17,4 +17,4 @@ const placeSchema=mongoose.Schema({
     owner: [{type: mongoose.Types.ObjectId, ref: 'placeCategory'}]
 });
 
-export default mongoose.model('place',placeSchema)
+module.exports = mongoose.model('place',placeSchema)

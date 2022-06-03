@@ -1,9 +1,9 @@
-import express from 'express';
+const express = require('express');
 const {Router} = express;
 const router=Router()
-import jwt  from 'jsonwebtoken'
-import User from '../models/User.js'
-import Coment from "../models/Coment.js"
+const jwt  = require('jsonwebtoken');
+const User = require('../models/User.js');
+const Coment = require("../models/Coment.js");
 
 router.post('/coment', async (req, res) => {
 
@@ -51,4 +51,4 @@ router.get('/cinema/coments_count/:place', async (req, res) => {
     }
 })
 
-export default router
+module.exports = router

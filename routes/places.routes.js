@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
 const {Router} = express;
 const router=Router()
-import PlaceCategory from '../models/PlaceCategory.js'
-import Place from '../models/Place.js'
+const PlaceCategory = require('../models/PlaceCategory.js');
+const Place = require('../models/Place.js');
 
 router.post('/place_category/places', async (req, res) => {
 
@@ -146,4 +146,4 @@ router.get('/popular/some', async (req, res) => {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
-export default router
+module.exports = router

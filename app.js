@@ -1,15 +1,15 @@
-import expess from 'express'
-import mongoose from 'mongoose'
-import Cors from "cors"
-import auth from './routes/auth.routes.js'
-import category from './routes/category.routes.js'
-import coments from './routes/coments.routes.js'
-import email from './routes/email.routes.js'
-import places from './routes/places.routes.js'
-import path from 'path'
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+const expess = require('express');
+const mongoose = require('mongoose');
+const Cors = require("cors");
+const auth = require('./routes/auth.routes.js');
+const category = require('./routes/category.routes.js');
+const coments = require('./routes/coments.routes.js');
+const email = require('./routes/email.routes.js');
+const places = require('./routes/places.routes.js');
+const path = require('path');
+const { fileURLToPath } = require('url');
+//const __filename = fileURLToPath(import.meta.url);
+//export const __dirname = path.dirname(__filename);
 
 //API Config
 const app = expess();
