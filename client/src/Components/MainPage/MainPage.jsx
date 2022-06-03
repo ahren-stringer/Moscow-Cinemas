@@ -24,9 +24,13 @@ function MainPage() {
                 <div style={{ position: 'static' }}>
                     <div className='title__slide-wrapper'>
                         <div className='title__slide-1'>
+                            
+            <div className="parallax dark scrolly-invisible" data-velocity="-.2" ></div>
+            <div id='trapezoid'><span></span></div>
+
                             <div className='title__slide-container'>
                                 <h3>Добро пожаловать на MosCulture</h3>
-                                <div>
+                                <div classNmae="sub_title">
                                     Сайт о местах культурного наследия России и Мира
                             </div>
                             </div>
@@ -35,6 +39,16 @@ function MainPage() {
                 </div>
             </div>
             <div className='__container'>
+
+                <div className='PageHeading'>
+                    <div className='PageTile'>
+                        Лучшие места
+                    </div>
+                    <div className='PageSubtitle'>
+                        На сайте представлен список как исторических, так и современных мест культурного отдыха жителей Москвы и гостей столици
+                    </div>
+                </div>
+
                 <div className='place__type-wrapper'>
                     {
                         categores
@@ -56,6 +70,9 @@ function MainPage() {
                             : <Preloader />
                     }
                 </div>
+
+
+
                 <Popular />
             </div>
         </div>

@@ -51,7 +51,11 @@ function Popular(props) {
                 <div>
                     <div>
                         <NavLink to='/popular'>
-                            <h3>Популярные места</h3>
+                            <div className='PageHeading'>
+                                <div className='PageTile'>
+                                Популярные места
+                                </div>
+                            </div>
                         </NavLink>
                     </div>
                     <div className='slider__wrapper-big'>

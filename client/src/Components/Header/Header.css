@@ -15,9 +15,9 @@
 }
 .logo__title{
     color: white;
-font-size: 19px;
-font-weight: 600;
-padding-left: 5px;
+    font-size: 27px;
+    font-weight: 600;
+    padding-left: 5px;
 }
 .liked{
    display: flex;
@@ -106,7 +106,6 @@ padding-left: 5px;
 	left: -40px;
 	top: 10px;
 }
-
 @media (max-width: 650px){
 .menu-btn {
     display: inline-block;

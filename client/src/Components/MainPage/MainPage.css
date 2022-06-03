@@ -16,8 +16,8 @@
     color: white;
     position: relative;
 }
-.title__slide-1{
-    background-image: url(../../img/title-1.jpg); 
+.scrolly-invisible{
+    background-image: url(../../img/Moscow.jpg); 
 }
 .title__slide-2{
     background-image: url(https://b1.m24.ru/c/1114597.jpg); 
@@ -27,12 +27,36 @@
 }
 .title__slide-container{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 48%;
+    left: 30%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
-    text-shadow: 0 0 16px rgb(0 0 0);
+    /* text-shadow: 0 0 16px rgb(0 0 0); */
+    text-align: left;
+    max-width: 500px;
+}
+
+.title__slide-container h3 {
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 64px;
+    margin-bottom: 44px;
+}
+.sub_title {
+    font-size: 25px;
+}
+#trapezoid {
+    border-top: 100vh solid rgb(41, 128, 185);
+    border-right: 642px solid transparent;
+    height: 100%;
+    width: 89%;
+    position: absolute;
+    opacity: 79%;
+}
+#trapezoid span {
+  margin-top: -100px;
+  position: absolute;
 }
 .place__type-wrapper{
     margin: 50px auto;
@@ -104,12 +128,64 @@
     margin-right: 5px;
 }
 .popular-card__wrapper{
-    padding: 0 10px
+    padding: 0 40px;
+    border-radius: 46px;
+}
+.popular-card__wrapper .Category_category__img__2blKC {
+    min-height: 185px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.popular-card__wrapper  .Category_name__3NbUX {
+    margin: 16px;
+    font-size: 22px;
+    color: #000;
 }
 .popular__title a{
     color: black;
 }
+.PageHeading {
+    text-align: center;
+    max-width: 700px;
+    margin: 80px auto 90px;
+    color: #010101;
+}
+.PageTile {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 21px;
+    color: #039be5;
+}
+.PageSubtitle {
+    font-size: 22px;
+    line-height: 27px;
+}
 
+.parallax, .fixed-bg, .fixed-img2 {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /* z-index: -2; */
+}.slick-track{
+    padding: 10px 0px;
+}
+.layer:before, .dark:before, .blue:before, .whitish:before, .blackish:before, .grayish:before, .darkblue:before {
+    background: #1c1c1c none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: .9;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
 @media (max-width: 1200px){
     .place__img{
       min-height: 150px;
