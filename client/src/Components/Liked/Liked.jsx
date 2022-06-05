@@ -15,7 +15,7 @@ function Liked(props) {
   useEffect(()=>{
     setLs(props.liked)
   },[props.liked])
-
+debugger
   if (Object.entries(props.liked).filter(item => item[0] !== "count" && item[0] !== "userData").length === 0) return <div className='liked__nothing'>
     <h4 className='liked__nothing-title'>Вам, пока что, ничего не нравится :)</h4>
     <Popular 

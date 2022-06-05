@@ -74,11 +74,28 @@ export const setCategoryCountThunk = (type) =>
     }
 export const likedThunk = (name, item) =>
     async (dispatch) => {
-        let counter = +localStorage.getItem('count');
-        if (localStorage.getItem(name)) {
-            localStorage.removeItem(name)
+        
+        let likedStore=localStorage.getItem('likedStore');
+
+        if(!likedStore){
+            localStorage.setItem('likedStore',JSON.stringify({
+                counter:0,
+                places:{}
+            }))
+        }
+
+        let counter = +JSON.parse(localStorage.getItem('likedStore')).counter;
+
+        let places=JSON.parse(localStorage.getItem('likedStore'));
+
+
+        if (places.some(name)) {
+            delete places[name]  //localStorage.removeItem(name)  
             counter = counter - 1
-            localStorage.setItem('count', counter)
+            localStorage.setItem('likedStore',JSON.stringify({
+                counter,
+                places
+            }))
             dispatch(Setliked({ ...localStorage }))
         } else {
             localStorage.setItem(name, JSON.stringify(item))

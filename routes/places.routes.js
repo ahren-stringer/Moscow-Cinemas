@@ -146,4 +146,13 @@ router.get('/popular/some', async (req, res) => {
         res.status(500).json({ message: 'Что-то пошло не так' })
     }
 })
+router.delete('/places', async (req, res) => {
+    try {
+        await Place.deleteOne({name:'Киноклуб «Эльдар»'})
+        console.log(req);
+    } catch (e) {
+        res.status(500).json({ message: 'Что-то пошло не так' })
+        console.log(e);
+    }
+})
 module.exports = router

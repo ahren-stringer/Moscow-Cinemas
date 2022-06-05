@@ -16,7 +16,7 @@
     color: white;
     position: relative;
 }
-.scrolly-invisible{
+.title__slide-1{
     background-image: url(../../img/Moscow.jpg); 
 }
 .title__slide-2{
@@ -25,16 +25,17 @@
 .title__slide-3{
     background-image: url(https://irkutsk.megafon.ru/download/~federal/~federal/images/mobid.jpg); 
 }
-.title__slide-container{
+.title_wrapp {
+    height: 100%;
+    width: 100%;
     position: absolute;
-    top: 48%;
-    left: 30%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+}
+.title__slide-container{
     color: white;
     /* text-shadow: 0 0 16px rgb(0 0 0); */
     text-align: left;
     max-width: 500px;
+    margin-top: 220px;
 }
 
 .title__slide-container h3 {
@@ -171,6 +172,8 @@
     position: absolute;
     top: 0;
     width: 100%;
+    background-position: center;
+    background-size: cover;
     /* z-index: -2; */
 }.slick-track{
     padding: 10px 0px;

@@ -20,24 +20,27 @@ function MainPage() {
 
     return (
         <div>
-            <div className='title'>
-                <div style={{ position: 'static' }}>
-                    <div className='title__slide-wrapper'>
                         <div className='title__slide-1'>
                             
-            <div className="parallax dark scrolly-invisible" data-velocity="-.2" ></div>
             <div id='trapezoid'><span></span></div>
+
+                        <div className='title_wrapp'>
+
+                        <div className='__container'>
 
                             <div className='title__slide-container'>
                                 <h3>Добро пожаловать на MosCulture</h3>
-                                <div classNmae="sub_title">
+                                <div className="sub_title">
                                     Сайт о местах культурного наследия России и Мира
+                                </div>
                             </div>
+                            
                             </div>
+
                         </div>
-                    </div>
-                </div>
-            </div>
+
+                        </div>
+
             <div className='__container'>
 
                 <div className='PageHeading'>

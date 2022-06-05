@@ -10,4 +10,4 @@ const comentSchema=mongoose.Schema({
     owner: [{type: mongoose.Types.ObjectId, ref: 'User'}]
 });
 
-module.exports = mongoose.model('coment',comentSchema)
+module.exports = mongoose.model('coment',comentSchema);
