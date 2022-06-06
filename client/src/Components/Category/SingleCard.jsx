@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function SingleCard(props) {
-
+debugger
     return (
         <div className={s.cinema} key={props.key} >
             <NavLink to={`/places/${props.item.name}`}>
@@ -17,14 +17,19 @@ function SingleCard(props) {
                             { 'backgroundImage': 'url(https://ru.moscovery.com/wp-content/uploads/2016/03/header-92.jpg)' }
                             : { 'backgroundImage': 'url(https://felicina.ru/wp-content/uploads/2018/05/main2-1.jpg)' }
                 }>
-                </div>
+                </div> </NavLink>
                 <div className={s.name}>
-                    {props.item.name}
-                </div>
-            </NavLink>
-            {
+                <NavLink to={`/places/${props.item.name}`}>
+                    <div className={s.name_name}>
+                        {props.item.name}
+                    </div>
+                </NavLink>
+
+                    {
                ( props.match.url === '/liked' 
-               && Object.entries(localStorage).filter(item => item[0] !== "count" && item[0] !== "userData").length !== 0) 
+               && Object.keys(JSON.parse(localStorage.getItem('likedStore')).places).length !==0
+               //Object.entries(localStorage).filter(item => item[0] !== "count" && item[0] !== "userData").length !== 0
+               ) 
                ? <p className={s.liked__delete} onClick={() => { props.likedThunk(props.item.name, props.item) }}>
                     Удалить из избранного
             </p> :
@@ -32,10 +37,14 @@ function SingleCard(props) {
                         props.likedThunk(props.item.name, props.item)
                     }}>
                         Добавить в избранное {
-                            !!props.ls[props.item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
+                            !!props.ls.places ? !!props.ls.places[props.item.name] && <FontAwesomeIcon icon={faHeart} style={{ color: 'red',marginLeft: '5px' }} /> :null
                         }
                     </div>
             }
+
+                    
+                </div>
+            
         </div>
 
     );

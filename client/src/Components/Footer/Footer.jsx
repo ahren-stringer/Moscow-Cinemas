@@ -35,7 +35,7 @@ function MailForm(props) {
             name="name"
             type="text"
             component={input}
-            label="First Name"
+            label="Имя"
             validate={[required]}
             warn={aol}
         />
@@ -51,7 +51,7 @@ function MailForm(props) {
             name="message"
             type="text"
             component={textarea}
-            label="Textarea"
+            label="Сообщение"
             validate={[required]}
             warn={aol}
         />
@@ -73,12 +73,12 @@ const Footer = () => {
     return (
         <footer className="page-footer" style={{'background-color': "#2980b9"}}>
             <div className="__container">
-
-                    <div style={{maxWidth:'400px'}}>
+<div style={{'height':'500px'}}></div>
+                    {/* <div style={{maxWidth:'400px'}}>
                     <h5 className="white-text">Обратная связь</h5>
                         <MailForm onSubmit={submit}/>
 
-                    </div>
+                    </div> */}
                     </div>
 
             <div className="footer-copyright">               

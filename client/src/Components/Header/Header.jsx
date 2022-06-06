@@ -90,8 +90,8 @@ class Header extends React.Component {
                 {/* Избранное */}
                 <div className="liked inner-item">
                   <span class="collection-item">
-                    {!this.state.menuBtn || <span class="new badge">
-                      {this.props.counter}
+                    {!this.state.menuBtn || <span class="new badge" style={!this.props.counter?{'display':'none'}:{}}>
+                      {this.state.counter}
                     </span>}
                     {this.state.menuBtn ? <NavLink to='/liked'>
                       Избранное
@@ -100,7 +100,7 @@ class Header extends React.Component {
                         <FontAwesomeIcon icon={faHeart} style={{ color: 'red' }} />
                       </NavLink>}
                     {this.state.menuBtn ||
-                      this.props.counter
+                      this.state.counter
                     }
                   </span>
                 </div>

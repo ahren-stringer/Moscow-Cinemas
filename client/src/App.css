@@ -10,6 +10,15 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+.auth_wrapp{
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth_inner{
+  width: 65%;
+}
 @media (max-width: 1200px){
   .__container{
     max-width: 90%;

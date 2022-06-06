@@ -12,14 +12,14 @@ const SET_COUNTER = 'infoReuser/SET-COUNTER';
 let init = {
     categoryData: [],
     names: [],
-    liked: { ...localStorage },
+    liked: { ...JSON.parse(localStorage.getItem('likedStore')) },
     totalCount: 1,
     numberOfPage: 1,
     onOnePage: 12,
     request: true,
     typeTitle: '',
     categoryCount: 0,
-    count: localStorage.getItem("count"),
+    count: JSON.parse(localStorage.getItem('likedStore')).counter,
 };
 
 const categoryReduser = (state = init, action) => {
@@ -86,22 +86,28 @@ export const likedThunk = (name, item) =>
 
         let counter = +JSON.parse(localStorage.getItem('likedStore')).counter;
 
-        let places=JSON.parse(localStorage.getItem('likedStore'));
+        let places=JSON.parse(localStorage.getItem('likedStore')).places;
 
 
-        if (places.some(name)) {
+        if (name in places) {
             delete places[name]  //localStorage.removeItem(name)  
             counter = counter - 1
             localStorage.setItem('likedStore',JSON.stringify({
                 counter,
                 places
             }))
-            dispatch(Setliked({ ...localStorage }))
+            dispatch(Setliked({ ...JSON.parse(localStorage.getItem('likedStore')) }))
         } else {
-            localStorage.setItem(name, JSON.stringify(item))
+            //localStorage.setItem(name, JSON.stringify(item))
             counter = counter + 1
-            localStorage.setItem('count', counter)
-            dispatch(Setliked({ ...localStorage }))
+            //localStorage.setItem('count', counter)
+
+            localStorage.setItem('likedStore',JSON.stringify({
+                counter,
+                places:{...places,[name]:item}
+            }))
+
+            dispatch(Setliked({ ...JSON.parse(localStorage.getItem('likedStore')) }))
         }
         dispatch(setCounter(counter))
     }

@@ -67,10 +67,14 @@ function Auth(props) {
     }
 
     return <div class="container">
+        <div className="auth_wrapp">
+        <div className="auth_inner">
         <div style={{ marginLeft: "10px" }}>
             <h4>Войти:</h4>
         </div>
         <AuthForm onSubmit={submit} />
+        </div>
+        </div>
     </div>
 }
 

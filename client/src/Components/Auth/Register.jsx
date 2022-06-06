@@ -61,11 +61,15 @@ function Register(props) {
     }
 
     return <div class="container">
+        <div className="auth_wrapp">
+        <div className="auth_inner">
         <div style={{marginLeft: "10px"}}>
             <h4>Регистрация</h4>
         </div>
         <div className="row">
             <RegisterForm onSubmit={submit}/>
+        </div>
+        </div>
         </div>
     </div>
 }
