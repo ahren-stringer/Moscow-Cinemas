@@ -11,19 +11,21 @@ function Liked(props) {
   let [ls, setLs] = useState(props.liked);
 
   let categoryData;
-  let places;
+  let places=[];
 
-  if (localStorage.getItem('likedStore')){
-    categoryData=Object.entries(JSON.parse(localStorage.getItem('likedStore')).places).map(item => item[1]) 
-    places=Object.keys(JSON.parse(localStorage.getItem('likedStore')).places)
+  if (ls.places){
+    debugger
+    categoryData=Object.entries(ls.places).map(item => item[1]) 
+    places=Object.keys(ls.places)
 }else{
   categoryData=[]
+  places=[]
 }
   useEffect(()=>{
     setLs(props.liked)
   },[props.liked])
 debugger
-  if (places && places.length === 0) return <div className='liked__nothing'>
+  if (places.length === 0) return <div className='liked__nothing'>
     <h4 className='liked__nothing-title'>Вам, пока что, ничего не нравится :)</h4>
     <Popular 
     likedThunk={props.likedThunk}/>

@@ -5,6 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function SingleCard(props) {
+    let palces;
+    if(JSON.parse(localStorage.getItem('likedStore'))){
+        palces=Object.keys(JSON.parse(localStorage.getItem('likedStore')).places)
+    }else{
+        palces=[]
+    }
 debugger
     return (
         <div className={s.cinema} key={props.key} >
@@ -27,7 +33,7 @@ debugger
 
                     {
                ( props.match.url === '/liked' 
-               && Object.keys(JSON.parse(localStorage.getItem('likedStore')).places).length !==0
+               && palces.length !==0
                //Object.entries(localStorage).filter(item => item[0] !== "count" && item[0] !== "userData").length !== 0
                ) 
                ? <p className={s.liked__delete} onClick={() => { props.likedThunk(props.item.name, props.item) }}>
