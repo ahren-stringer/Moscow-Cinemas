@@ -19,7 +19,7 @@ let init = {
     request: true,
     typeTitle: '',
     categoryCount: 0,
-    count: JSON.parse(localStorage.getItem('likedStore')).counter || null,
+    count: JSON.parse(localStorage.getItem('likedStore')).counter || 0,
 };
 
 const categoryReduser = (state = init, action) => {
