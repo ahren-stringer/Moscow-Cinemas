@@ -69,7 +69,7 @@ const Coments = (props) => {
 
                             <div className="input-field col s12">
                                 <textarea id="textarea1" className="materialize-textarea" name='coment' onChange={onInputChange}></textarea>
-                                <label for="textarea1">Textarea</label>
+                                <label for="textarea1">Коментарий</label>
                             </div>
 
                         </div>
