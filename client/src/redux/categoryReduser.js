@@ -9,6 +9,13 @@ const SET_TYPE_TITLE = "categoryReuser/SET_TYPE_TITLE"
 const SET_CATEGORY_COUNT = 'infoReuser/SET_CATEGORY_COUNT'
 const SET_COUNTER = 'infoReuser/SET-COUNTER';
 
+let count;
+if (localStorage.getItem('likedStore')){
+    count=JSON.parse(localStorage.getItem('likedStore')).counter
+}else{
+    count=0
+}
+
 let init = {
     categoryData: [],
     names: [],
@@ -19,7 +26,7 @@ let init = {
     request: true,
     typeTitle: '',
     categoryCount: 0,
-    count: JSON.parse(localStorage.getItem('likedStore')).counter || 0,
+    count,
 };
 
 const categoryReduser = (state = init, action) => {

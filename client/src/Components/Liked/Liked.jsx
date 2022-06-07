@@ -9,14 +9,21 @@ import { withRouter } from 'react-router-dom';
 
 function Liked(props) {
   let [ls, setLs] = useState(props.liked);
-  let categoryData = Object.entries(JSON.parse(localStorage.getItem('likedStore')).places)
-  .map(item => item[1]) 
 
+  let categoryData;
+  let places;
+
+  if (localStorage.getItem('likedStore')){
+    categoryData=Object.entries(JSON.parse(localStorage.getItem('likedStore')).places).map(item => item[1]) 
+    places=Object.keys(JSON.parse(localStorage.getItem('likedStore')).places)
+}else{
+  categoryData=[]
+}
   useEffect(()=>{
     setLs(props.liked)
   },[props.liked])
 debugger
-  if (Object.keys(JSON.parse(localStorage.getItem('likedStore')).places).length === 0) return <div className='liked__nothing'>
+  if (places && places.length === 0) return <div className='liked__nothing'>
     <h4 className='liked__nothing-title'>Вам, пока что, ничего не нравится :)</h4>
     <Popular 
     likedThunk={props.likedThunk}/>
