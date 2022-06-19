@@ -71,7 +71,6 @@ function Auth(props) {
         <div className="auth_inner">
         <div style={{ marginLeft: "10px" }}>
             <h4>Войти:</h4>
-            <div style={{display:'none'}}>Сука</div>
         </div>
         <AuthForm onSubmit={submit} />
         </div>
